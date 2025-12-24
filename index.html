@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f0f12" />
+  <title>Raízes Aromas • Velas veganas aromatizadas</title>
+  <meta name="description" content="Velas veganas aromatizadas (Lavanda, Bamboo, Morango & Champagne). Presentes especiais e encomendas para pequenas empresas. Entrega em BH e região, Campinas e Atibaia." />
+  <meta property="og:title" content="Raízes Aromas • Velas veganas aromatizadas" />
+  <meta property="og:description" content="Presentes especiais e encomendas para pequenas empresas. Entrega em BH e região, Campinas e Atibaia." />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root{
+      --bg:#0f0f12;
+      --card:#15161b;
+      --text:#f2f3f5;
+      --muted:#b7bcc7;
+      --line:rgba(255,255,255,.12);
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --r:18px;
+      --accent1:#f5c76a; /* dourado */
+      --accent2:#c77dff; /* roxo */
+      --accent3:#79f2c0; /* verde menta */
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica, "Noto Sans", "Liberation Sans", sans-serif;
+      background:
+        radial-gradient(1100px 700px at 15% 10%, rgba(199,125,255,.16), transparent 55%),
+        radial-gradient(900px 550px at 80% 15%, rgba(121,242,192,.12), transparent 55%),
+        radial-gradient(900px 650px at 40% 85%, rgba(245,199,106,.12), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.45;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 64px;}
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(15,15,18,.82), rgba(15,15,18,.45));
+      border-bottom:1px solid var(--line);
+    }
+    .topbar .wrap{
+      padding:14px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width: 200px;
+      text-decoration:none;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(245,199,106,.9), transparent 55%),
+        radial-gradient(circle at 70% 30%, rgba(199,125,255,.9), transparent 55%),
+        radial-gradient(circle at 50% 70%, rgba(121,242,192,.9), transparent 60%),
+        #111;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .brand b{font-size:15px; letter-spacing:.2px}
+    .brand span{display:block; font-size:12px; color:var(--muted)}
+    nav{
+      display:flex; gap:18px; align-items:center;
+      color:var(--muted); font-size:13px;
+    }
+    nav a{ text-decoration:none; padding:8px 10px; border-radius:10px;}
+    nav a:hover{ background: rgba(255,255,255,.06); color:var(--text);}
+
+    .ctaRow{display:flex; gap:10px; align-items:center;}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:11px 14px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      font-size:13px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.25);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.08);}
+    .btn.primary{
+      background: linear-gradient(90deg, rgba(199,125,255,.95), rgba(121,242,192,.9));
+      border-color: rgba(255,255,255,.12);
+      color:#0c0c0f;
+    }
+    .btn.primary:hover{ background: linear-gradient(90deg, rgba(199,125,255,1), rgba(121,242,192,1));}
+    .btn.ghost{ box-shadow:none; background: transparent;}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .dot{width:9px; height:9px; border-radius:999px; background: var(--accent3); box-shadow: 0 0 0 3px rgba(121,242,192,.15);}
+
+    /* Hero */
+    .hero{
+      padding:42px 0 18px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:20px;
+      align-items:stretch;
+    }
+    .panel{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius:var(--r);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .heroMain{ padding:26px; position:relative;}
+    .heroMain:before{
+      content:"";
+      position:absolute; inset:-120px -120px auto auto;
+      width:320px; height:320px; border-radius:999px;
+      background: radial-gradient(circle, rgba(245,199,106,.22), transparent 60%);
+      filter: blur(2px);
+      pointer-events:none;
+    }
+    h1{
+      margin:14px 0 12px;
+      font-size: clamp(28px, 4.2vw, 46px);
+      letter-spacing:-.5px;
+      line-height:1.05;
+    }
+    .grad{
+      background: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:rgba(242,243,245,.78);
+      font-size:15px;
+      max-width: 52ch;
+    }
+    .heroActions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;}
+    .smallNote{ color: var(--muted); font-size:12px; margin-top:10px;}
+
+    .heroSide{ padding:0; display:flex; flex-direction:column;}
+    .media{
+      position:relative;
+      height: 100%;
+      min-height: 320px;
+      background:
+        radial-gradient(900px 380px at 50% 20%, rgba(199,125,255,.18), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.55)),
+        #0b0b0f;
+    }
+    .media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.92;
+      filter: contrast(1.05) saturate(1.05);
+    }
+    .mediaOverlay{
+      position:absolute; inset:0;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      padding:16px;
+      background: linear-gradient(to top, rgba(0,0,0,.65), transparent 55%);
+      gap:10px;
+    }
+    .badgeRow{ display:flex; gap:8px; flex-wrap:wrap;}
+    .kpi{
+      display:flex; gap:10px; align-items:center;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(15,15,18,.45);
+      border-radius: 14px;
+      padding:10px 12px;
+      color: rgba(242,243,245,.9);
+      font-size:12px;
+      width: fit-content;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Sections */
+    section{ padding:18px 0 0; }
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .card{ padding:16px; border-radius:var(--r); border:1px solid var(--line); background: rgba(255,255,255,.04); }
+    .card h3{ margin:0 0 6px; font-size:14px;}
+    .card p{ margin:0; color: var(--muted); font-size:13px;}
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      margin:18px 0 10px;
+    }
+    .sectionTitle h2{ margin:0; font-size:18px; letter-spacing:-.2px;}
+    .sectionTitle p{ margin:0; color:var(--muted); font-size:13px;}
+
+    /* Product cards */
+    .products{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .product{
+      display:grid;
+      grid-template-columns: 108px 1fr;
+      gap:12px;
+      align-items:center;
+      padding:14px;
+      border-radius:var(--r);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+    }
+    .ph{
+      width:108px; height:108px; border-radius:16px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(245,199,106,.25), transparent 58%),
+        radial-gradient(circle at 70% 40%, rgba(199,125,255,.2), transparent 60%),
+        radial-gradient(circle at 45% 80%, rgba(121,242,192,.18), transparent 65%),
+        rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+    }
+    .ph img{ width:100%; height:100%; object-fit:cover; }
+    .product b{ font-size:14px; }
+    .meta{ color:var(--muted); font-size:12px; margin-top:4px; }
+    .chips{ display:flex; gap:6px; flex-wrap:wrap; margin-top:10px;}
+    .chip{ font-size:11px; padding:6px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); color: rgba(242,243,245,.86);}
+
+    /* FAQ */
+    details{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius:16px;
+      padding:12px 14px;
+    }
+    details + details{ margin-top:10px; }
+    summary{
+      cursor:pointer;
+      font-weight:700;
+      font-size:13px;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{ margin:10px 0 0; color: var(--muted); font-size:13px;}
+
+    footer{
+      margin-top:26px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+      color: var(--muted);
+      font-size:12px;
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+      nav{ display:none; }
+      .grid3{ grid-template-columns: 1fr; }
+      .products{ grid-template-columns: 1fr; }
+    }
+
+    /* Optional: makes it look "fullscreen" when embedded */
+    .viewport{
+      min-height: 100vh;
+      display:flex;
+      flex-direction:column;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="viewport">
+    <header class="topbar">
+      <div class="wrap">
+        <a class="brand" href="#topo" aria-label="Raízes Aromas">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <b>Raízes Aromas</b>
+            <span>Velas veganas aromatizadas</span>
+          </div>
+        </a>
+
+        <nav aria-label="Navegação">
+          <a href="#beneficios">Benefícios</a>
+          <a href="#aromas">Aromas</a>
+          <a href="#entrega">Entrega</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="ctaRow">
+          <a class="btn ghost" href="https://ig.me/m/raizesaromas_" target="_blank" rel="noopener">Falar no Instagram</a>
+          <a class="btn primary" href="https://wa.me/5511944800174" target="_blank" rel="noopener">Pedir no WhatsApp</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="topo" class="wrap">
+      <div class="hero">
+        <div class="panel heroMain">
+          <span class="pill"><span class="dot" aria-hidden="true"></span> Presentes especiais + encomendas para pequenas empresas</span>
+
+          <h1>O seu <span class="grad">momento</span> começa com um aroma.</h1>
+          <p class="lead">
+            Velas veganas aromatizadas feitas para transformar rotina em ritual: aconchego em casa, presente com significado
+            e lembrança que fica.
+          </p>
+
+          <div class="heroActions">
+            <a class="btn primary" href="https://wa.me/5511944800174" target="_blank" rel="noopener">Quero um presente especial</a>
+            <a class="btn" href="https://ig.me/m/raizesaromas_" target="_blank" rel="noopener">Ver no Instagram</a>
+            <a class="btn" href="#aromas">Conhecer aromas</a>
+          </div>
+
+          <div class="smallNote">
+            Entregas em <b>Belo Horizonte e região</b>, <b>Campinas</b> e <b>Atibaia</b> • Tamanhos: <b>15g</b> e <b>40g</b>
+          </div>
+        </div>
+
+        <aside class="panel heroSide" aria-label="Destaque visual">
+          <div class="media">
+            <!-- Sugestão: troque por uma foto "hero" hospedada (GitHub/Drive com link direto).
+                 Placeholder usa a imagem que você mandou no chat (quando você tiver um link público direto, coloque aqui). -->
+            <img
+              src="https://instagram.fplu16-1.fna.fbcdn.net/v/t51.2885-19/527533069_17892262416297505_7931410026316560392_n.jpg?stp=dst-jpg_s320x320_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.fplu16-1.fna.fbcdn.net&_nc_cat=101&_nc_oc=Q6cZ2QE4S9_wTQ8bSmeJYnkqogBHa_x_hySrKorcPn34eEGm2t2ELMkpOcGQHY_UvTMGR7AlI_IAHhLDUhJSFX1P4s5h&_nc_ohc=tlyBVLfueYUQ7kNvwFdSZvz&_nc_gid=h12-GRKhbuN0k1QxiY4_lg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfmaGTnHYVMXS8tYdcpNBgbdJm7zYksv2YoX1CNvuxdX1g&oe=6951EEC3&_nc_sid=8b3546"
+              alt="Raízes Aromas"
+              loading="eager"
+            />
+            <div class="mediaOverlay">
+              <div class="badgeRow">
+                <div class="kpi">🌿 Veganas</div>
+                <div class="kpi">🎁 Perfeitas para presente</div>
+                <div class="kpi">🏷️ 15g e 40g</div>
+              </div>
+              <div class="kpi">💬 Atendimento rápido pelo Instagram e WhatsApp</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <section id="beneficios">
+        <div class="sectionTitle">
+          <h2>Por que escolher a Raízes</h2>
+          <p>Clareza, confiança e conversão — sem excesso de texto.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <h3>Presente com significado</h3>
+            <p>Uma vela é mais do que um item: é mensagem. Ideal para aniversários, agradecimentos e carinho.</p>
+          </div>
+          <div class="card">
+            <h3>Aromas marcantes</h3>
+            <p>Fragrâncias para cada intenção: relaxar, energizar, acolher ou celebrar.</p>
+          </div>
+          <div class="card">
+            <h3>Encomendas para empresas</h3>
+            <p>Brindes e lembranças para clientes e times — com toque artesanal e cuidado no detalhe.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="aromas">
+        <div class="sectionTitle">
+          <h2>Aromas em destaque</h2>
+          <p>Escolha pelo sentimento que você quer criar.</p>
+        </div>
+
+        <div class="products">
+          <div class="product">
+            <div class="ph" aria-hidden="true">
+              <!-- troque por foto do produto -->
+              <img src="" alt="" style="display:none" />
+            </div>
+            <div>
+              <b>Lavanda</b>
+              <div class="meta">Conforto e calmaria • perfeito para relaxar</div>
+              <div class="chips">
+                <span class="chip">Para dormir melhor</span>
+                <span class="chip">Ambiente zen</span>
+                <span class="chip">Presente “certeiro”</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product">
+            <div class="ph" aria-hidden="true"></div>
+            <div>
+              <b>Bamboo</b>
+              <div class="meta">Fresco e leve • sensação de casa limpa</div>
+              <div class="chips">
+                <span class="chip">Sala / escritório</span>
+                <span class="chip">Refrescante</span>
+                <span class="chip">Minimalista</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product">
+            <div class="ph" aria-hidden="true"></div>
+            <div>
+              <b>Morango &amp; Champagne</b>
+              <div class="meta">Doce e celebrativo • vibe de ocasião especial</div>
+              <div class="chips">
+                <span class="chip">Datas especiais</span>
+                <span class="chip">Romântico</span>
+                <span class="chip">“Uau” imediato</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product">
+            <div class="ph" aria-hidden="true"></div>
+            <div>
+              <b>Outros aromas</b>
+              <div class="meta">Quer algo específico? Chama no direct e a gente sugere o ideal.</div>
+              <div class="chips">
+                <span class="chip">Personalizado</span>
+                <span class="chip">Ideias de presente</span>
+                <span class="chip">Para empresas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="heroActions" style="margin-top:14px">
+          <a class="btn primary" href="https://ig.me/m/raizesaromas_" target="_blank" rel="noopener">Quero ajuda para escolher</a>
+          <a class="btn" href="https://wa.me/5511944800174" target="_blank" rel="noopener">Quero comprar agora</a>
+        </div>
+      </section>
+
+      <section id="entrega">
+        <div class="sectionTitle">
+          <h2>Entrega e tamanhos</h2>
+          <p>Informação simples = decisão rápida.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <h3>Regiões atendidas</h3>
+            <p><b>Belo Horizonte e região</b><br><b>Campinas</b><br><b>Atibaia</b></p>
+          </div>
+          <div class="card">
+            <h3>Tamanhos</h3>
+            <p><b>15g</b> (lembrancinha / mimo)<br><b>40g</b> (presente completo)</p>
+          </div>
+          <div class="card">
+            <h3>Como pedir</h3>
+            <p>Chame no Instagram ou WhatsApp, diga o aroma/tamanho e a cidade de entrega. Pronto.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="panel" style="padding:18px; margin-top:18px;">
+          <div class="sectionTitle" style="margin:0 0 10px">
+            <h2>Pedido em 3 passos</h2>
+            <p>Sem complicação.</p>
+          </div>
+
+          <div class="grid3">
+            <div class="card">
+              <h3>1) Escolha</h3>
+              <p>Aroma (Lavanda, Bamboo, Morango &amp; Champagne…) + tamanho (15g ou 40g).</p>
+            </div>
+            <div class="card">
+              <h3>2) Confirme</h3>
+              <p>Endereço/cidade e data desejada. A gente orienta o melhor para presente.</p>
+            </div>
+            <div class="card">
+              <h3>3) Encante</h3>
+              <p>Você entrega um “momento” — não só um produto.</p>
+            </div>
+          </div>
+
+          <div class="heroActions" style="margin-top:14px">
+            <a class="btn primary" href="https://wa.me/5511944800174" target="_blank" rel="noopener">Fazer pedido no WhatsApp</a>
+            <a class="btn" href="https://ig.me/m/raizesaromas_" target="_blank" rel="noopener">Fazer pedido no Instagram</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+        <div class="sectionTitle">
+          <h2>FAQ</h2>
+          <p>Removendo dúvidas que travam a compra.</p>
+        </div>
+
+        <details>
+          <summary>Quais aromas vocês têm?</summary>
+          <p>Os principais são Lavanda, Bamboo e Morango &amp; Champagne. Pelo direct/WhatsApp você pode pedir sugestão e ver disponibilidade.</p>
+        </details>
+
+        <details>
+          <summary>Qual tamanho escolher: 15g ou 40g?</summary>
+          <p><b>15g</b> é ótimo como mimo/lembrancinha. <b>40g</b> é o presente mais completo para marcar presença.</p>
+        </details>
+
+        <details>
+          <summary>Vocês fazem encomenda para empresas?</summary>
+          <p>Sim. Conte a quantidade, cidade e ocasião. A gente sugere aroma e apresentação ideais para brindes e lembranças.</p>
+        </details>
+
+        <details>
+          <summary>Onde vocês entregam?</summary>
+          <p>Belo Horizonte e região, Campinas e Atibaia. Para outras localidades, fale com a gente para avaliar alternativa.</p>
+        </details>
+      </section>
+
+      <footer>
+        <div>© <span id="y"></span> Raízes Aromas • Velas veganas aromatizadas</div>
+        <div>
+          <a href="https://www.instagram.com/raizesaromas_/" target="_blank" rel="noopener">Instagram</a>
+          &nbsp;•&nbsp;
+          <a href="https://wa.me/5511944800174" target="_blank" rel="noopener">WhatsApp</a>
+          &nbsp;•&nbsp;
+          <a href="https://ig.me/m/raizesaromas_" target="_blank" rel="noopener">Direct</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Pequeno JS seguro: ano e scroll suave (funciona bem em GitHub Pages; no embed do Sites pode variar)
+    document.getElementById("y").textContent = new Date().getFullYear();
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener("click", (e)=>{
+        const id = a.getAttribute("href");
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({behavior:"smooth", block:"start"});
+      });
+    });
+  </script>
+</body>
+</html>
