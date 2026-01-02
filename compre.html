@@ -34,6 +34,63 @@
   gtag('js', new Date());
 
   gtag('config', 'G-PMVN86NGX7');
+
+  const PRECO_30G = 15;
+const PRECO_110G = 60;
+
+function calcSubtotalProdutos() {
+  let total30 = 0, total110 = 0;
+  for (const s of Object.values(state)) {
+    total30 += s.q30;
+    total110 += s.q110;
+  }
+  return (total30 * PRECO_30G) + (total110 * PRECO_110G);
+}
+
+function calcFreteSelecionado() {
+  if (!freteState?.escolhido) return null;
+  const info = (freteState.escolhido === "PAC") ? freteState.pac : freteState.sedex;
+  if (!info || !Number.isFinite(Number(info.price))) return null;
+  return Number(info.price);
+}
+
+function updateResumoValores() {
+  const local = document.getElementById("local")?.value;
+
+  const box = document.getElementById("totaisValores");
+  const linhaFrete = document.getElementById("linhaFrete");
+  const elSubtotal = document.getElementById("subtotalProdutos");
+  const elFrete = document.getElementById("subtotalFrete");
+  const elTotal = document.getElementById("totalEstimado");
+
+  if (!box || !elSubtotal || !elTotal) return;
+
+  const subtotal = calcSubtotalProdutos();
+  elSubtotal.textContent = formatBRL(subtotal);
+
+  // ✅ Se não for Frete, NÃO APARECE e total = subtotal
+  if (local !== "Frete") {
+    box.style.display = "block";       // se quiser esconder tudo, troque para "none"
+    if (linhaFrete) linhaFrete.style.display = "none";
+    elTotal.textContent = formatBRL(subtotal);
+    return;
+  }
+
+  // ✅ Se for Frete: mostra linha do frete e calcula total
+  box.style.display = "block";
+  if (linhaFrete) linhaFrete.style.display = "block";
+
+  const frete = calcFreteSelecionado();
+  if (frete == null) {
+    if (elFrete) elFrete.textContent = "Selecione PAC ou SEDEX";
+    elTotal.textContent = formatBRL(subtotal);
+    return;
+  }
+
+  if (elFrete) elFrete.textContent = formatBRL(frete);
+  elTotal.textContent = formatBRL(subtotal + frete);
+}
+
 </script>
   <style>
     :root{
@@ -293,8 +350,7 @@
 
     <h1>Monte seu pedido</h1>
     <p class="sub">
-      Escolha as quantidades por aroma e tamanho (30g e 110g). No final, clique em
-      <b>Fazer pedido no WhatsApp</b> e a mensagem vai pronta. 💛
+      Escolha as quantidades por aroma e tamanho (30g e 110g). No final, clique em <b>fazer pedido no WhatsApp</b> e a mensagem vai pronta. 💛
     </p>
 
     <div class="grid">
@@ -336,7 +392,7 @@
   <label><b>Calcular frete</b></label>
 
   <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-    <input id="cepInput" type="text" inputmode="numeric" placeholder="00000-000" maxlength="9" />
+    <input id="cepInput" class="field" type="text" inputmode="numeric" placeholder="00000-000" maxlength="9" />
     <button class="btn" id="btnCalcularFrete" type="button">Calcular</button>
   </div>
 
@@ -363,19 +419,12 @@
             <textarea id="observacao" placeholder="Ex.: é presente, quero um aroma mais suave, entregar até sexta, etc."></textarea>
           </div>
 
-          <div class="totals" id="totals">
-            <div><b>30g:</b> <span id="t30">0</span> un</div>
-            <div><b>110g:</b> <span id="t110">0</span> un</div>
-            <div class="hint">Preços (informativo): 30g R$15 • 110g R$60</div>
-          </div>
 
           <button class="btn primary" type="button" target="_blank" id="btnWhatsapp">
             Fazer pedido no WhatsApp
           </button>
 
           <div class="footerRow">
-            <a class="mutedLink" href="https://ig.me/m/raizesaromas_" rel="noopener">ou falar no Direct</a>
-            <span class="mutedLink">•</span>
             <span class="mutedLink">Feito por um jovem casal empreendendo para casar 💍</span>
           </div>
         </div>
@@ -500,6 +549,8 @@ let lastEntrega = null;
       }
       $t30.textContent = total30;
       $t110.textContent = total110;
+      updateResumoValores();
+
     }
 
     // ========= WHATSAPP MESSAGE =========
@@ -653,6 +704,8 @@ function showFreteAreaIfNeeded() {
     if (resEl) resEl.style.display = "none";
     document.querySelectorAll('input[name="freteOpcao"]').forEach(r => r.checked = false);
   }
+  updateResumoValores();
+
 }
 
 function findPacSedex(options){
@@ -787,12 +840,15 @@ bindFreteOpcaoGA4();
     console.error(e);
     statusEl.textContent = "Erro ao calcular. Verifique sua conexão e tente novamente.";
   }
+  updateResumoValores();
+
 }
 
 function bindFreteChoice() {
   document.querySelectorAll('input[name="freteOpcao"]').forEach(radio => {
     radio.addEventListener("change", () => {
       freteState.escolhido = radio.value; // PAC ou SEDEX
+      updateResumoValores(); // 👈 atualiza total
     });
   });
 }
