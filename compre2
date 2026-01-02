@@ -1,3 +1,294 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#F2E3CE" />
+
+  <title>Raízes Aromas • Montar pedido</title>
+  <meta name="description" content="Monte seu pedido de velas veganas aromatizadas (30g e 110g) e finalize pelo WhatsApp." />
+  <meta name="robots" content="index,follow" />
+
+  <style>
+    :root{
+      /* Paleta enviada */
+      --bg: #F2E3CE;      /* principal */
+      --ink:#210124;      /* texto forte */
+      --olive:#313715;    /* apoio */
+      --orange:#D16014;   /* CTA */
+      --card:#FAF2E6;
+      --line: rgba(33,1,36,.18);
+      --shadow: 0 18px 55px rgba(33,1,36,.12);
+      --r: 18px;
+      --max: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(900px 500px at 20% 10%, rgba(209,96,20,.12), transparent 55%),
+                  radial-gradient(900px 500px at 90% 20%, rgba(49,55,21,.10), transparent 55%),
+                  var(--bg);
+      color: var(--ink);
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 70px;}
+    .top{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:14px 16px;
+      border:1px solid var(--line);
+      background: rgba(250,242,230,.75);
+      backdrop-filter: blur(10px);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 12px;
+      z-index: 50;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none;
+    }
+    .logo{
+      width:42px; height:42px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(209,96,20,.35), rgba(49,55,21,.22));
+      border:1px solid var(--line);
+      display:grid; place-items:center;
+      font-weight:900;
+      color: var(--ink);
+    }
+    .brand b{display:block; font-size:14px; letter-spacing:.2px}
+    .brand span{display:block; font-size:12px; color: rgba(33,1,36,.70)}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(250,242,230,.9);
+      text-decoration:none;
+      font-weight:700;
+      font-size:13px;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(250,242,230,1);}
+    .btn.primary{
+      background: var(--orange);
+      border-color: rgba(0,0,0,.05);
+      color: #fff;
+    }
+    .btn.primary:hover{filter: brightness(1.03);}
+
+    h1{
+      margin:18px 0 8px;
+      font-size: clamp(24px, 3.6vw, 40px);
+      letter-spacing: -0.6px;
+      line-height: 1.05;
+    }
+    .sub{
+      margin:0 0 18px;
+      color: rgba(33,1,36,.78);
+      max-width: 70ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items:start;
+      margin-top: 14px;
+    }
+    @media (max-width: 920px){
+      .grid{grid-template-columns: 1fr;}
+      .top{position: static;}
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      background: rgba(250,242,230,.7);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .panelHead{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      display:flex; justify-content:space-between; align-items:flex-end; gap:10px;
+    }
+    .panelHead h2{margin:0; font-size:16px}
+    .panelHead p{margin:0; font-size:12px; color: rgba(33,1,36,.72)}
+
+    .items{padding:14px; display:grid; gap:12px;}
+    .item{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.35);
+      border-radius: 16px;
+      padding:12px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .itemTop{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    }
+    .item b{font-size:14px}
+    .item .desc{font-size:12px; color: rgba(33,1,36,.72); margin-top:3px}
+
+    .qtyRow{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 520px){
+      .qtyRow{grid-template-columns: 1fr;}
+    }
+
+    .qtyBox{
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding:10px;
+      background: rgba(250,242,230,.65);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .qtyBox .label{
+      display:flex; flex-direction:column;
+    }
+    .qtyBox .label span{font-size:12px; color: rgba(33,1,36,.7)}
+    .qtyBox .label b{font-size:13px}
+    .stepper{
+      display:flex; align-items:center; gap:8px;
+    }
+    .iconBtn{
+      width:34px; height:34px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.55);
+      cursor:pointer;
+      font-size:18px;
+      font-weight:900;
+      line-height: 1;
+    }
+    .iconBtn:active{transform: scale(.98);}
+    input.qty{
+      width:56px;
+      height:34px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      text-align:center;
+      font-weight:800;
+      background: rgba(255,255,255,.65);
+      color: var(--ink);
+      outline:none;
+    }
+
+    /* Resumo */
+    .summary{
+      padding:14px;
+      display:grid;
+      gap: 12px;
+    }
+    .field{
+      display:grid;
+      gap:6px;
+    }
+    label{font-size:12px; color: rgba(33,1,36,.75); font-weight:700}
+    select, textarea{
+      width:100%;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      padding:10px 12px;
+      background: rgba(255,255,255,.6);
+      color: var(--ink);
+      font: inherit;
+      outline:none;
+    }
+    textarea{min-height: 80px; resize: vertical;}
+
+    .totals{
+      border:1px dashed rgba(33,1,36,.28);
+      background: rgba(250,242,230,.7);
+      border-radius: 16px;
+      padding:12px;
+      font-size: 13px;
+      color: rgba(33,1,36,.85);
+      display:grid;
+      gap:6px;
+    }
+    .totals b{color: var(--ink);}
+    .hint{font-size:12px; color: rgba(33,1,36,.72);}
+
+    .footerRow{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .mutedLink{font-size:12px; color: rgba(33,1,36,.75);}
+
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:7px 10px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.35);
+      font-size:12px;
+      color: rgba(33,1,36,.80);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="./index.html" aria-label="Voltar para a página inicial">
+        
+        <img src="assets/images/logo.png" alt="Raízes Aromas" style="width:42px;height:42px;border-radius:14px;object-fit:cover;border:1px solid rgba(33,1,36,.18)">
+        <div>
+          <b>Raízes Aromas</b>
+          <span>Velas veganas aromatizadas</span>
+        </div>
+      </a>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="pill">📍 Atibaia/SP BH/MG</span>
+        <a class="btn" href="https://www.instagram.com/raizesaromas_/" target="_blank" rel="noopener">Ver Instagram</a>
+      </div>
+    </header>
+
+    <h1>Monte seu pedido</h1>
+    <p class="sub">
+      Escolha as quantidades por aroma e tamanho (30g e 110g). No final, clique em
+      <b>Fazer pedido no WhatsApp</b> e a mensagem vai pronta. 💛
+    </p>
+
+    <div class="grid">
+      <!-- LISTA DE PRODUTOS -->
+      <section class="panel" aria-label="Produtos">
+        <div class="panelHead">
+          <div>
+            <h2>Aromas</h2>
+            <p>Fixos + possibilidades extras</p>
+          </div>
+          <button class="btn" type="button" id="btnZerar">Zerar tudo</button>
+        </div>
+
+        <div class="items" id="items"></div>
+      </section>
+
+      <!-- RESUMO / CHECKOUT -->
+      <aside class="panel" aria-label="Resumo do pedido">
+        <div class="panelHead">
+          <div>
+            <h2>Resumo</h2>
+            <p>Fechar pedido por WhatsApp</p>
+          </div>
+        </div>
+
+        <div class="summary">
+
 <div class="field">
   <label for="local">Local de retirada/entrega</label>
   <select id="local">
@@ -32,3 +323,207 @@
     </label>
   </div>
 </div>
+
+
+          <div class="field">
+            <label for="observacao">Observação (opcional)</label>
+            <textarea id="observacao" placeholder="Ex.: é presente, quero um aroma mais suave, entregar até sexta, etc."></textarea>
+          </div>
+
+          <div class="totals" id="totals">
+            <div><b>30g:</b> <span id="t30">0</span> un</div>
+            <div><b>110g:</b> <span id="t110">0</span> un</div>
+            <div class="hint">Preços (informativo): 30g R$15 • 110g R$60</div>
+          </div>
+
+          <button class="btn primary" type="button" id="btnWhatsapp">
+            Fazer pedido no WhatsApp
+          </button>
+
+          <div class="footerRow">
+            <a class="mutedLink" href="https://ig.me/m/raizesaromas_" target="_blank" rel="noopener">ou falar no Direct</a>
+            <span class="mutedLink">•</span>
+            <span class="mutedLink">Feito por um jovem casal empreendendo para casar 💍</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // ========= CONFIG =========
+    const WHATSAPP_PHONE = "5511944800174"; // sem "+" e sem espaços
+
+    const PRODUCTS = [
+      {
+        id: "lavanda",
+        name: "Lavanda",
+        desc: "Conforto e calmaria. Ótima para relaxar.",
+      },
+      {
+        id: "bamboo",
+        name: "Bamboo",
+        desc: "Fresco e leve. Sensação de ambiente limpo.",
+      },
+      {
+        id: "morango_champagne",
+        name: "Morango & Champagne",
+        desc: "Doce e celebrativo. Presente com “uau”.",
+      },
+      { id: "baunilha", name: "Baunilha", desc: "Doce e aconchegante." },
+      { id: "flor_cerejeira", name: "Flor de Cerejeira", desc: "Delicada e elegante." },
+      { id: "ameixa", name: "Ameixa", desc: "Marcante e sofisticada." },
+    ];
+
+    // Estado: { [id]: { q30: number, q110: number } }
+    const state = Object.fromEntries(PRODUCTS.map(p => [p.id, { q30: 0, q110: 0 }]));
+
+    // ========= UI RENDER =========
+    const $items = document.getElementById("items");
+    const $t30 = document.getElementById("t30");
+    const $t110 = document.getElementById("t110");
+
+    function clampInt(v){
+      const n = parseInt(v, 10);
+      return Number.isFinite(n) && n >= 0 ? n : 0;
+    }
+
+    function render(){
+      $items.innerHTML = PRODUCTS.map(p => {
+        const s = state[p.id];
+        return `
+          <article class="item" data-id="${p.id}">
+            <div class="itemTop">
+              <div>
+                <b>${p.name}</b>
+                <div class="desc">${p.desc}</div>
+              </div>
+            </div>
+
+            <div class="qtyRow">
+              ${renderQtyBox(p.id, "q30", "30g", "Vela pequena", s.q30)}
+              ${renderQtyBox(p.id, "q110", "110g", "Vela grande", s.q110)}
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      // bind events
+      document.querySelectorAll("[data-action]").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          const id = btn.getAttribute("data-id");
+          const key = btn.getAttribute("data-key");
+          const action = btn.getAttribute("data-action");
+          step(id, key, action);
+        });
+      });
+
+      document.querySelectorAll("input.qty").forEach(inp => {
+        inp.addEventListener("input", () => {
+          const id = inp.getAttribute("data-id");
+          const key = inp.getAttribute("data-key");
+          state[id][key] = clampInt(inp.value);
+          updateTotals();
+        });
+      });
+
+      updateTotals();
+    }
+
+    function renderQtyBox(id, key, title, subtitle, value){
+      return `
+        <div class="qtyBox" aria-label="${title}">
+          <div class="label">
+            <b>${title}</b>
+            <span>${subtitle}</span>
+          </div>
+          <div class="stepper">
+            <button class="iconBtn" type="button" aria-label="Diminuir"
+              data-action="dec" data-id="${id}" data-key="${key}">−</button>
+            <input class="qty" inputmode="numeric" pattern="[0-9]*"
+              aria-label="Quantidade ${title}" value="${value}"
+              data-id="${id}" data-key="${key}">
+            <button class="iconBtn" type="button" aria-label="Aumentar"
+              data-action="inc" data-id="${id}" data-key="${key}">+</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function step(id, key, action){
+      const cur = state[id][key];
+      state[id][key] = action === "inc" ? cur + 1 : Math.max(0, cur - 1);
+      // Atualiza apenas o input daquele item
+      const inp = document.querySelector(`input.qty[data-id="${id}"][data-key="${key}"]`);
+      if (inp) inp.value = state[id][key];
+      updateTotals();
+    }
+
+    function updateTotals(){
+      let total30 = 0, total110 = 0;
+      for (const s of Object.values(state)){
+        total30 += s.q30;
+        total110 += s.q110;
+      }
+      $t30.textContent = total30;
+      $t110.textContent = total110;
+    }
+
+    // ========= WHATSAPP MESSAGE =========
+    function buildMessage(){
+      const local = document.getElementById("local").value;
+      const obs = document.getElementById("observacao").value.trim();
+
+      const lines30 = [];
+      const lines110 = [];
+
+      for (const p of PRODUCTS){
+        const s = state[p.id];
+        if (s.q30 > 0) lines30.push(`- ${p.name}: ${s.q30} un`);
+        if (s.q110 > 0) lines110.push(`- ${p.name}: ${s.q110} un`);
+      }
+
+      const hasAny = lines30.length || lines110.length;
+
+      const header = `Olá! Quero fazer um pedido da Raízes Aromas 🌿🕯️`;
+      const loc = `Local de retirada/entrega: ${local}`;
+      const sizes =
+        `\n📦 Itens:\n` +
+        (lines30.length ? `\n30g:\n${lines30.join("\n")}\n` : `\n30g: (nenhum)\n`) +
+        (lines110.length ? `\n110g:\n${lines110.join("\n")}\n` : `\n110g: (nenhum)\n`);
+
+      const story = `\n💛 Vi a história de vocês e quero apoiar o projeto do casal!`;
+      const obsBlock = obs ? `\n📝 Observação: ${obs}` : "";
+      const closing = `\n\nObrigad@!`;
+
+      if (!hasAny){
+        return `${header}\n${loc}\n\nQuero ajuda para escolher um aroma e tamanho 🙂${story}${obsBlock}${closing}`;
+      }
+
+      return `${header}\n${loc}${sizes}${story}${obsBlock}${closing}`;
+    }
+
+    function goWhatsApp(){
+      const msg = buildMessage();
+      const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
+      window.open(url, "_blank", "noopener");
+    }
+
+    // ========= BUTTONS =========
+    document.getElementById("btnWhatsapp").addEventListener("click", goWhatsApp);
+
+    document.getElementById("btnZerar").addEventListener("click", () => {
+      for (const p of PRODUCTS){
+        state[p.id].q30 = 0;
+        state[p.id].q110 = 0;
+      }
+      // atualiza inputs na tela
+      document.querySelectorAll("input.qty").forEach(inp => inp.value = 0);
+      updateTotals();
+    });
+
+    // init
+    render();
+  </script>
+</body>
+</html>
