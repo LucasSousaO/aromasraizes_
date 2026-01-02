@@ -548,10 +548,10 @@ let lastEntrega = null;
 
     // ========= BUTTONS =========
     document.getElementById("btnWhatsapp").addEventListener("click", goWhatsApp);
-    document.getElementByIT("backtoInstagram").addEventListener("click",gtag('event', 'backInstagram_click', {
-    event_category: 'engagement',
-    event_label: 'Saida Instagram',
-  });
+document.getElementByIT("backtoInstagram").addEventListener("click",gtag('event', 'backInstagram_click', {
+  event_category: 'engagement',
+  event_label: 'Saida Instagram',
+});
 
     document.getElementById("btnZerar").addEventListener("click", () => {
       for (const p of PRODUCTS){
