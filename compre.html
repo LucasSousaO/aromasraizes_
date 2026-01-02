@@ -710,73 +710,75 @@ async function calcularFrete() {
       return;
     }
 
-    // mais robusto (caso venha custom_price/custom_delivery_time)
-    /*const options = (data.options || []).map(o => ({
-      name: String(o.name || o.service || o.service_name || ""),
-      price: Number(o.price ?? o.custom_price ?? 0),
-      delivery_time: Number(o.delivery_time ?? o.custom_delivery_time ?? 0)
-    }));*/
-    const options = (data.options || [])
+// 1) normaliza + filtra opções com preço válido
+const options = (data.options || [])
   .map(o => ({
-    name: String(o.name || ""),
-    price: Number(o.price),
-    delivery_time: Number(o.delivery_time)
+    name: String(o.name || o.service || o.service_name || ""),
+    // aceita string "15.18"
+    price: Number(o.price ?? o.custom_price),
+    delivery_time: Number(o.delivery_time ?? o.custom_delivery_time)
   }))
-  .filter(o =>
-    Number.isFinite(o.price) &&
-    o.price > 0
-  );
+  .filter(o => Number.isFinite(o.price) && o.price > 0);
 
+// 2) separa PAC/SEDEX
 const { pac, sedex } = findPacSedex(options);
-
+// 3) se não tem nada, aborta
 if (!pac && !sedex) {
+  freteState.cepMasked = "";
+  freteState.pac = null;
+  freteState.sedex = null;
+  freteState.escolhido = null;
   statusEl.textContent = "Nenhuma opção de frete disponível para este CEP.";
+  resultadosEl.style.display = "none";
   return;
 }
 
-    freteState.cepMasked = cepMasked;
-    freteState.pac = { price: pac.price, delivery_time: pac.delivery_time };
-    freteState.sedex = { price: sedex.price, delivery_time: sedex.delivery_time };
-    freteState.escolhido = null;
-
-    //document.getElementById("pacLabel").textContent =
-      //`PAC — ${formatBRL(pac.price)} • ${pac.delivery_time} dia(s)`;
-    //document.getElementById("sedexLabel").textContent =
-      //`SEDEX — ${formatBRL(sedex.price)} • ${sedex.delivery_time} dia(s)`;
-const pacRow = document.querySelector('input[value="PAC"]')?.closest("label");
+// 4) guarda CEP e reseta escolha
+freteState.cepMasked = cepMasked;
+freteState.escolhido = null;
+// 5) mostra/esconde linhas (PAC / SEDEX) e atualiza state
+const pacRow = document.querySelector('input[name="freteOpcao"][value="PAC"]')?.closest("label");
 if (pac) {
+  if (pacRow) pacRow.style.display = "flex";
   document.getElementById("pacLabel").textContent =
     `PAC — ${formatBRL(pac.price)} • ${pac.delivery_time} dia(s)`;
-  pacRow.style.display = "flex";
-  freteState.pac = pac;
-} else if (pacRow) {
-  pacRow.style.display = "none";
+  freteState.pac = { price: pac.price, delivery_time: pac.delivery_time };
+} else {
+  if (pacRow) pacRow.style.display = "none";
   freteState.pac = null;
 }
-    const sedexRow = document.querySelector('input[value="SEDEX"]')?.closest("label");
+
+const sedexRow = document.querySelector('input[name="freteOpcao"][value="SEDEX"]')?.closest("label");
 if (sedex) {
+  if (sedexRow) sedexRow.style.display = "flex";
   document.getElementById("sedexLabel").textContent =
     `SEDEX — ${formatBRL(sedex.price)} • ${sedex.delivery_time} dia(s)`;
-  sedexRow.style.display = "flex";
-  freteState.sedex = sedex;
-} else if (sedexRow) {
-  sedexRow.style.display = "none";
+  freteState.sedex = { price: sedex.price, delivery_time: sedex.delivery_time };
+} else {
+  if (sedexRow) sedexRow.style.display = "none";
   freteState.sedex = null;
 }
+
+// 6) limpa checks e auto-seleciona se só existir 1 opção
+document.querySelectorAll('input[name="freteOpcao"]').forEach(r => (r.checked = false));
+
 if (pac && !sedex) {
-  document.querySelector('input[value="PAC"]').checked = true;
+  const r = document.querySelector('input[name="freteOpcao"][value="PAC"]');
+  if (r) r.checked = true;
   freteState.escolhido = "PAC";
 }
-
 if (sedex && !pac) {
-  document.querySelector('input[value="SEDEX"]').checked = true;
+  const r = document.querySelector('input[name="freteOpcao"][value="SEDEX"]');
+  if (r) r.checked = true;
   freteState.escolhido = "SEDEX";
 }
 
-    document.querySelectorAll('input[name="freteOpcao"]').forEach(r => r.checked = false);
+// 7) finaliza UI
+statusEl.textContent = sedex && pac
+  ? "Frete calculado. Selecione PAC ou SEDEX (obrigatório)."
+  : "Frete calculado.";
+resultadosEl.style.display = "block";
 
-    statusEl.textContent = "Frete calculado. Selecione PAC ou SEDEX (obrigatório).";
-    resultadosEl.style.display = "block";
 
     // 👇 bind GA4 agora que os radios existem
 bindFreteOpcaoGA4();
