@@ -711,27 +711,67 @@ async function calcularFrete() {
     }
 
     // mais robusto (caso venha custom_price/custom_delivery_time)
-    const options = (data.options || []).map(o => ({
+    /*const options = (data.options || []).map(o => ({
       name: String(o.name || o.service || o.service_name || ""),
       price: Number(o.price ?? o.custom_price ?? 0),
       delivery_time: Number(o.delivery_time ?? o.custom_delivery_time ?? 0)
-    }));
+    }));*/
+    const options = (data.options || [])
+  .map(o => ({
+    name: String(o.name || ""),
+    price: Number(o.price),
+    delivery_time: Number(o.delivery_time)
+  }))
+  .filter(o =>
+    Number.isFinite(o.price) &&
+    o.price > 0
+  );
 
-    const { pac, sedex } = findPacSedex(options);
-    if (!pac || !sedex) {
-      statusEl.textContent = "Não foi possível obter PAC e SEDEX para este CEP.";
-      return;
-    }
+const { pac, sedex } = findPacSedex(options);
+
+if (!pac && !sedex) {
+  statusEl.textContent = "Nenhuma opção de frete disponível para este CEP.";
+  return;
+}
 
     freteState.cepMasked = cepMasked;
     freteState.pac = { price: pac.price, delivery_time: pac.delivery_time };
     freteState.sedex = { price: sedex.price, delivery_time: sedex.delivery_time };
     freteState.escolhido = null;
 
-    document.getElementById("pacLabel").textContent =
-      `PAC — ${formatBRL(pac.price)} • ${pac.delivery_time} dia(s)`;
-    document.getElementById("sedexLabel").textContent =
-      `SEDEX — ${formatBRL(sedex.price)} • ${sedex.delivery_time} dia(s)`;
+    //document.getElementById("pacLabel").textContent =
+      //`PAC — ${formatBRL(pac.price)} • ${pac.delivery_time} dia(s)`;
+    //document.getElementById("sedexLabel").textContent =
+      //`SEDEX — ${formatBRL(sedex.price)} • ${sedex.delivery_time} dia(s)`;
+const pacRow = document.querySelector('input[value="PAC"]')?.closest("label");
+if (pac) {
+  document.getElementById("pacLabel").textContent =
+    `PAC — ${formatBRL(pac.price)} • ${pac.delivery_time} dia(s)`;
+  pacRow.style.display = "flex";
+  freteState.pac = pac;
+} else if (pacRow) {
+  pacRow.style.display = "none";
+  freteState.pac = null;
+}
+    const sedexRow = document.querySelector('input[value="SEDEX"]')?.closest("label");
+if (sedex) {
+  document.getElementById("sedexLabel").textContent =
+    `SEDEX — ${formatBRL(sedex.price)} • ${sedex.delivery_time} dia(s)`;
+  sedexRow.style.display = "flex";
+  freteState.sedex = sedex;
+} else if (sedexRow) {
+  sedexRow.style.display = "none";
+  freteState.sedex = null;
+}
+if (pac && !sedex) {
+  document.querySelector('input[value="PAC"]').checked = true;
+  freteState.escolhido = "PAC";
+}
+
+if (sedex && !pac) {
+  document.querySelector('input[value="SEDEX"]').checked = true;
+  freteState.escolhido = "SEDEX";
+}
 
     document.querySelectorAll('input[name="freteOpcao"]').forEach(r => r.checked = false);
 
