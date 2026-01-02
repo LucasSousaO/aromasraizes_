@@ -267,6 +267,54 @@
       .grid{ grid-template-columns: 1fr; }
       .prices{ grid-template-columns: 1fr; }
     }
+
+    /* Modal */
+.modal{ position:fixed; inset:0; display:none; z-index:999; }
+.modal[aria-hidden="false"]{ display:block; }
+.modalBackdrop{
+  position:absolute; inset:0;
+  background: rgba(33,1,36,.35);
+  backdrop-filter: blur(4px);
+}
+.modalCard{
+  position:relative;
+  width:min(720px, calc(100% - 24px));
+  margin: 60px auto;
+  border-radius: 18px;
+  border:1px solid var(--line);
+  background: rgba(250,242,230,.96);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+.modalHead{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+  padding:14px 16px;
+  border-bottom:1px solid var(--line);
+}
+.modalBody{ padding:14px 16px; display:grid; gap:12px; }
+.qBlock{ display:grid; gap:8px; padding:10px; border:1px solid rgba(33,1,36,.12); border-radius:16px; background: rgba(255,255,255,.35); }
+.optGrid{ display:grid; grid-template-columns: 1fr 1fr; gap:8px; }
+@media (max-width: 520px){ .optGrid{ grid-template-columns:1fr; } }
+.opt{
+  display:flex; gap:10px; align-items:center;
+  padding:10px; border-radius:14px;
+  border:1px solid rgba(33,1,36,.12);
+  background: rgba(255,255,255,.45);
+  cursor:pointer;
+  font-size:13px;
+}
+.resultBox{
+  border:1px solid rgba(33,1,36,.18);
+  background: rgba(255,255,255,.55);
+  border-radius: 16px;
+  padding:12px;
+}
+.modalFoot{
+  display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+  padding:12px 16px;
+  border-top:1px solid var(--line);
+}
+
   </style>
 
   <!-- SEO local básico (informativo, sem prometer o que não tem) -->
@@ -293,6 +341,150 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "uv9oeyq093");
 </script>
+  <script>// ================= Modal Ajuda Aroma =================
+const AROMAS = {
+  lavanda: { name:"Lavanda", desc:"Conforto e calmaria. Ótima para relaxar." },
+  bamboo: { name:"Bamboo", desc:"Fresco e leve. Sensação de ambiente limpo." },
+  morango_champagne: { name:"Morango & Champagne", desc:"Doce e celebrativo. Presente com “uau”." },
+  baunilha: { name:"Baunilha", desc:"Doce e aconchegante." },
+  flor_cerejeira: { name:"Flor de Cerejeira", desc:"Delicada e elegante." },
+  ameixa: { name:"Ameixa", desc:"Marcante e sofisticada." }
+};
+
+let aromaRecomendadoId = null;
+
+function openModalAroma(){
+  const m = document.getElementById("modalAroma");
+  m.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+  // foco no primeiro botão
+  document.getElementById("btnCloseModal")?.focus();
+}
+
+function closeModalAroma(){
+  const m = document.getElementById("modalAroma");
+  m.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+  aromaRecomendadoId = null;
+  // limpa resultado
+  const box = document.getElementById("resultadoAroma");
+  box.style.display = "none";
+  box.innerHTML = "";
+  document.getElementById("btnAplicarAroma").style.display = "none";
+}
+
+function getRadioValue(name){
+  return document.querySelector(`input[name="${name}"]:checked`)?.value || null;
+}
+
+function recomendarAroma({momento, estilo, uso}){
+  // Regras simples e bem “humanas”
+  // 1) Presente tende a Morango & Champagne
+  if (uso === "presente") {
+    // se a pessoa quer algo marcante p/ presente, Ameixa também encaixa
+    if (estilo === "marcante") return "ameixa";
+    return "morango_champagne";
+  }
+
+  // 2) Relaxar -> Lavanda (principal), ou Flor de Cerejeira (delicado)
+  if (momento === "relaxar") {
+    if (estilo === "delicado") return "flor_cerejeira";
+    return "lavanda";
+  }
+
+  // 3) Banho / sensação de limpeza -> Bamboo
+  if (momento === "banho") {
+    if (estilo === "doce") return "baunilha";
+    return "bamboo";
+  }
+
+  // 4) Receber visita / clima especial -> Morango & Champagne ou Ameixa
+  if (momento === "receber") {
+    if (estilo === "marcante") return "ameixa";
+    if (estilo === "delicado") return "flor_cerejeira";
+    return "morango_champagne";
+  }
+
+  // 5) Dia a dia -> Bamboo (leve) / Baunilha (doce) / Ameixa (marcante) / Flor (delicado)
+  if (estilo === "doce") return "baunilha";
+  if (estilo === "marcante") return "ameixa";
+  if (estilo === "delicado") return "flor_cerejeira";
+  return "bamboo";
+}
+
+function showRecomendacao(){
+  const momento = getRadioValue("momento");
+  const estilo = getRadioValue("estilo");
+  const uso = getRadioValue("uso");
+
+  if (!momento || !estilo || !uso) {
+    alert("Responda as 3 perguntas para eu te indicar o melhor aroma 🙂");
+    return;
+  }
+
+  aromaRecomendadoId = recomendarAroma({momento, estilo, uso});
+  const a = AROMAS[aromaRecomendadoId];
+
+  const box = document.getElementById("resultadoAroma");
+  box.style.display = "block";
+  box.innerHTML = `
+    <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
+      <div>
+        <div style="font-weight:900; font-size:14px;">Indicação: ${a.name}</div>
+        <div style="font-size:13px; color: rgba(33,1,36,.78); margin-top:4px;">${a.desc}</div>
+      </div>
+      <span class="pill">✨</span>
+    </div>
+    <div style="margin-top:10px; font-size:12px; color: rgba(33,1,36,.74);">
+      Dica: se quiser, comece com <b>30g</b> para testar. Se já conhece o aroma, vá de <b>110g</b>.
+    </div>
+  `;
+
+  const btnAplicar = document.getElementById("btnAplicarAroma");
+  btnAplicar.style.display = "inline-flex";
+}
+
+// “Adicionar ao carrinho”: soma +1 no 30g do aroma recomendado
+function aplicarAromaNoCarrinho(){
+  if (!aromaRecomendadoId) return;
+
+  // seu state já usa ids iguais aos PRODUCTS (lavanda, bamboo, etc.)
+  if (!state[aromaRecomendadoId]) {
+    alert("Não encontrei esse aroma no carrinho.");
+    return;
+  }
+
+  state[aromaRecomendadoId].q30 += 1;
+
+  // atualiza input na tela
+  const inp = document.querySelector(`input.qty[data-id="${aromaRecomendadoId}"][data-key="q30"]`);
+  if (inp) inp.value = state[aromaRecomendadoId].q30;
+
+  updateTotals();
+
+  // (opcional) GA4 evento
+  if (window.gtag) {
+    gtag('event', 'aroma_recomendado_aplicado', {
+      aroma: aromaRecomendadoId
+    });
+  }
+
+  closeModalAroma();
+}
+
+// Bind
+document.getElementById("btnAjudaAroma")?.addEventListener("click", openModalAroma);
+document.getElementById("btnCloseModal")?.addEventListener("click", closeModalAroma);
+document.querySelector("#modalAroma .modalBackdrop")?.addEventListener("click", closeModalAroma);
+document.getElementById("btnVerRecomendacao")?.addEventListener("click", showRecomendacao);
+document.getElementById("btnAplicarAroma")?.addEventListener("click", aplicarAromaNoCarrinho);
+
+// ESC fecha
+document.addEventListener("keydown", (e) => {
+  const m = document.getElementById("modalAroma");
+  if (e.key === "Escape" && m?.getAttribute("aria-hidden") === "false") closeModalAroma();
+});
+ </script>
 </head>
 
 <body>
@@ -378,7 +570,8 @@
       </div>
 
       <div class="ctaRow" style="margin-top:12px">
-        <a class="btn secondary" href="https://ig.me/m/raizesaromas_"  rel="noopener">Me ajuda a escolher um aroma</a>
+      <button class="btn" type="button" id="btnAjudaAroma">Me ajuda a escolher um aroma</button>
+
    <a class="btn primary" href="./compre.html" rel="noopener">Montar pedido</a>
       </div>
     </section>
