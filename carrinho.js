@@ -51,7 +51,7 @@ function getCartProductsForFreight() {
 
 function showFreteAreaIfNeeded() {
   const local = document.getElementById("local")?.value;
-  const area = document.getElementById("freteArea");
+  const area = document.getElementById("local");
   if (!area) return;
 
   const isFrete = local === "Frete";
