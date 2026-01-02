@@ -280,7 +280,7 @@
       </a>
       <div style="display:flex; gap:10px; align-items:center;">
         <span class="pill">📍 Atibaia/SP BH/MG</span>
-        <a class="btn" href="https://www.instagram.com/raizesaromas_/" target="_blank" rel="noopener">Ver Instagram</a>
+        <a class="btn" id="backtoInstagram" href="https://www.instagram.com/raizesaromas_/" target="_blank" rel="noopener">Ver Instagram</a>
       </div>
     </header>
 
@@ -379,7 +379,7 @@
   <script>
     // ========= CONFIG =========
     const WHATSAPP_PHONE = "5511944800174"; // sem "+" e sem espaços
-
+let lastEntrega = null;
     const PRODUCTS = [
       {
         id: "lavanda",
@@ -530,6 +530,10 @@
     }
 
     function goWhatsApp(){
+        gtag('event', 'whatsapp_click', {
+    event_category: 'engagement',
+    event_label: 'Fazer pedido',
+  });
       const msg = buildMessage();
       const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
       window.open(url, "_blank", "noopener");
@@ -537,6 +541,10 @@
 
     // ========= BUTTONS =========
     document.getElementById("btnWhatsapp").addEventListener("click", goWhatsApp);
+    document.getElementByIT("backtoInstagram").addEventListener("click",gtag('event', 'backInstagram_click', {
+    event_category: 'engagement',
+    event_label: 'Saida Instagram',
+  });)
 
     document.getElementById("btnZerar").addEventListener("click", () => {
       for (const p of PRODUCTS){
@@ -610,6 +618,15 @@ function showFreteAreaIfNeeded() {
 
   const local = (select.value || "").trim().toLowerCase();
   const isFrete = local === "frete";
+
+    // 👉 GA4: dispara somente se mudou
+  if (window.gtag && local !== lastEntrega) {
+    gtag('event', 'select_entrega', {
+      method: local, // Atibaia | Belo Horizonte | Frete
+    });
+    lastEntrega = local;
+  }
+  
   area.style.display = isFrete ? "block" : "none";
 
   if (!isFrete) {
@@ -631,12 +648,23 @@ function findPacSedex(options){
   const sedex = options.find(o => /sedex/i.test(o.name));
   return { pac, sedex };
 }
-
+function bindFreteOpcaoGA4() {
+  document.querySelectorAll('input[name="freteOpcao"]').forEach(radio => {
+    // evita múltiplos listeners
+    radio.onchange = () => {
+      if (window.gtag) {
+        gtag('event', 'frete_opcao', {
+          service: radio.value // PAC ou SEDEX
+        });
+      }
+    };
+  });
+}
 async function calcularFrete() {
   const cepInput = document.getElementById("cepInput");
   const statusEl = document.getElementById("freteStatus");
   const resultadosEl = document.getElementById("freteResultados");
-
+  
   const cepMasked = (cepInput?.value || "").trim();
   const cep = onlyDigits(cepMasked);
 
@@ -698,6 +726,9 @@ async function calcularFrete() {
     statusEl.textContent = "Frete calculado. Selecione PAC ou SEDEX (obrigatório).";
     resultadosEl.style.display = "block";
 
+    // 👇 bind GA4 agora que os radios existem
+bindFreteOpcaoGA4();
+    
   } catch (e) {
     console.error(e);
     statusEl.textContent = "Erro ao calcular. Verifique sua conexão e tente novamente.";
@@ -763,6 +794,8 @@ buildMessage = function() {
 
 // Ajusta o WhatsApp para não abrir se buildMessage retornar null
 const _goWhatsAppOriginal = goWhatsApp;
+
+
 goWhatsApp = function() {
   const msg = buildMessage();
   if (!msg) return;
