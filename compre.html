@@ -7,7 +7,7 @@
 
   <title>Raízes Aromas • Montar pedido</title>
   <meta name="description" content="Monte seu pedido de velas veganas aromatizadas (30g e 110g) e finalize pelo WhatsApp." />
-  <meta name="robots" content="compre,follow" />
+  <meta name="robots" content="index,follow" />
   
   <!-- Canonical (troque quando publicar no domínio final) -->
   <link rel="canonical" href="https://aromasraizes.com.br" />
@@ -343,21 +343,19 @@
   <div id="freteStatus" style="margin-top:8px; font-size:14px;"></div>
 
   <div id="freteResultados" style="display:none; margin-top:10px; padding:10px; border:1px solid #eee; border-radius:8px;">
-    <div style="margin-bottom:6px;"><b>Selecione uma opção (obrigatório):</b></div>
+  <div style="margin-bottom:6px;"><b>Selecione uma opção (obrigatório):</b></div>
 
-    <label style="display:flex; gap:8px; align-items:center; padding:8px; border:1px solid #f0f0f0; border-radius:8px; margin-bottom:8px;">
-<input type="radio" name="freteOpcao" value="PAC">
-<span id="pacLabel">PAC — ...</span>
+  <label style="display:flex; gap:8px; align-items:center; padding:8px; border:1px solid #f0f0f0; border-radius:8px; margin-bottom:8px;">
+    <input type="radio" name="freteOpcao" value="PAC">
+    <span id="pacLabel">PAC — ...</span>
+  </label>
 
-<input type="radio" name="freteOpcao" value="SEDEX">
-<span id="sedexLabel">SEDEX — ...</span>
-    </label>
+  <label style="display:flex; gap:8px; align-items:center; padding:8px; border:1px solid #f0f0f0; border-radius:8px;">
+    <input type="radio" name="freteOpcao" value="SEDEX">
+    <span id="sedexLabel">SEDEX — ...</span>
+  </label>
+</div>
 
-    <label style="display:flex; gap:8px; align-items:center; padding:8px; border:1px solid #f0f0f0; border-radius:8px;">
-      <input type="radio" name="freteOpcao" value="SEDEX">
-      <span id="sedexLabel">SEDEX — ...</span>
-    </label>
-  </div>
 </div>
 <div class="totals" id="totals">
   <div><b>30g:</b> <span id="t30">0</span> un</div>
@@ -380,7 +378,7 @@
           </div>
 
 
-          <button class="btn primary" type="button" target="_blank" id="btnWhatsapp">
+          <button class="btn primary" type="button" id="btnWhatsapp">
             Fazer pedido no WhatsApp
           </button>
 
@@ -392,225 +390,294 @@
     </div>
   </div>
 
-  <script>
-    // ========= CONFIG =========
-    const WHATSAPP_PHONE = "5511944800174"; // sem "+" e sem espaços
-let lastEntrega = null;
-    const PRODUCTS = [
-      {
-        id: "lavanda",
-        name: "Lavanda",
-        desc: "Conforto e calmaria. Ótima para relaxar.",
-      },
-      {
-        id: "bamboo",
-        name: "Bamboo",
-        desc: "Fresco e leve. Sensação de ambiente limpo.",
-      },
-      {
-        id: "morango_champagne",
-        name: "Morango & Champagne",
-        desc: "Doce e celebrativo. Presente com “uau”.",
-      },
-      { id: "baunilha", name: "Baunilha", desc: "Doce e aconchegante." },
-      { id: "flor_cerejeira", name: "Flor de Cerejeira", desc: "Delicada e elegante." },
-      { id: "ameixa", name: "Ameixa", desc: "Marcante e sofisticada." },
-    ];
+<script>
+/**
+ * =========================================================
+ *  Raízes Aromas — compre.html (JS organizado)
+ *  - Carrinho (quantidades por aroma / 30g e 110g)
+ *  - Frete (API) + filtro de opções sem preço
+ *  - Total estimado (Produtos + Frete somente quando "Frete")
+ *  - WhatsApp: valida frete (CEP + PAC/SEDEX) quando selecionado
+ *  - GA4: eventos básicos (opcional, só dispara se gtag existir)
+ * =========================================================
+ */
 
-    // Estado: { [id]: { q30: number, q110: number } }
-    const state = Object.fromEntries(PRODUCTS.map(p => [p.id, { q30: 0, q110: 0 }]));
-
-    // ========= UI RENDER =========
-    const $items = document.getElementById("items");
-    const $t30 = document.getElementById("t30");
-    const $t110 = document.getElementById("t110");
-
-    function clampInt(v){
-      const n = parseInt(v, 10);
-      return Number.isFinite(n) && n >= 0 ? n : 0;
-    }
-
-    function render(){
-      $items.innerHTML = PRODUCTS.map(p => {
-        const s = state[p.id];
-        return `
-          <article class="item" data-id="${p.id}">
-            <div class="itemTop">
-              <div>
-                <b>${p.name}</b>
-                <div class="desc">${p.desc}</div>
-              </div>
-            </div>
-
-            <div class="qtyRow">
-              ${renderQtyBox(p.id, "q30", "30g", "Vela pequena", s.q30)}
-              ${renderQtyBox(p.id, "q110", "110g", "Vela grande", s.q110)}
-            </div>
-          </article>
-        `;
-      }).join("");
-
-      // bind events
-      document.querySelectorAll("[data-action]").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-          const id = btn.getAttribute("data-id");
-          const key = btn.getAttribute("data-key");
-          const action = btn.getAttribute("data-action");
-          step(id, key, action);
-        });
-      });
-
-      document.querySelectorAll("input.qty").forEach(inp => {
-        inp.addEventListener("input", () => {
-          const id = inp.getAttribute("data-id");
-          const key = inp.getAttribute("data-key");
-          state[id][key] = clampInt(inp.value);
-          updateTotals();
-        });
-      });
-
-      updateTotals();
-    }
-
-    function renderQtyBox(id, key, title, subtitle, value){
-      return `
-        <div class="qtyBox" aria-label="${title}">
-          <div class="label">
-            <b>${title}</b>
-            <span>${subtitle}</span>
-          </div>
-          <div class="stepper">
-            <button class="iconBtn" type="button" aria-label="Diminuir"
-              data-action="dec" data-id="${id}" data-key="${key}">−</button>
-            <input class="qty" inputmode="numeric" pattern="[0-9]*"
-              aria-label="Quantidade ${title}" value="${value}"
-              data-id="${id}" data-key="${key}">
-            <button class="iconBtn" type="button" aria-label="Aumentar"
-              data-action="inc" data-id="${id}" data-key="${key}">+</button>
-          </div>
-        </div>
-      `;
-    }
-
-    function step(id, key, action){
-      const cur = state[id][key];
-      state[id][key] = action === "inc" ? cur + 1 : Math.max(0, cur - 1);
-      // Atualiza apenas o input daquele item
-      const inp = document.querySelector(`input.qty[data-id="${id}"][data-key="${key}"]`);
-      if (inp) inp.value = state[id][key];
-      updateTotals();
-    }
-
-    function updateTotals(){
-      let total30 = 0, total110 = 0;
-      for (const s of Object.values(state)){
-        total30 += s.q30;
-        total110 += s.q110;
-      }
-      $t30.textContent = total30;
-      $t110.textContent = total110;
-      updateResumoValores();
-
-    }
-
-    // ========= WHATSAPP MESSAGE =========
-    function buildMessage(){
-      const local = document.getElementById("local").value;
-      const obs = document.getElementById("observacao").value.trim();
-
-      const lines30 = [];
-      const lines110 = [];
-
-      for (const p of PRODUCTS){
-        const s = state[p.id];
-        if (s.q30 > 0) lines30.push(`- ${p.name}: ${s.q30} un`);
-        if (s.q110 > 0) lines110.push(`- ${p.name}: ${s.q110} un`);
-      }
-
-      const hasAny = lines30.length || lines110.length;
-
-      const header = `Olá! Quero fazer um pedido da Raízes Aromas 🌿🕯️`;
-      const loc = `Local de retirada/entrega: ${local}`;
-      const sizes =
-        `\n📦 Itens:\n` +
-        (lines30.length ? `\n30g:\n${lines30.join("\n")}\n` : `\n30g: (nenhum)\n`) +
-        (lines110.length ? `\n110g:\n${lines110.join("\n")}\n` : `\n110g: (nenhum)\n`);
-
-      const story = `\n💛 Vi a história de vocês e quero apoiar o projeto do casal!`;
-      const obsBlock = obs ? `\n📝 Observação: ${obs}` : "";
-      const closing = `\n\nObrigad@!`;
-
-      if (!hasAny){
-        return `${header}\n${loc}\n\nQuero ajuda para escolher um aroma e tamanho 🙂${story}${obsBlock}${closing}`;
-      }
-
-      return `${header}\n${loc}${sizes}${story}${obsBlock}${closing}`;
-    }
-
-    function goWhatsApp(){
-        gtag('event', 'whatsapp_click', {
-    event_category: 'engagement',
-    event_label: 'Fazer pedido',
-  });
-      const msg = buildMessage();
-      const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
-      window.open(url, "_blank", "noopener");
-    }
-
-    // ========= BUTTONS =========
-    document.getElementById("btnWhatsapp").addEventListener("click", goWhatsApp);
-document.getElementById("backtoInstagram")?.addEventListener("click", () => {
-  if (window.gtag) {
-    gtag('event', 'backInstagram_click', {
-      event_category: 'engagement',
-      event_label: 'Saida Instagram'
-    });
-  }
-});
-
-
-    document.getElementById("btnZerar").addEventListener("click", () => {
-      for (const p of PRODUCTS){
-        state[p.id].q30 = 0;
-        state[p.id].q110 = 0;
-      }
-      // atualiza inputs na tela
-      document.querySelectorAll("input.qty").forEach(inp => inp.value = 0);
-      updateTotals();
-    });
-
-    // init
-    render();
-    // ================= FRETE (Correios via API) =================
+/* =========================
+   CONFIG
+========================= */
+const WHATSAPP_PHONE = "5511944800174"; // sem "+" e sem espaços
 const FRETE_API_URL = "https://aromasraizesapi.vercel.app/api/frete";
 
+const PRECO_30G = 15;
+const PRECO_110G = 60;
+
+const PRODUCTS = [
+  { id: "lavanda", name: "Lavanda", desc: "Conforto e calmaria. Ótima para relaxar." },
+  { id: "bamboo", name: "Bamboo", desc: "Fresco e leve. Sensação de ambiente limpo." },
+  { id: "morango_champagne", name: "Morango & Champagne", desc: "Doce e celebrativo. Presente com “uau”." },
+  { id: "baunilha", name: "Baunilha", desc: "Doce e aconchegante." },
+  { id: "flor_cerejeira", name: "Flor de Cerejeira", desc: "Delicada e elegante." },
+  { id: "ameixa", name: "Ameixa", desc: "Marcante e sofisticada." },
+];
+
+/* =========================
+   STATE
+========================= */
+// Carrinho por aroma
+const state = Object.fromEntries(PRODUCTS.map(p => [p.id, { q30: 0, q110: 0 }]));
+
+// Frete
 const freteState = {
   cepMasked: "",
-  pac: null,   // { price, delivery_time }
-  sedex: null, // { price, delivery_time }
+  pac: null,   // { price:number, delivery_time:number }
+  sedex: null, // { price:number, delivery_time:number }
   escolhido: null // "PAC" | "SEDEX"
 };
 
-function onlyDigits(s){ return String(s||"").replace(/\D/g,""); }
+let lastEntrega = null; // GA4: evita eventos duplicados no select
+
+/* =========================
+   HELPERS
+========================= */
+function onlyDigits(s){ return String(s || "").replace(/\D/g, ""); }
+
+function clampInt(v){
+  const n = parseInt(v, 10);
+  return Number.isFinite(n) && n >= 0 ? n : 0;
+}
+
 function formatBRL(value){
   const n = Number(value);
   if (Number.isNaN(n)) return String(value);
-  return n.toLocaleString("pt-BR",{ style:"currency", currency:"BRL" });
+  return n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
-// Máscara CEP 00000-000
-function attachCepMask() {
-  const el = document.getElementById("cepInput");
-  if (!el) return;
-  el.addEventListener("input", () => {
-    let v = onlyDigits(el.value).slice(0,8);
-    if (v.length > 5) v = v.slice(0,5) + "-" + v.slice(5);
-    el.value = v;
+function safeGtag(eventName, params){
+  if (window.gtag) window.gtag("event", eventName, params || {});
+}
+
+/* =========================
+   DOM REFS
+========================= */
+const $items = document.getElementById("items");
+const $t30 = document.getElementById("t30");
+const $t110 = document.getElementById("t110");
+
+const $local = document.getElementById("local");
+const $freteArea = document.getElementById("freteArea");
+const $cepInput = document.getElementById("cepInput");
+const $btnCalcularFrete = document.getElementById("btnCalcularFrete");
+const $freteStatus = document.getElementById("freteStatus");
+const $freteResultados = document.getElementById("freteResultados");
+
+const $pacLabel = document.getElementById("pacLabel");
+const $sedexLabel = document.getElementById("sedexLabel");
+
+const $btnWhatsapp = document.getElementById("btnWhatsapp");
+const $btnZerar = document.getElementById("btnZerar");
+const $observacao = document.getElementById("observacao");
+
+const $totaisValores = document.getElementById("totaisValores");
+const $linhaFrete = document.getElementById("linhaFrete");
+const $subtotalProdutos = document.getElementById("subtotalProdutos");
+const $subtotalFrete = document.getElementById("subtotalFrete");
+const $totalEstimado = document.getElementById("totalEstimado");
+
+/* =========================
+   CARRINHO UI
+========================= */
+function renderQtyBox(id, key, title, subtitle, value){
+  return `
+    <div class="qtyBox" aria-label="${title}">
+      <div class="label">
+        <b>${title}</b>
+        <span>${subtitle}</span>
+      </div>
+      <div class="stepper">
+        <button class="iconBtn" type="button" aria-label="Diminuir"
+          data-action="dec" data-id="${id}" data-key="${key}">−</button>
+        <input class="qty" inputmode="numeric" pattern="[0-9]*"
+          aria-label="Quantidade ${title}" value="${value}"
+          data-id="${id}" data-key="${key}">
+        <button class="iconBtn" type="button" aria-label="Aumentar"
+          data-action="inc" data-id="${id}" data-key="${key}">+</button>
+      </div>
+    </div>
+  `;
+}
+
+function step(id, key, action){
+  const cur = state[id][key];
+  state[id][key] = action === "inc" ? cur + 1 : Math.max(0, cur - 1);
+
+  const inp = document.querySelector(`input.qty[data-id="${id}"][data-key="${key}"]`);
+  if (inp) inp.value = state[id][key];
+
+  updateTotals();
+}
+
+function render(){
+  if (!$items) return;
+
+  $items.innerHTML = PRODUCTS.map(p => {
+    const s = state[p.id];
+    return `
+      <article class="item" data-id="${p.id}">
+        <div class="itemTop">
+          <div>
+            <b>${p.name}</b>
+            <div class="desc">${p.desc}</div>
+          </div>
+        </div>
+
+        <div class="qtyRow">
+          ${renderQtyBox(p.id, "q30", "30g", "Vela pequena", s.q30)}
+          ${renderQtyBox(p.id, "q110", "110g", "Vela grande", s.q110)}
+        </div>
+      </article>
+    `;
+  }).join("");
+
+  // Eventos: + e -
+  document.querySelectorAll("[data-action]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id");
+      const key = btn.getAttribute("data-key");
+      const action = btn.getAttribute("data-action");
+      step(id, key, action);
+    });
+  });
+
+  // Eventos: input manual
+  document.querySelectorAll("input.qty").forEach(inp => {
+    inp.addEventListener("input", () => {
+      const id = inp.getAttribute("data-id");
+      const key = inp.getAttribute("data-key");
+      state[id][key] = clampInt(inp.value);
+      updateTotals();
+    });
+  });
+
+  updateTotals();
+}
+
+function updateTotals(){
+  let total30 = 0, total110 = 0;
+
+  for (const s of Object.values(state)){
+    total30 += s.q30;
+    total110 += s.q110;
+  }
+
+  if ($t30) $t30.textContent = total30;
+  if ($t110) $t110.textContent = total110;
+
+  updateResumoValores();
+}
+
+/* =========================
+   TOTAL ESTIMADO
+========================= */
+function calcSubtotalProdutos(){
+  let total30 = 0, total110 = 0;
+  for (const s of Object.values(state)) {
+    total30 += Number(s.q30 || 0);
+    total110 += Number(s.q110 || 0);
+  }
+  return (total30 * PRECO_30G) + (total110 * PRECO_110G);
+}
+
+function calcFreteSelecionado(){
+  if (!freteState.escolhido) return null;
+  const info = (freteState.escolhido === "PAC") ? freteState.pac : freteState.sedex;
+  if (!info || !Number.isFinite(Number(info.price))) return null;
+  return Number(info.price);
+}
+
+function updateResumoValores(){
+  const local = ($local?.value || "").trim();
+
+  // não deixa quebrar caso os spans não existam (mas ideal é existir)
+  if (!$subtotalProdutos || !$totalEstimado || !$totaisValores) return;
+
+  const subtotal = calcSubtotalProdutos();
+  $subtotalProdutos.textContent = formatBRL(subtotal);
+
+  // Se não for Frete: esconde linha frete e total = subtotal
+  if (local !== "Frete") {
+    if ($linhaFrete) $linhaFrete.style.display = "none";
+    if ($subtotalFrete) $subtotalFrete.textContent = "—";
+    $totalEstimado.textContent = formatBRL(subtotal);
+    return;
+  }
+
+  // Se for Frete: mostra linha frete
+  if ($linhaFrete) $linhaFrete.style.display = "block";
+
+  const frete = calcFreteSelecionado();
+  if (frete == null) {
+    if ($subtotalFrete) $subtotalFrete.textContent = "Selecione PAC ou SEDEX";
+    $totalEstimado.textContent = formatBRL(subtotal);
+    return;
+  }
+
+  if ($subtotalFrete) $subtotalFrete.textContent = formatBRL(frete);
+  $totalEstimado.textContent = formatBRL(subtotal + frete);
+}
+
+/* =========================
+   FRETE (UI + API)
+========================= */
+function attachCepMask(){
+  if (!$cepInput) return;
+  $cepInput.addEventListener("input", () => {
+    let v = onlyDigits($cepInput.value).slice(0, 8);
+    if (v.length > 5) v = v.slice(0, 5) + "-" + v.slice(5);
+    $cepInput.value = v;
   });
 }
 
-// ✅ Agora adaptado para o seu state (soma tudo do carrinho)
-function getCartProductsForFreight() {
+function resetFreteStateAndUI(){
+  freteState.cepMasked = "";
+  freteState.pac = null;
+  freteState.sedex = null;
+  freteState.escolhido = null;
+
+  if ($freteStatus) $freteStatus.textContent = "";
+  if ($freteResultados) $freteResultados.style.display = "none";
+
+  document.querySelectorAll('input[name="freteOpcao"]').forEach(r => (r.checked = false));
+
+  // reexibe as linhas caso você tenha ocultado antes
+  const pacRow = document.querySelector('input[name="freteOpcao"][value="PAC"]')?.closest("label");
+  const sedexRow = document.querySelector('input[name="freteOpcao"][value="SEDEX"]')?.closest("label");
+  if (pacRow) pacRow.style.display = "flex";
+  if (sedexRow) sedexRow.style.display = "flex";
+}
+
+function showFreteAreaIfNeeded(){
+  if (!$local || !$freteArea) return;
+
+  const localRaw = ($local.value || "").trim();
+  const local = localRaw.toLowerCase();
+  const isFrete = local === "frete";
+
+  // GA4: evento só se mudou
+  if (localRaw !== lastEntrega) {
+    safeGtag("select_entrega", { method: localRaw });
+    lastEntrega = localRaw;
+  }
+
+  $freteArea.style.display = isFrete ? "block" : "none";
+
+  if (!isFrete) {
+    resetFreteStateAndUI();
+  }
+
+  updateResumoValores();
+}
+
+function getCartProductsForFreight(){
   let q30 = 0, q110 = 0;
   for (const s of Object.values(state)) {
     q30 += Number(s.q30 || 0);
@@ -621,7 +688,7 @@ function getCartProductsForFreight() {
   if (q30 > 0) products.push({
     id: "vela_30g",
     width: 8, height: 5, length: 8,
-    weight: 0.06, insurance_value: 15, // ajuste se quiser
+    weight: 0.06, insurance_value: 15,
     quantity: q30
   });
   if (q110 > 0) products.push({
@@ -634,307 +701,245 @@ function getCartProductsForFreight() {
   return products;
 }
 
-function showFreteAreaIfNeeded() {
-  const select = document.getElementById("local");
-  const area = document.getElementById("freteArea");
-  if (!select || !area) return;
-
-  const local = (select.value || "").trim().toLowerCase();
-  const isFrete = local === "frete";
-
-    // 👉 GA4: dispara somente se mudou
-  if (window.gtag && local !== lastEntrega) {
-    gtag('event', 'select_entrega', {
-      method: local, // Atibaia | Belo Horizonte | Frete
-    });
-    lastEntrega = local;
-  }
-  
-  area.style.display = isFrete ? "block" : "none";
-
-  if (!isFrete) {
-    freteState.cepMasked = "";
-    freteState.pac = null;
-    freteState.sedex = null;
-    freteState.escolhido = null;
-
-    const statusEl = document.getElementById("freteStatus");
-    const resEl = document.getElementById("freteResultados");
-    if (statusEl) statusEl.textContent = "";
-    if (resEl) resEl.style.display = "none";
-    document.querySelectorAll('input[name="freteOpcao"]').forEach(r => r.checked = false);
-  }
-  updateResumoValores();
-
-}
-
 function findPacSedex(options){
   const pac = options.find(o => /pac/i.test(o.name));
   const sedex = options.find(o => /sedex/i.test(o.name));
   return { pac, sedex };
 }
-function bindFreteOpcaoGA4() {
+
+function bindFreteChoice(){
   document.querySelectorAll('input[name="freteOpcao"]').forEach(radio => {
-    // evita múltiplos listeners
-    radio.onchange = () => {
-      if (window.gtag) {
-        gtag('event', 'frete_opcao', {
-          service: radio.value // PAC ou SEDEX
-        });
-      }
-    };
+    radio.addEventListener("change", () => {
+      freteState.escolhido = radio.value; // "PAC" | "SEDEX"
+      safeGtag("frete_opcao", { service: radio.value });
+      updateResumoValores();
+    });
   });
 }
-async function calcularFrete() {
-  const cepInput = document.getElementById("cepInput");
-  const statusEl = document.getElementById("freteStatus");
-  const resultadosEl = document.getElementById("freteResultados");
-  
-  const cepMasked = (cepInput?.value || "").trim();
+
+async function calcularFrete(){
+  const cepMasked = ($cepInput?.value || "").trim();
   const cep = onlyDigits(cepMasked);
 
+  if (!$freteStatus || !$freteResultados) return;
+
   if (cep.length !== 8) {
-    statusEl.textContent = "Informe um CEP válido (00000-000).";
-    resultadosEl.style.display = "none";
+    $freteStatus.textContent = "Informe um CEP válido (00000-000).";
+    $freteResultados.style.display = "none";
     return;
   }
 
   const products = getCartProductsForFreight();
   if (!products.length) {
-    statusEl.textContent = "Adicione itens no carrinho antes de calcular o frete.";
-    resultadosEl.style.display = "none";
+    $freteStatus.textContent = "Adicione itens no carrinho antes de calcular o frete.";
+    $freteResultados.style.display = "none";
     return;
   }
 
-  statusEl.textContent = "Calculando frete...";
-  resultadosEl.style.display = "none";
+  $freteStatus.textContent = "Calculando frete...";
+  $freteResultados.style.display = "none";
 
   try {
     const resp = await fetch(FRETE_API_URL, {
       method: "POST",
-      headers: { "Content-Type":"application/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ toPostalCode: cep, products })
     });
 
     const data = await resp.json();
+
     if (!resp.ok) {
       console.error("Erro frete:", data);
-      statusEl.textContent = "Não foi possível calcular o frete agora. Tente novamente.";
+      $freteStatus.textContent = "Não foi possível calcular o frete agora. Tente novamente.";
       return;
     }
 
-// 1) normaliza + filtra opções com preço válido
-const options = (data.options || [])
-  .map(o => ({
-    name: String(o.name || o.service || o.service_name || ""),
-    // aceita string "15.18"
-    price: Number(o.price ?? o.custom_price),
-    delivery_time: Number(o.delivery_time ?? o.custom_delivery_time)
-  }))
-  .filter(o => Number.isFinite(o.price) && o.price > 0);
+    // normaliza e filtra opções sem preço (ou preço 0 / NaN)
+    const options = (data.options || [])
+      .map(o => ({
+        name: String(o.name || o.service || o.service_name || ""),
+        price: Number(o.price ?? o.custom_price),
+        delivery_time: Number(o.delivery_time ?? o.custom_delivery_time)
+      }))
+      .filter(o => Number.isFinite(o.price) && o.price > 0);
 
-// 2) separa PAC/SEDEX
-const { pac, sedex } = findPacSedex(options);
-// 3) se não tem nada, aborta
-if (!pac && !sedex) {
-  freteState.cepMasked = "";
-  freteState.pac = null;
-  freteState.sedex = null;
-  freteState.escolhido = null;
-  statusEl.textContent = "Nenhuma opção de frete disponível para este CEP.";
-  resultadosEl.style.display = "none";
-  return;
-}
+    const { pac, sedex } = findPacSedex(options);
 
-// 4) guarda CEP e reseta escolha
-freteState.cepMasked = cepMasked;
-freteState.escolhido = null;
-// 5) mostra/esconde linhas (PAC / SEDEX) e atualiza state
-const pacRow = document.querySelector('input[name="freteOpcao"][value="PAC"]')?.closest("label");
-if (pac) {
-  if (pacRow) pacRow.style.display = "flex";
-  document.getElementById("pacLabel").textContent =
-    `PAC — ${formatBRL(pac.price)} • ${pac.delivery_time} dia(s)`;
-  freteState.pac = { price: pac.price, delivery_time: pac.delivery_time };
-} else {
-  if (pacRow) pacRow.style.display = "none";
-  freteState.pac = null;
-}
+    // se não tem nenhuma opção válida, aborta
+    if (!pac && !sedex) {
+      resetFreteStateAndUI();
+      $freteStatus.textContent = "Nenhuma opção de frete disponível para este CEP.";
+      return;
+    }
 
-const sedexRow = document.querySelector('input[name="freteOpcao"][value="SEDEX"]')?.closest("label");
-if (sedex) {
-  if (sedexRow) sedexRow.style.display = "flex";
-  document.getElementById("sedexLabel").textContent =
-    `SEDEX — ${formatBRL(sedex.price)} • ${sedex.delivery_time} dia(s)`;
-  freteState.sedex = { price: sedex.price, delivery_time: sedex.delivery_time };
-} else {
-  if (sedexRow) sedexRow.style.display = "none";
-  freteState.sedex = null;
-}
+    // guarda CEP e reseta escolha
+    freteState.cepMasked = cepMasked;
+    freteState.escolhido = null;
 
-// 6) limpa checks e auto-seleciona se só existir 1 opção
-document.querySelectorAll('input[name="freteOpcao"]').forEach(r => (r.checked = false));
+    // pega linhas para esconder/exibir
+    const pacRow = document.querySelector('input[name="freteOpcao"][value="PAC"]')?.closest("label");
+    const sedexRow = document.querySelector('input[name="freteOpcao"][value="SEDEX"]')?.closest("label");
 
-if (pac && !sedex) {
-  const r = document.querySelector('input[name="freteOpcao"][value="PAC"]');
-  if (r) r.checked = true;
-  freteState.escolhido = "PAC";
-}
-if (sedex && !pac) {
-  const r = document.querySelector('input[name="freteOpcao"][value="SEDEX"]');
-  if (r) r.checked = true;
-  freteState.escolhido = "SEDEX";
-}
+    // PAC
+    if (pac) {
+      if ($pacLabel) $pacLabel.textContent = `PAC — ${formatBRL(pac.price)} • ${pac.delivery_time} dia(s)`;
+      if (pacRow) pacRow.style.display = "flex";
+      freteState.pac = { price: pac.price, delivery_time: pac.delivery_time };
+    } else {
+      if (pacRow) pacRow.style.display = "none";
+      freteState.pac = null;
+    }
 
-// 7) finaliza UI
-statusEl.textContent = sedex && pac
-  ? "Frete calculado. Selecione PAC ou SEDEX (obrigatório)."
-  : "Frete calculado.";
-resultadosEl.style.display = "block";
+    // SEDEX
+    if (sedex) {
+      if ($sedexLabel) $sedexLabel.textContent = `SEDEX — ${formatBRL(sedex.price)} • ${sedex.delivery_time} dia(s)`;
+      if (sedexRow) sedexRow.style.display = "flex";
+      freteState.sedex = { price: sedex.price, delivery_time: sedex.delivery_time };
+    } else {
+      if (sedexRow) sedexRow.style.display = "none";
+      freteState.sedex = null;
+    }
 
+    // limpa checks
+    document.querySelectorAll('input[name="freteOpcao"]').forEach(r => (r.checked = false));
 
-    // 👇 bind GA4 agora que os radios existem
-bindFreteOpcaoGA4();
-    
+    // se só existe 1 opção válida, auto-seleciona
+    if (pac && !sedex) {
+      const r = document.querySelector('input[name="freteOpcao"][value="PAC"]');
+      if (r) r.checked = true;
+      freteState.escolhido = "PAC";
+    }
+    if (sedex && !pac) {
+      const r = document.querySelector('input[name="freteOpcao"][value="SEDEX"]');
+      if (r) r.checked = true;
+      freteState.escolhido = "SEDEX";
+    }
+
+    // UI final
+    $freteResultados.style.display = "block";
+    $freteStatus.textContent =
+      (pac && sedex) ? "Frete calculado. Selecione PAC ou SEDEX (obrigatório)." : "Frete calculado.";
+
+    safeGtag("frete_calculado", { cep_prefix: cep.slice(0, 5) });
+
+    updateResumoValores();
+
   } catch (e) {
     console.error(e);
-    statusEl.textContent = "Erro ao calcular. Verifique sua conexão e tente novamente.";
+    $freteStatus.textContent = "Erro ao calcular. Verifique sua conexão e tente novamente.";
   }
-  updateResumoValores();
-
 }
 
-function bindFreteChoice() {
-  document.querySelectorAll('input[name="freteOpcao"]').forEach(radio => {
-    radio.addEventListener("change", () => {
-      freteState.escolhido = radio.value; // PAC ou SEDEX
-      updateResumoValores(); // 👈 atualiza total
-    });
-  });
-}
-
-// ====== Integrar com a mensagem do WhatsApp ======
-function getEntregaTextForWhatsApp() {
-  const local = document.getElementById("local").value;
+/* =========================
+   WHATSAPP (mensagem)
+========================= */
+function getEntregaTextForWhatsApp(){
+  const local = ($local?.value || "").trim();
 
   if (local === "Atibaia") return "Local de retirada/entrega: Retirada em Atibaia";
   if (local === "Belo Horizonte") return "Local de retirada/entrega: Retirada em Belo Horizonte";
 
   // Frete
-  if (!freteState.cepMasked || !freteState.escolhido) return null;
+  if (local === "Frete") {
+    if (!freteState.cepMasked || !freteState.escolhido) return null;
+    const info = (freteState.escolhido === "PAC") ? freteState.pac : freteState.sedex;
+    if (!info) return null;
 
-  const info = freteState.escolhido === "PAC" ? freteState.pac : freteState.sedex;
-  if (!info) return null;
+    return [
+      "Local de retirada/entrega: Frete (Correios)",
+      `CEP: ${freteState.cepMasked}`,
+      `Serviço: ${freteState.escolhido}`,
+      `Valor do frete: ${formatBRL(info.price)}`,
+      `Prazo: ${info.delivery_time} dia(s)`
+    ].join("\n");
+  }
 
-  return [
-    "Local de retirada/entrega: Frete (Correios)",
-    `CEP: ${freteState.cepMasked}`,
-    `Serviço: ${freteState.escolhido}`,
-    `Valor do frete: ${formatBRL(info.price)}`,
-    `Prazo: ${info.delivery_time} dia(s)`
-  ].join("\n");
+  return `Local de retirada/entrega: ${local}`;
 }
 
-// Override da sua buildMessage() para incluir o frete corretamente
-const _buildMessageOriginal = buildMessage;
-buildMessage = function() {
-  const local = document.getElementById("local").value;
+function buildMessage(){
+  const local = ($local?.value || "").trim();
+  const obs = ($observacao?.value || "").trim();
 
-  // se for frete, exige cálculo + seleção
-  if ((local || "").trim().toLowerCase() === "frete") {
-    const entregaTxt = getEntregaTextForWhatsApp();
-    if (!entregaTxt) {
-      alert("Para Frete, informe o CEP, calcule e selecione PAC ou SEDEX.");
-      return null;
-    }
+  const lines30 = [];
+  const lines110 = [];
+
+  for (const p of PRODUCTS){
+    const s = state[p.id];
+    if (s.q30 > 0) lines30.push(`- ${p.name}: ${s.q30} un`);
+    if (s.q110 > 0) lines110.push(`- ${p.name}: ${s.q110} un`);
   }
 
-  // monta normalmente
-  let msg = _buildMessageOriginal();
-  if (!msg) return null;
+  const hasAny = lines30.length || lines110.length;
+  const header = `Olá! Quero fazer um pedido da Raízes Aromas 🌿🕯️`;
 
-  // substitui a linha "Local de retirada/entrega: X" por detalhes do frete quando necessário
-  if ((local || "").trim().toLowerCase() === "frete") {
-    const entregaTxt = getEntregaTextForWhatsApp();
-    msg = msg.replace(/Local de retirada\/entrega:.*(\r?\n)/, `${entregaTxt}\n`);
+  // entrega (com validação de frete)
+  const entregaTxt = getEntregaTextForWhatsApp();
+  if (local === "Frete" && !entregaTxt) {
+    alert("Para Frete, informe o CEP, calcule e selecione PAC ou SEDEX.");
+    return null;
   }
 
-  return msg;
-};
+  const sizes =
+    `\n📦 Itens:\n` +
+    (lines30.length ? `\n30g:\n${lines30.join("\n")}\n` : `\n30g: (nenhum)\n`) +
+    (lines110.length ? `\n110g:\n${lines110.join("\n")}\n` : `\n110g: (nenhum)\n`);
 
-// Ajusta o WhatsApp para não abrir se buildMessage retornar null
-const _goWhatsAppOriginal = goWhatsApp;
+  const story = `\n💛 Vi a história de vocês e quero apoiar o projeto do casal!`;
+  const obsBlock = obs ? `\n📝 Observação: ${obs}` : "";
+  const closing = `\n\nObrigad@!`;
 
+  if (!hasAny){
+    return `${header}\n${entregaTxt}\n\nQuero ajuda para escolher um aroma e tamanho 🙂${story}${obsBlock}${closing}`;
+  }
 
-goWhatsApp = function() {
+  return `${header}\n${entregaTxt}${sizes}${story}${obsBlock}${closing}`;
+}
+
+function goWhatsApp(){
+  safeGtag("whatsapp_click", { event_category: "engagement", event_label: "Fazer pedido" });
+
   const msg = buildMessage();
   if (!msg) return;
+
   const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
   window.open(url, "_blank", "noopener");
-};
-
-// init frete (agora que tudo existe na DOM)
-document.getElementById("local")?.addEventListener("change", showFreteAreaIfNeeded);
-showFreteAreaIfNeeded();
-attachCepMask();
-bindFreteChoice();
-document.getElementById("btnCalcularFrete")?.addEventListener("click", calcularFrete);
-
-    const PRECO_30G = 15;
-const PRECO_110G = 60;
-
-function calcSubtotalProdutos() {
-  let total30 = 0, total110 = 0;
-  for (const s of Object.values(state)) {
-    total30 += s.q30;
-    total110 += s.q110;
-  }
-  return (total30 * PRECO_30G) + (total110 * PRECO_110G);
 }
 
-function calcFreteSelecionado() {
-  if (!freteState?.escolhido) return null;
-  const info = (freteState.escolhido === "PAC") ? freteState.pac : freteState.sedex;
-  if (!info || !Number.isFinite(Number(info.price))) return null;
-  return Number(info.price);
+/* =========================
+   EVENTS / INIT
+========================= */
+function bindEvents(){
+  $btnWhatsapp?.addEventListener("click", goWhatsApp);
+
+  $btnZerar?.addEventListener("click", () => {
+    for (const p of PRODUCTS){
+      state[p.id].q30 = 0;
+      state[p.id].q110 = 0;
+    }
+    document.querySelectorAll("input.qty").forEach(inp => (inp.value = 0));
+    updateTotals();
+  });
+
+  $local?.addEventListener("change", showFreteAreaIfNeeded);
+  $btnCalcularFrete?.addEventListener("click", calcularFrete);
+
+  // radios (bind 1x)
+  bindFreteChoice();
+
+  // CEP mask
+  attachCepMask();
+
+  // inicial
+  showFreteAreaIfNeeded();
+  updateResumoValores();
 }
 
-function updateResumoValores() {
-  const local = document.getElementById("local")?.value;
+document.addEventListener("DOMContentLoaded", () => {
+  render();
+  bindEvents();
+});
+</script>
 
-  const box = document.getElementById("totaisValores");
-  const linhaFrete = document.getElementById("linhaFrete");
-  const elSubtotal = document.getElementById("subtotalProdutos");
-  const elFrete = document.getElementById("subtotalFrete");
-  const elTotal = document.getElementById("totalEstimado");
-
-  if (!box || !elSubtotal || !elTotal) return;
-
-  const subtotal = calcSubtotalProdutos();
-  elSubtotal.textContent = formatBRL(subtotal);
-
-  // ✅ Se não for Frete, NÃO APARECE e total = subtotal
-  if (local !== "Frete") {
-    box.style.display = "block";       // se quiser esconder tudo, troque para "none"
-    if (linhaFrete) linhaFrete.style.display = "none";
-    elTotal.textContent = formatBRL(subtotal);
-    return;
-  }
-
-  // ✅ Se for Frete: mostra linha do frete e calcula total
-  box.style.display = "block";
-  if (linhaFrete) linhaFrete.style.display = "block";
-
-  const frete = calcFreteSelecionado();
-  if (frete == null) {
-    if (elFrete) elFrete.textContent = "Selecione PAC ou SEDEX";
-    elTotal.textContent = formatBRL(subtotal);
-    return;
-  }
-
-  if (elFrete) elFrete.textContent = formatBRL(frete);
-  elTotal.textContent = formatBRL(subtotal + frete);
-}
-  </script>
 </body>
 </html>
