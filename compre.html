@@ -35,62 +35,6 @@
 
   gtag('config', 'G-PMVN86NGX7');
 
-  const PRECO_30G = 15;
-const PRECO_110G = 60;
-
-function calcSubtotalProdutos() {
-  let total30 = 0, total110 = 0;
-  for (const s of Object.values(state)) {
-    total30 += s.q30;
-    total110 += s.q110;
-  }
-  return (total30 * PRECO_30G) + (total110 * PRECO_110G);
-}
-
-function calcFreteSelecionado() {
-  if (!freteState?.escolhido) return null;
-  const info = (freteState.escolhido === "PAC") ? freteState.pac : freteState.sedex;
-  if (!info || !Number.isFinite(Number(info.price))) return null;
-  return Number(info.price);
-}
-
-function updateResumoValores() {
-  const local = document.getElementById("local")?.value;
-
-  const box = document.getElementById("totaisValores");
-  const linhaFrete = document.getElementById("linhaFrete");
-  const elSubtotal = document.getElementById("subtotalProdutos");
-  const elFrete = document.getElementById("subtotalFrete");
-  const elTotal = document.getElementById("totalEstimado");
-
-  if (!box || !elSubtotal || !elTotal) return;
-
-  const subtotal = calcSubtotalProdutos();
-  elSubtotal.textContent = formatBRL(subtotal);
-
-  // ✅ Se não for Frete, NÃO APARECE e total = subtotal
-  if (local !== "Frete") {
-    box.style.display = "block";       // se quiser esconder tudo, troque para "none"
-    if (linhaFrete) linhaFrete.style.display = "none";
-    elTotal.textContent = formatBRL(subtotal);
-    return;
-  }
-
-  // ✅ Se for Frete: mostra linha do frete e calcula total
-  box.style.display = "block";
-  if (linhaFrete) linhaFrete.style.display = "block";
-
-  const frete = calcFreteSelecionado();
-  if (frete == null) {
-    if (elFrete) elFrete.textContent = "Selecione PAC ou SEDEX";
-    elTotal.textContent = formatBRL(subtotal);
-    return;
-  }
-
-  if (elFrete) elFrete.textContent = formatBRL(frete);
-  elTotal.textContent = formatBRL(subtotal + frete);
-}
-
 </script>
   <style>
     :root{
@@ -402,14 +346,30 @@ function updateResumoValores() {
     <div style="margin-bottom:6px;"><b>Selecione uma opção (obrigatório):</b></div>
 
     <label style="display:flex; gap:8px; align-items:center; padding:8px; border:1px solid #f0f0f0; border-radius:8px; margin-bottom:8px;">
-      <input type="radio" name="freteOpcao" value="SEDEX">
-      <span id="pacLabel">PAC — ...</span>
+<input type="radio" name="freteOpcao" value="PAC">
+<span id="pacLabel">PAC — ...</span>
+
+<input type="radio" name="freteOpcao" value="SEDEX">
+<span id="sedexLabel">SEDEX — ...</span>
     </label>
 
     <label style="display:flex; gap:8px; align-items:center; padding:8px; border:1px solid #f0f0f0; border-radius:8px;">
       <input type="radio" name="freteOpcao" value="SEDEX">
       <span id="sedexLabel">SEDEX — ...</span>
     </label>
+  </div>
+</div>
+<div class="totals" id="totals">
+  <div><b>30g:</b> <span id="t30">0</span> un</div>
+  <div><b>110g:</b> <span id="t110">0</span> un</div>
+  <div class="hint">Preços (informativo): 30g R$15 • 110g R$60</div>
+
+  <div id="totaisValores" style="margin-top:6px; border-top:1px dashed rgba(33,1,36,.22); padding-top:8px;">
+    <div><b>Subtotal produtos:</b> <span id="subtotalProdutos">R$ 0,00</span></div>
+    <div id="linhaFrete"><b>Frete:</b> <span id="subtotalFrete">—</span></div>
+    <div style="margin-top:6px; font-size:14px;">
+      <b>Total estimado:</b> <span id="totalEstimado">R$ 0,00</span>
+    </div>
   </div>
 </div>
 
@@ -920,6 +880,61 @@ attachCepMask();
 bindFreteChoice();
 document.getElementById("btnCalcularFrete")?.addEventListener("click", calcularFrete);
 
+    const PRECO_30G = 15;
+const PRECO_110G = 60;
+
+function calcSubtotalProdutos() {
+  let total30 = 0, total110 = 0;
+  for (const s of Object.values(state)) {
+    total30 += s.q30;
+    total110 += s.q110;
+  }
+  return (total30 * PRECO_30G) + (total110 * PRECO_110G);
+}
+
+function calcFreteSelecionado() {
+  if (!freteState?.escolhido) return null;
+  const info = (freteState.escolhido === "PAC") ? freteState.pac : freteState.sedex;
+  if (!info || !Number.isFinite(Number(info.price))) return null;
+  return Number(info.price);
+}
+
+function updateResumoValores() {
+  const local = document.getElementById("local")?.value;
+
+  const box = document.getElementById("totaisValores");
+  const linhaFrete = document.getElementById("linhaFrete");
+  const elSubtotal = document.getElementById("subtotalProdutos");
+  const elFrete = document.getElementById("subtotalFrete");
+  const elTotal = document.getElementById("totalEstimado");
+
+  if (!box || !elSubtotal || !elTotal) return;
+
+  const subtotal = calcSubtotalProdutos();
+  elSubtotal.textContent = formatBRL(subtotal);
+
+  // ✅ Se não for Frete, NÃO APARECE e total = subtotal
+  if (local !== "Frete") {
+    box.style.display = "block";       // se quiser esconder tudo, troque para "none"
+    if (linhaFrete) linhaFrete.style.display = "none";
+    elTotal.textContent = formatBRL(subtotal);
+    return;
+  }
+
+  // ✅ Se for Frete: mostra linha do frete e calcula total
+  box.style.display = "block";
+  if (linhaFrete) linhaFrete.style.display = "block";
+
+  const frete = calcFreteSelecionado();
+  if (frete == null) {
+    if (elFrete) elFrete.textContent = "Selecione PAC ou SEDEX";
+    elTotal.textContent = formatBRL(subtotal);
+    return;
+  }
+
+  if (elFrete) elFrete.textContent = formatBRL(frete);
+  elTotal.textContent = formatBRL(subtotal + frete);
+}
   </script>
 </body>
 </html>
