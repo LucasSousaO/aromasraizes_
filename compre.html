@@ -836,8 +836,8 @@ async function calcularFrete(){
 function getEntregaTextForWhatsApp(){
   const local = ($local?.value || "").trim();
 
-  if (local === "Atibaia") return "Local de retirada/entrega: Retirada em Atibaia";
-  if (local === "Belo Horizonte") return "Local de retirada/entrega: Retirada em Belo Horizonte";
+  if (local === "Atibaia") return "📍 Local de retirada/entrega: Retirada em Atibaia";
+  if (local === "Belo Horizonte") return "📍 Local de retirada/entrega: Retirada em Belo Horizonte";
 
   // Frete
   if (local === "Frete") {
@@ -846,15 +846,15 @@ function getEntregaTextForWhatsApp(){
     if (!info) return null;
 
     return [
-      "Local de retirada/entrega: Frete (Correios)",
-      `CEP: ${freteState.cepMasked}`,
-      `Serviço: ${freteState.escolhido}`,
-      `Valor do frete: ${formatBRL(info.price)}`,
-      `Prazo: ${info.delivery_time} dia(s)`
+      "🚚 Local de retirada/entrega: Frete (Correios)",
+      `📍 CEP: ${freteState.cepMasked}`,
+      `📦 Serviço: ${freteState.escolhido}`,
+      `💸 Valor do frete: ${formatBRL(info.price)}`,
+      `⏱️ Prazo: ${info.delivery_time} dia(s)`
     ].join("\n");
   }
 
-  return `Local de retirada/entrega: ${local}`;
+  return `📍 Local de retirada/entrega: ${local}`;
 }
 
 function buildMessage(){
@@ -864,10 +864,19 @@ function buildMessage(){
   const lines30 = [];
   const lines110 = [];
 
+  let qtd30 = 0;
+  let qtd110 = 0;
+
   for (const p of PRODUCTS){
     const s = state[p.id];
-    if (s.q30 > 0) lines30.push(`- ${p.name}: ${s.q30} un`);
-    if (s.q110 > 0) lines110.push(`- ${p.name}: ${s.q110} un`);
+    if (s.q30 > 0) {
+      lines30.push(`- ${p.name}: ${s.q30} un`);
+      qtd30 += s.q30;
+    }
+    if (s.q110 > 0) {
+      lines110.push(`- ${p.name}: ${s.q110} un`);
+      qtd110 += s.q110;
+    }
   }
 
   const hasAny = lines30.length || lines110.length;
@@ -880,20 +889,41 @@ function buildMessage(){
     return null;
   }
 
-  const sizes =
+  // ✅ valores
+  const subtotalProdutos = (qtd30 * PRECO_30G) + (qtd110 * PRECO_110G);
+
+  let frete = null;
+  if (local === "Frete" && freteState.escolhido) {
+    const info = freteState.escolhido === "PAC" ? freteState.pac : freteState.sedex;
+    if (info && Number.isFinite(Number(info.price))) frete = Number(info.price);
+  }
+
+  const totalPedido = frete != null ? (subtotalProdutos + frete) : subtotalProdutos;
+
+  const valoresBlock = [
+    "\n💰 Valores:",
+    `- Subtotal produtos: ${formatBRL(subtotalProdutos)}`,
+    ...(local === "Frete"
+      ? [`- Frete: ${frete != null ? formatBRL(frete) : "Selecione PAC ou SEDEX"}`]
+      : []),
+    `➡️ Total do pedido: ${formatBRL(totalPedido)}`
+  ].join("\n");
+
+  // ✅ itens com preços no título
+  const itensBlock =
     `\n📦 Itens:\n` +
-    (lines30.length ? `\n30g:\n${lines30.join("\n")}\n` : `\n30g: (nenhum)\n`) +
-    (lines110.length ? `\n110g:\n${lines110.join("\n")}\n` : `\n110g: (nenhum)\n`);
+    (lines30.length ? `\n30g (${formatBRL(PRECO_30G)} cada):\n${lines30.join("\n")}\n` : `\n30g: (nenhum)\n`) +
+    (lines110.length ? `\n110g (${formatBRL(PRECO_110G)} cada):\n${lines110.join("\n")}\n` : `\n110g: (nenhum)\n`);
 
   const story = `\n💛 Vi a história de vocês e quero apoiar o projeto do casal!`;
   const obsBlock = obs ? `\n📝 Observação: ${obs}` : "";
-  const closing = `\n\nObrigad@!`;
+  const closing = `\n\nObrigad@! 😊`;
 
   if (!hasAny){
-    return `${header}\n${entregaTxt}\n\nQuero ajuda para escolher um aroma e tamanho 🙂${story}${obsBlock}${closing}`;
+    return `${header}\n${entregaTxt}\n\nQuero ajuda para escolher um aroma e tamanho 🙂${valoresBlock}${story}${obsBlock}${closing}`;
   }
 
-  return `${header}\n${entregaTxt}${sizes}${story}${obsBlock}${closing}`;
+  return `${header}\n${entregaTxt}${itensBlock}${valoresBlock}${story}${obsBlock}${closing}`;
 }
 
 function goWhatsApp(){
@@ -905,6 +935,7 @@ function goWhatsApp(){
   const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
   window.open(url, "_blank", "noopener");
 }
+
 
 /* =========================
    EVENTS / INIT
