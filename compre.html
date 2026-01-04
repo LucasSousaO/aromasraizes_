@@ -131,6 +131,10 @@
     @media (max-width: 920px){
       .grid{grid-template-columns: 1fr;}
       .top{position: static;}
+    #btnZerar {
+    background: transparent;
+    border-style: dashed;
+  }
     }
 
     .panel{
@@ -171,6 +175,28 @@
       gap: 10px;
     }
     @media (max-width: 520px){
+      .btnResumoMobile{
+    display: flex;
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 14px;
+    z-index: 999;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 14px;
+    border-radius: 16px;
+
+    background: var(--orange);
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  }
       .qtyRow{grid-template-columns: 1fr;}
        .panelHead {
     flex-direction: column;
@@ -287,13 +313,21 @@
       font-size:12px;
       color: rgba(33,1,36,.80);
     }
+    /* ===== Botão flutuante - mobile ===== */
+.btnResumoMobile{
+  display: none;
+}
     /* ===== Modal (Ajuda Aroma) ===== */
+/* ===== Modal (Ajuda Aroma) - FIX iOS ===== */
+    
 .modal{
   position: fixed;
   inset: 0;
-  display: none; /* fechado por padrão */
-  z-index: 999;
+  display: none;
+  z-index: 9999;
+  padding: 12px;                 /* importante no mobile */
 }
+.modalCard, .modalBody { touch-action: pan-y; }
 
 .modal.is-open{
   display: block;
@@ -306,16 +340,27 @@
   backdrop-filter: blur(3px);
 }
 
+/* O card precisa caber na tela e permitir scroll interno */
 .modalCard{
   position: relative;
   max-width: 720px;
-  margin: 8vh auto;
+
+  /* ✅ chave do mobile */
+  max-height: calc(100dvh - 24px); /* usa dvh no mobile moderno */
+  height: auto;
+
+  margin: 0 auto;
+  top: 12px;                      /* evita “sumir” atrás da barra */
   border: 1px solid var(--line);
   background: rgba(250,242,230,.96);
   border-radius: var(--r);
   box-shadow: var(--shadow);
   overflow: hidden;
+
+  display: flex;                  /* ✅ para dividir head/body */
+  flex-direction: column;
 }
+
 
 .modalHead{
   display:flex;
@@ -326,11 +371,17 @@
   border-bottom: 1px solid var(--line);
 }
 
+/* ✅ o scroll acontece aqui */
 .modalBody{
+  flex: 1 1 auto;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; /* iOS */
   padding: 14px 16px 16px;
   display:grid;
   gap: 14px;
 }
+    /* evita “bounce” estranho em alguns navegadores */
+.modalBody{ overscroll-behavior: contain; }
 
 .qBlock b{
   display:block;
@@ -405,8 +456,11 @@
             <p>à pronta entrega ou encomenda</p>
           </div>
 <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+  <button class="btnResumoMobile" type="button">
+  Ver resumo do pedido
+  </button>
   <button class="btn" type="button" id="btnAjudaAroma">✨ Me ajuda a escolher</button>
-  <button class="btn" type="button" id="btnZerar">Zerar tudo</button>
+  <button class="btn" type="button" id="btnZerar">Limpar seleção</button>
 </div>
         </div>
 
@@ -414,7 +468,7 @@
       </section>
 
       <!-- RESUMO / CHECKOUT -->
-      <aside class="panel" aria-label="Resumo do pedido">
+      <aside class="panel" id="resumoPedido" aria-label="Resumo do pedido">
         <div class="panelHead">
           <div>
             <h2>Resumo</h2>
@@ -1119,22 +1173,40 @@ const AROMAS = {
 
 let aromaRecomendadoId = null;
 
+let __scrollY = 0;
+
+function lockScroll(){
+  __scrollY = window.scrollY || 0;
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${__scrollY}px`;
+  document.body.style.left = "0";
+  document.body.style.right = "0";
+  document.body.style.width = "100%";
+}
+
+function unlockScroll(){
+  document.body.style.position = "";
+  document.body.style.top = "";
+  document.body.style.left = "";
+  document.body.style.right = "";
+  document.body.style.width = "";
+  window.scrollTo(0, __scrollY);
+}
+
 function openModalAroma(){
   const m = document.getElementById("modalAroma");
   if (!m) return;
   m.classList.add("is-open");
-  document.body.style.overflow = "hidden";
-  document.getElementById("btnCloseModal")?.focus();
+  lockScroll();
 }
 
 function closeModalAroma(){
   const m = document.getElementById("modalAroma");
   if (!m) return;
   m.classList.remove("is-open");
-  document.body.style.overflow = "";
+  unlockScroll();
 
   aromaRecomendadoId = null;
-
   document.querySelectorAll('#modalAroma input[type="radio"]').forEach(r => r.checked = false);
 
   const box = document.getElementById("resultadoAroma");
@@ -1143,6 +1215,7 @@ function closeModalAroma(){
   const btnAplicar = document.getElementById("btnAplicarAroma");
   if (btnAplicar) btnAplicar.style.display = "none";
 }
+
 
 function getRadioValue(name){
   return document.querySelector(`#modalAroma input[name="${name}"]:checked`)?.value || null;
