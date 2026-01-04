@@ -739,16 +739,20 @@ function updateTotals(){
   if ($t30) $t30.textContent = total30;
   if ($t110) $t110.textContent = total110;
 
-    // 👇 Mostrar / esconder botão "Zerar tudo"
-  const btnZerar = document.getElementById("btnZerar");
-  if (btnZerar) {
-    const hasItems = (total30 + total110) > 0;
-    btnZerar.style.display = hasItems ? "inline-flex" : "none";
+  // ✅ calcula UMA VEZ e usa para tudo
+  const hasItems = (total30 + total110) > 0;
+
+  // Mostrar / esconder botão "Limpar seleção"
+  if ($btnZerar) {
+    $btnZerar.style.display = hasItems ? "inline-flex" : "none";
   }
-updateResumoMobileBtnVisibility(hasItems);
+
+  // Mobile-only: botão "Ver resumo"
+  updateResumoMobileBtnVisibility(hasItems);
 
   updateResumoValores();
-  toggleResumoButton(); // 👈 aqui
+
+  // toggleResumoButton();
 }
 
 /* =========================
