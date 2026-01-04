@@ -138,6 +138,9 @@
     background: transparent;
     border-style: dashed;
   }
+        .btnResumoMobile{
+    display: inline-flex; /* ou flex */
+  }
     }
 
     .panel{
@@ -177,6 +180,10 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
+    .btnResumoMobile { 
+  display: none; 
+}
+
     @media (max-width: 520px){
       .btnResumoMobile{
     display: flex;
@@ -738,9 +745,9 @@ function updateTotals(){
     const hasItems = (total30 + total110) > 0;
     btnZerar.style.display = hasItems ? "inline-flex" : "none";
   }
+updateResumoMobileBtnVisibility(hasItems);
 
   updateResumoValores();
-  toggleResumoButton(); // 👈 aqui
 
 }
 
@@ -1337,7 +1344,9 @@ function aplicarAromaNoCarrinho(){
 
   closeModalAroma();
 }
-  document.querySelector(".btnResumoMobile")?.addEventListener("click", () => {
+document.querySelector(".btnResumoMobile")?.addEventListener("click", () => {
+  if (!isMobile()) return; // segurança extra
+
   document
     .getElementById("resumoPedido")
     ?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1350,6 +1359,23 @@ function aplicarAromaNoCarrinho(){
   if (!btn) return;
 
   btn.style.display = totalItens > 0 ? "flex" : "none";
+}
+  function isMobile(){
+  return window.matchMedia("(max-width: 920px)").matches;
+}
+
+function updateResumoMobileBtnVisibility(hasItems){
+  const btn = document.querySelector(".btnResumoMobile");
+  if (!btn) return;
+
+  // Desktop: nunca mostra
+  if (!isMobile()){
+    btn.style.display = "none";
+    return;
+  }
+
+  // Mobile: mostra só se tiver itens (se essa for a regra)
+  btn.style.display = hasItems ? "inline-flex" : "none";
 }
 
 // Binds (depois do DOM pronto)
