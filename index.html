@@ -748,18 +748,25 @@ document.addEventListener("keydown", (e) => {
     min-height: 460px;
   }
 
-  .story-card__media {
-    position: relative;
-    height: 260px;
-    background: #e9dfd2;
-  }
+/* Mantém o card bonito e evita que a imagem estoure */
+.story-card__media{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;      /* proporção boa para mapa (ajuste se quiser) */
+  max-height: 340px;        /* limite no mobile */
+  overflow: hidden;
+  border-radius: 16px;      /* opcional */
+  background: #e9dfd2;      /* placeholder */
+}
 
-  .story-card__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+/* Imagem sempre “cabe” sem distorcer */
+.story-card__media img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;      /* mantém o mapa inteiro visível */
+  display: block;
+}
+
 
   .story-card__content {
     padding: 18px 18px 20px;
@@ -850,24 +857,27 @@ document.addEventListener("keydown", (e) => {
   .story-dot[aria-selected="true"] {
     background: rgba(0,0,0,.55);
   }
-
-  /* ====== Responsivo desktop: imagem ao lado do texto ====== */
-  @media (min-width: 860px) {
-    .story-card {
-      grid-template-columns: 1.15fr 1fr;
-      min-height: 420px;
-    }
-    .story-card__media {
-      height: auto;
-      min-height: 420px;
-    }
-    .story-card__content {
-      padding: 26px 26px 26px 22px;
-    }
-    .story-card__content h3 {
-      font-size: 26px;
-    }
+@media (min-width: 860px) {
+  .story-card {
+    grid-template-columns: 1.15fr 1fr;
+    min-height: 420px;
   }
+
+  .story-card__media {
+    aspect-ratio: 16 / 9;
+    max-height: 420px;
+    min-height: unset; /* evita conflito */
+  }
+
+  .story-card__content {
+    padding: 26px 26px 26px 22px;
+  }
+
+  .story-card__content h3 {
+    font-size: 26px;
+  }
+}
+
 </style>
 
 <script>
