@@ -620,11 +620,374 @@ document.addEventListener("keydown", (e) => {
       </div>
     </section>
 
-    <!-- História (curta, humana, sem virar textão) -->
-    <section class="section card" aria-label="História">
-      <h1>Conheça nossa história</h1>
-      <h2>Por trás da raízes aromas, existe uma história (de amor).</h2>
-      <p>Somos um casal diferente: moramos  a 500km de distância! E mesmo com esse desafio, estamos há mais de 2 anos juntos.</p><br>
-      <p>Com viagens custosas entre Belo Horizonte e Campinas, o desejo de fazer renda extra para a distância deixar de existir, nasce a Raízes Aromas. Por meio do trabalho manual, com afeto e cuidado, as velas aromáticas são produzidas!</p><br>
-      <p>Paulo: Mineiro com Orgulho@ Lê Conceição Evaristo e escuta Milton Nascimento. Tranquilo demais, vive pela calmaria. Também é professor de Pilates e esportes.</p><br>
-      <p>Rafa: Menina do interior que ama cidade grande! Energia que não acaba, se pudesse tinha 3 profissões diferentes.Graduanda em Geografia pela Unicamp.</p>
+  <!-- ====== CARROSSEL: Nossa História ====== -->
+<section class="story-carousel" aria-label="Carrossel: Conheça nossa história">
+  <div class="story-carousel__header">
+    <h2>Conheça nossa história</h2>
+    <p>Por trás da Raízes Aromas, existe uma história (de amor).</p>
+  </div>
+
+  <div class="story-carousel__viewport" data-carousel>
+    <div class="story-carousel__track" data-track>
+      <!-- Card 1 -->
+      <article class="story-card" role="group" aria-roledescription="slide" aria-label="1 de 6">
+        <div class="story-card__media">
+          <img src="img/story-01.jpg" alt="Vela acesa em ambiente aconchegante" loading="lazy">
+        </div>
+        <div class="story-card__content">
+          <h3>Por trás da marca</h3>
+          <p>Por trás da Raízes Aromas, existe uma história (de amor).</p>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="story-card" role="group" aria-roledescription="slide" aria-label="2 de 6">
+        <div class="story-card__media">
+          <img src="img/story-02.jpg" alt="Estrada ao pôr do sol, simbolizando distância" loading="lazy">
+        </div>
+        <div class="story-card__content">
+          <h3>Um casal diferente</h3>
+          <p>Moramos a <strong>500 km</strong> de distância — e mesmo assim, estamos há mais de <strong>2 anos</strong> juntos.</p>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="story-card" role="group" aria-roledescription="slide" aria-label="3 de 6">
+        <div class="story-card__media">
+          <img src="img/story-03.jpg" alt="Mesa de trabalho artesanal com velas" loading="lazy">
+        </div>
+        <div class="story-card__content">
+          <h3>Como tudo começou</h3>
+          <p>Com viagens custosas e muita saudade, nasceu o desejo de fazer renda extra para a distância deixar de existir. Assim nasceu a <strong>Raízes Aromas</strong>.</p>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="story-card" role="group" aria-roledescription="slide" aria-label="4 de 6">
+        <div class="story-card__media">
+          <img src="img/story-04.jpg" alt="Mãos produzindo uma vela artesanal" loading="lazy">
+        </div>
+        <div class="story-card__content">
+          <h3>Feito à mão</h3>
+          <p>Por meio do trabalho manual, com afeto e cuidado, nossas velas aromáticas são produzidas — uma por uma.</p>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="story-card" role="group" aria-roledescription="slide" aria-label="5 de 6">
+        <div class="story-card__media">
+          <img src="img/story-05.jpg" alt="Pessoa tranquila em luz natural" loading="lazy">
+        </div>
+        <div class="story-card__content">
+          <h3>Paulo</h3>
+          <p>Mineiro com orgulho. Lê Conceição Evaristo e escuta Milton Nascimento. Tranquilo demais, vive pela calmaria. Também é professor de Pilates e esportes.</p>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="story-card" role="group" aria-roledescription="slide" aria-label="6 de 6">
+        <div class="story-card__media">
+          <img src="img/story-06.jpg" alt="Pessoa com energia em ambiente urbano" loading="lazy">
+        </div>
+        <div class="story-card__content">
+          <h3>Rafa</h3>
+          <p>Menina do interior que ama cidade grande. Energia que não acaba. Graduanda em Geografia pela Unicamp. Se pudesse, teria 3 profissões.</p>
+
+          <div class="story-card__cta">
+            <a class="btn" href="#produtos">Conhecer aromas</a>
+            <a class="btn btn--ghost" href="https://wa.me/5531999999999?text=Oi!%20Quero%20conhecer%20as%20velas%20da%20Ra%C3%ADzes%20Aromas." target="_blank" rel="noopener noreferrer">
+              Chamar no WhatsApp
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Controles -->
+    <button class="story-carousel__btn story-carousel__btn--prev" type="button" aria-label="Slide anterior" data-prev>
+      ‹
+    </button>
+    <button class="story-carousel__btn story-carousel__btn--next" type="button" aria-label="Próximo slide" data-next>
+      ›
+    </button>
+  </div>
+
+  <!-- Dots -->
+  <div class="story-carousel__dots" role="tablist" aria-label="Navegação do carrossel" data-dots></div>
+</section>
+
+<style>
+  /* ====== Layout base ====== */
+  .story-carousel {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 24px 16px 8px;
+  }
+
+  .story-carousel__header h2 {
+    margin: 0 0 6px;
+    font-size: clamp(28px, 3vw, 42px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .story-carousel__header p {
+    margin: 0 0 18px;
+    opacity: 0.9;
+  }
+
+  .story-carousel__viewport {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(0,0,0,.10);
+    background: #f6f0e8;
+    touch-action: pan-y; /* ajuda no swipe */
+  }
+
+  .story-carousel__track {
+    display: flex;
+    transition: transform 320ms ease;
+    will-change: transform;
+  }
+
+  /* Cada card ocupa 100% da viewport */
+  .story-card {
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 460px;
+  }
+
+  .story-card__media {
+    position: relative;
+    height: 260px;
+    background: #e9dfd2;
+  }
+
+  .story-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .story-card__content {
+    padding: 18px 18px 20px;
+  }
+
+  .story-card__content h3 {
+    margin: 0 0 10px;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+
+  .story-card__content p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .story-card__cta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid rgba(0,0,0,.08);
+    background: #2a1a12;
+    color: #fff;
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: #2a1a12;
+    border-color: rgba(42,26,18,.25);
+  }
+
+  /* ====== Botões Prev/Next ====== */
+  .story-carousel__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,.10);
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    font-size: 28px;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .story-carousel__btn--prev { left: 10px; }
+  .story-carousel__btn--next { right: 10px; }
+
+  .story-carousel__btn:focus-visible {
+    outline: 3px solid rgba(0,0,0,.35);
+    outline-offset: 2px;
+  }
+
+  /* ====== Dots ====== */
+  .story-carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 0 0;
+  }
+
+  .story-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,.25);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .story-dot[aria-selected="true"] {
+    background: rgba(0,0,0,.55);
+  }
+
+  /* ====== Responsivo desktop: imagem ao lado do texto ====== */
+  @media (min-width: 860px) {
+    .story-card {
+      grid-template-columns: 1.15fr 1fr;
+      min-height: 420px;
+    }
+    .story-card__media {
+      height: auto;
+      min-height: 420px;
+    }
+    .story-card__content {
+      padding: 26px 26px 26px 22px;
+    }
+    .story-card__content h3 {
+      font-size: 26px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const root = document.querySelector("[data-carousel]");
+    if (!root) return;
+
+    const track = root.querySelector("[data-track]");
+    const slides = Array.from(track.children);
+    const btnPrev = root.querySelector("[data-prev]");
+    const btnNext = root.querySelector("[data-next]");
+    const dotsWrap = root.parentElement.querySelector("[data-dots]");
+
+    let index = 0;
+    let startX = 0;
+    let currentX = 0;
+    let dragging = false;
+
+    // Cria dots
+    const dots = slides.map((_, i) => {
+      const b = document.createElement("button");
+      b.className = "story-dot";
+      b.type = "button";
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-label", `Ir para o slide ${i + 1}`);
+      b.addEventListener("click", () => goTo(i));
+      dotsWrap.appendChild(b);
+      return b;
+    });
+
+    function update() {
+      track.style.transform = `translateX(${-index * 100}%)`;
+
+      // aria-selected nos dots
+      dots.forEach((d, i) => d.setAttribute("aria-selected", String(i === index)));
+
+      // Desabilita botões nas pontas
+      btnPrev.disabled = index === 0;
+      btnNext.disabled = index === slides.length - 1;
+
+      // Atualiza labels do slide (1 de N)
+      slides.forEach((s, i) => {
+        s.setAttribute("aria-label", `${i + 1} de ${slides.length}`);
+      });
+    }
+
+    function goTo(i) {
+      index = Math.max(0, Math.min(i, slides.length - 1));
+      update();
+    }
+
+    function next() { goTo(index + 1); }
+    function prev() { goTo(index - 1); }
+
+    btnNext.addEventListener("click", next);
+    btnPrev.addEventListener("click", prev);
+
+    // Teclado (setas)
+    root.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+    });
+    root.tabIndex = 0; // permite foco para teclado
+
+    // Swipe (touch + mouse)
+    function onStart(clientX) {
+      dragging = true;
+      startX = clientX;
+      currentX = clientX;
+      track.style.transition = "none";
+    }
+
+    function onMove(clientX) {
+      if (!dragging) return;
+      currentX = clientX;
+      const dx = currentX - startX;
+
+      // move track de forma “elástica”
+      const percent = (dx / root.clientWidth) * 100;
+      track.style.transform = `translateX(${(-index * 100) + percent}%)`;
+    }
+
+    function onEnd() {
+      if (!dragging) return;
+      dragging = false;
+
+      const dx = currentX - startX;
+      const threshold = root.clientWidth * 0.18; // 18% da largura
+      track.style.transition = "transform 320ms ease";
+
+      if (dx < -threshold) next();
+      else if (dx > threshold) prev();
+      else update();
+    }
+
+    // Touch
+    root.addEventListener("touchstart", (e) => onStart(e.touches[0].clientX), { passive: true });
+    root.addEventListener("touchmove", (e) => onMove(e.touches[0].clientX), { passive: true });
+    root.addEventListener("touchend", onEnd);
+
+    // Mouse (arrastar)
+    root.addEventListener("mousedown", (e) => onStart(e.clientX));
+    window.addEventListener("mousemove", (e) => onMove(e.clientX));
+    window.addEventListener("mouseup", onEnd);
+
+    // Recalcula ao redimensionar
+    window.addEventListener("resize", update);
+
+    update();
+  })();
+</script>
+<!-- ====== /CARROSSEL ====== -->
