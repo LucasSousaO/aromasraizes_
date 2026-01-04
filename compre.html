@@ -77,6 +77,9 @@
       display:flex; align-items:center; gap:12px;
       text-decoration:none;
     }
+    #btnZerar {
+  display: none;
+}
     .logo{
       width:42px; height:42px; border-radius:14px;
       background: linear-gradient(135deg, rgba(209,96,20,.35), rgba(49,55,21,.22));
@@ -729,8 +732,15 @@ function updateTotals(){
   if ($t30) $t30.textContent = total30;
   if ($t110) $t110.textContent = total110;
 
+    // 👇 Mostrar / esconder botão "Zerar tudo"
+  const btnZerar = document.getElementById("btnZerar");
+  if (btnZerar) {
+    const hasItems = (total30 + total110) > 0;
+    btnZerar.style.display = hasItems ? "inline-flex" : "none";
+  }
+
   updateResumoValores();
-    toggleResumoButton(); // 👈 aqui
+  toggleResumoButton(); // 👈 aqui
 
 }
 
