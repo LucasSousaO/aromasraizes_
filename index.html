@@ -728,8 +728,14 @@
 
   // Se você não tem carrinho nessa página, substitua aqui por WhatsApp/Instagram depois.
   function aplicarAromaNoCarrinho(){
-    alert("Recomendação aplicada! (Aqui você pode integrar ao carrinho/WhatsApp)");
-    closeModalAroma();
+  if (!aromaRecomendadoId) return;
+
+  const url = new URL("./compre.html", window.location.href);
+  url.searchParams.set("add", aromaRecomendadoId); // ex: lavanda
+  url.searchParams.set("size", "30");
+  url.searchParams.set("qty", "1");
+
+  window.location.href = url.toString();
   }
 
   // ✅ Bind só depois do DOM pronto
