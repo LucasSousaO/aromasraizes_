@@ -741,48 +741,52 @@ document.addEventListener("keydown", (e) => {
   }
 
   /* Cada card ocupa 100% da viewport */
-  .story-card {
-    flex: 0 0 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    min-height: 460px;
-  }
-
-/* Mantém o card bonito e evita que a imagem estoure */
-.story-card__media{
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;      /* proporção boa para mapa (ajuste se quiser) */
-  max-height: 340px;        /* limite no mobile */
-  overflow: hidden;
-  border-radius: 16px;      /* opcional */
-  background: #e9dfd2;      /* placeholder */
+.story-card {
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding: 18px;
+  min-height: auto;          /* <-- remove o “vazio” */
 }
 
-/* Imagem sempre “cabe” sem distorcer */
-.story-card__media img{
+/* MÍDIA (imagem) */
+.story-card__media {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #e9dfd2;
+
+  /* tamanho bom no mobile sem “poster gigante” */
+  aspect-ratio: 1 / 1;       /* quadrado no mobile (mais instagramável) */
+  max-height: 320px;         /* controla a altura */
+  margin: 0 auto;
+}
+
+/* imagem ocupa o quadro de forma agradável */
+.story-card__media img {
   width: 100%;
   height: 100%;
-  object-fit: contain;      /* mantém o mapa inteiro visível */
+  object-fit: cover;         /* preenche e fica bonito */
   display: block;
 }
 
+/* Conteúdo */
+.story-card__content {
+  padding: 0;                /* já tem padding no card */
+}
 
-  .story-card__content {
-    padding: 18px 18px 20px;
-  }
+.story-card__content h3 {
+  margin: 0 0 10px;
+  font-size: 26px;
+  line-height: 1.1;
+}
 
-  .story-card__content h3 {
-    margin: 0 0 10px;
-    font-size: 22px;
-    letter-spacing: -0.01em;
-  }
-
-  .story-card__content p {
-    margin: 0;
-    font-size: 16px;
-    line-height: 1.55;
-  }
+.story-card__content p {
+  margin: 0 0 10px;
+  font-size: 16px;
+  line-height: 1.6;
+}
 
   .story-card__cta {
     display: flex;
@@ -857,26 +861,29 @@ document.addEventListener("keydown", (e) => {
   .story-dot[aria-selected="true"] {
     background: rgba(0,0,0,.55);
   }
+/* Desktop: imagem maior e texto com melhor leitura */
 @media (min-width: 860px) {
   .story-card {
-    grid-template-columns: 1.15fr 1fr;
-    min-height: 420px;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 24px;
+    padding: 28px;
   }
 
   .story-card__media {
-    aspect-ratio: 16 / 9;
-    max-height: 420px;
-    min-height: unset; /* evita conflito */
-  }
-
-  .story-card__content {
-    padding: 26px 26px 26px 22px;
+    aspect-ratio: 4 / 3;     /* mapa/Foto fica melhor assim no desktop */
+    max-height: 440px;       /* imagem finalmente fica “grande” */
   }
 
   .story-card__content h3 {
-    font-size: 26px;
+    font-size: 34px;
+  }
+
+  .story-card__content p {
+    font-size: 18px;
   }
 }
+
 
 </style>
 
