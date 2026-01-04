@@ -970,7 +970,43 @@ document.addEventListener("DOMContentLoaded", () => {
   render();
   bindEvents();
 });
+
+  (function applyAddFromUrl(){
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("add");      // ex: lavanda
+  const size = params.get("size");   // "30"
+  const qtyStr = params.get("qty");  // "1"
+  const qty = Math.max(1, parseInt(qtyStr || "1", 10));
+
+  if (!id || size !== "30") return;
+
+  // 1) Atualiza seu state (se existir)
+  if (window.state && window.state[id]) {
+    window.state[id].q30 = (window.state[id].q30 || 0) + qty;
+
+    // atualiza input visual (se existir)
+    const inp = document.querySelector(`input.qty[data-id="${id}"][data-key="q30"]`);
+    if (inp) inp.value = String(qty);
+
+    // chama sua função de totais (se existir)
+    if (typeof window.updateTotals === "function") window.updateTotals();
+  } else {
+    // 2) Fallback: se seu carrinho não usa state, tenta só atualizar o input e disparar evento
+    const inp = document.querySelector(`input.qty[data-id="${id}"][data-key="q30"]`);
+    if (inp) {
+      inp.value = String(qty);
+      inp.dispatchEvent(new Event("input", { bubbles: true }));
+      inp.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+  }
+
+  // (opcional) limpa query pra não reaplicar se recarregar
+  params.delete("add"); params.delete("size"); params.delete("qty");
+  const cleanUrl = window.location.pathname + (params.toString() ? `?${params.toString()}` : "");
+  window.history.replaceState({}, "", cleanUrl);
+})();
 </script>
 
+  
 </body>
 </html>
