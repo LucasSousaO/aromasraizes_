@@ -704,7 +704,62 @@ document.addEventListener("keydown", (e) => {
   <!-- Dots -->
   <div class="story-carousel__dots" role="tablist" aria-label="Navegação do carrossel" data-dots></div>
 </section>
+<!-- ===== Modal Ajuda Aroma ===== -->
+<div class="modal" id="modalAroma" aria-hidden="true" aria-label="Ajuda para escolher aroma" role="dialog" aria-modal="true">
+  <div class="modalBackdrop"></div>
 
+  <div class="modalCard" role="document">
+    <div class="modalHead">
+      <div>
+        <div style="font-weight:900; font-size:14px;">Me ajuda a escolher um aroma</div>
+        <div style="font-size:12px; color: rgba(33,1,36,.72); margin-top:3px;">
+          Responda rapidinho e eu te indico o melhor.
+        </div>
+      </div>
+
+      <button class="btn" type="button" id="btnCloseModal" aria-label="Fechar">Fechar</button>
+    </div>
+
+    <div class="modalBody">
+      <div class="qBlock">
+        <div style="font-weight:800;">1) Para qual momento?</div>
+        <div class="optGrid">
+          <label class="opt"><input type="radio" name="momento" value="relaxar"> Relaxar / dormir</label>
+          <label class="opt"><input type="radio" name="momento" value="banho"> Banho / autocuidado</label>
+          <label class="opt"><input type="radio" name="momento" value="receber"> Receber visita</label>
+          <label class="opt"><input type="radio" name="momento" value="diaadia"> Dia a dia</label>
+        </div>
+      </div>
+
+      <div class="qBlock">
+        <div style="font-weight:800;">2) Você prefere qual estilo?</div>
+        <div class="optGrid">
+          <label class="opt"><input type="radio" name="estilo" value="leve"> Leve / fresco</label>
+          <label class="opt"><input type="radio" name="estilo" value="doce"> Doce / aconchegante</label>
+          <label class="opt"><input type="radio" name="estilo" value="delicado"> Delicado / floral</label>
+          <label class="opt"><input type="radio" name="estilo" value="marcante"> Marcante / sofisticado</label>
+        </div>
+      </div>
+
+      <div class="qBlock">
+        <div style="font-weight:800;">3) É para você ou para presente?</div>
+        <div class="optGrid">
+          <label class="opt"><input type="radio" name="uso" value="pra_mim"> Pra mim</label>
+          <label class="opt"><input type="radio" name="uso" value="presente"> Presente</label>
+        </div>
+      </div>
+
+      <div class="modalFoot">
+        <button class="btn" type="button" id="btnVerRecomendacao">Ver recomendação</button>
+        <button class="btn primary" type="button" id="btnAplicarAroma" style="display:none;">Adicionar 30g ao carrinho</button>
+      </div>
+
+      <div class="resultBox" id="resultadoAroma" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+<!-- ===== /Modal Ajuda Aroma ===== -->
+</body>
 <style>
   /* ====== Layout base ====== */
   .story-carousel {
