@@ -730,6 +730,8 @@ function updateTotals(){
   if ($t110) $t110.textContent = total110;
 
   updateResumoValores();
+    toggleResumoButton(); // 👈 aqui
+
 }
 
 /* =========================
@@ -1295,6 +1297,20 @@ function aplicarAromaNoCarrinho(){
   updateTotals();
 
   closeModalAroma();
+}
+  document.querySelector(".btnResumoMobile")?.addEventListener("click", () => {
+  document
+    .getElementById("resumoPedido")
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+  function toggleResumoButton(){
+  const totalItens = Object.values(state)
+    .reduce((sum, s) => sum + s.q30 + s.q110, 0);
+
+  const btn = document.querySelector(".btnResumoMobile");
+  if (!btn) return;
+
+  btn.style.display = totalItens > 0 ? "flex" : "none";
 }
 
 // Binds (depois do DOM pronto)
