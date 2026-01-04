@@ -8,14 +8,9 @@
   <title>Raízes Aromas • Montar pedido</title>
   <meta name="description" content="Monte seu pedido de velas veganas aromatizadas (30g e 110g) e finalize pelo WhatsApp." />
   <meta name="robots" content="index,follow" />
-  
-  <!-- Canonical (troque quando publicar no domínio final) -->
   <link rel="canonical" href="https://aromasraizes.com.br" />
-
-  <!-- Favicon (troque pela URL final) -->
   <link rel="icon" href="assets/images/logo.png" />
 
-  <!-- Open Graph / WhatsApp Preview -->
   <meta property="og:title" content="Raízes Aromas | Velas veganas aromatizadas" />
   <meta property="og:description" content="Presentes especiais e encomendas. Entregas em Atibaia e Belo Horizonte. Peça pelo WhatsApp ou Instagram." />
   <meta property="og:type" content="website" />
@@ -23,26 +18,23 @@
   <meta property="og:image" content="assets/images/logo.png" />
   <meta property="og:locale" content="pt_BR" />
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PMVN86NGX7"></script>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMVN86NGX7"></script>
   <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PMVN86NGX7');
+  </script>
 
-  gtag('config', 'G-PMVN86NGX7');
-
-</script>
   <style>
     :root{
-      /* Paleta enviada */
-      --bg: #F2E3CE;      /* principal */
-      --ink:#210124;      /* texto forte */
-      --olive:#313715;    /* apoio */
-      --orange:#D16014;   /* CTA */
+      --bg: #F2E3CE;
+      --ink:#210124;
+      --olive:#313715;
+      --orange:#D16014;
       --card:#FAF2E6;
       --line: rgba(33,1,36,.18);
       --shadow: 0 18px 55px rgba(33,1,36,.12);
@@ -77,17 +69,7 @@
       display:flex; align-items:center; gap:12px;
       text-decoration:none;
     }
-    #btnZerar {
-  display: none;
-}
-    .logo{
-      width:42px; height:42px; border-radius:14px;
-      background: linear-gradient(135deg, rgba(209,96,20,.35), rgba(49,55,21,.22));
-      border:1px solid var(--line);
-      display:grid; place-items:center;
-      font-weight:900;
-      color: var(--ink);
-    }
+
     .brand b{display:block; font-size:14px; letter-spacing:.2px}
     .brand span{display:block; font-size:12px; color: rgba(33,1,36,.70)}
 
@@ -118,11 +100,6 @@
       letter-spacing: -0.6px;
       line-height: 1.05;
     }
-    .sub{
-      margin:0 0 18px;
-      color: rgba(33,1,36,.78);
-      max-width: 70ch;
-    }
 
     .grid{
       display:grid;
@@ -134,13 +111,7 @@
     @media (max-width: 920px){
       .grid{grid-template-columns: 1fr;}
       .top{position: static;}
-    #btnZerar {
-    background: transparent;
-    border-style: dashed;
-  }
-        .btnResumoMobile{
-    display: inline-flex; /* ou flex */
-  }
+      #btnZerar{background: transparent; border-style: dashed;}
     }
 
     .panel{
@@ -180,56 +151,19 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
-    .btnResumoMobile { 
-  display: none; 
-}
 
     @media (max-width: 520px){
-      .btnResumoMobile{
-    display: flex;
-    position: fixed;
-    left: 16px;
-    right: 16px;
-    bottom: 14px;
-    z-index: 999;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 14px;
-    border-radius: 16px;
-
-    background: var(--orange);
-    color: #fff;
-    font-weight: 800;
-    font-size: 14px;
-
-    border: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,.25);
-  }
       .qtyRow{grid-template-columns: 1fr;}
-       .panelHead {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
-
-  .panelHead > div {
-    text-align: left;
-  }
-
-  #btnAjudaAroma {
-    width: 100%;
-    justify-content: center;
-    font-size: 14px;
-  }
-
-  #btnZerar {
-    width: 100%;
-    justify-content: center;
-    font-size: 13px;
-    opacity: .75;
-  }
+      .panelHead{
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+      #btnAjudaAroma, #btnZerar{
+        width:100%;
+        justify-content:center;
+      }
+      #btnZerar{font-size:13px; opacity:.75;}
     }
 
     .qtyBox{
@@ -242,14 +176,10 @@
       justify-content:space-between;
       gap:10px;
     }
-    .qtyBox .label{
-      display:flex; flex-direction:column;
-    }
+    .qtyBox .label{display:flex; flex-direction:column;}
     .qtyBox .label span{font-size:12px; color: rgba(33,1,36,.7)}
     .qtyBox .label b{font-size:13px}
-    .stepper{
-      display:flex; align-items:center; gap:8px;
-    }
+    .stepper{display:flex; align-items:center; gap:8px;}
     .iconBtn{
       width:34px; height:34px;
       border-radius: 12px;
@@ -273,16 +203,12 @@
       outline:none;
     }
 
-    /* Resumo */
     .summary{
       padding:14px;
       display:grid;
       gap: 12px;
     }
-    .field{
-      display:grid;
-      gap:6px;
-    }
+    .field{display:grid; gap:6px;}
     label{font-size:12px; color: rgba(33,1,36,.75); font-weight:700}
     select, textarea{
       width:100%;
@@ -308,10 +234,7 @@
     }
     .totals b{color: var(--ink);}
     .hint{font-size:12px; color: rgba(33,1,36,.72);}
-
-    .footerRow{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
+    .footerRow{display:flex; gap:10px; flex-wrap:wrap;}
     .mutedLink{font-size:12px; color: rgba(33,1,36,.75);}
 
     .pill{
@@ -323,124 +246,128 @@
       font-size:12px;
       color: rgba(33,1,36,.80);
     }
-    /* ===== Botão flutuante - mobile ===== */
-.btnResumoMobile{
-  display: none;
-}
+
+    /* ✅ Botão flutuante mobile (uma regra só) */
+    .btnResumoMobile{
+      display:none; /* controlado via JS */
+    }
+    @media (max-width: 520px){
+      .btnResumoMobile{
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: 14px;
+        z-index: 999;
+
+        display:none; /* controlado via JS */
+        align-items: center;
+        justify-content: center;
+
+        padding: 14px;
+        border-radius: 16px;
+
+        background: var(--orange);
+        color: #fff;
+        font-weight: 800;
+        font-size: 14px;
+
+        border: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      }
+    }
+
     /* ===== Modal (Ajuda Aroma) ===== */
-/* ===== Modal (Ajuda Aroma) - FIX iOS ===== */
-    
-.modal{
-  position: fixed;
-  inset: 0;
-  display: none;
-  z-index: 9999;
-  padding: 12px;                 /* importante no mobile */
-}
-.modalCard, .modalBody { touch-action: pan-y; }
+    .modal{
+      position: fixed;
+      inset: 0;
+      display: none;
+      z-index: 9999;
+      padding: 12px;
+    }
+    .modalCard, .modalBody { touch-action: pan-y; }
+    .modal.is-open{ display:block; }
+    .modalBackdrop{
+      position:absolute;
+      inset:0;
+      background: rgba(33,1,36,.45);
+      backdrop-filter: blur(3px);
+    }
+    .modalCard{
+      position: relative;
+      max-width: 720px;
+      max-height: calc(100dvh - 24px);
+      margin: 0 auto;
+      top: 12px;
+      border: 1px solid var(--line);
+      background: rgba(250,242,230,.96);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      overflow: hidden;
 
-.modal.is-open{
-  display: block;
-}
+      display:flex;
+      flex-direction:column;
+    }
+    .modalHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .modalBody{
+      flex:1 1 auto;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 14px 16px 16px;
+      display:grid;
+      gap: 14px;
+      overscroll-behavior: contain;
+    }
+    .qBlock b{display:block; margin-bottom: 8px;}
+    .optGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    @media (max-width:520px){
+      .optGrid{ grid-template-columns: 1fr; }
+    }
+    .opt{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.55);
+      cursor:pointer;
+      font-size: 13px;
+    }
+    .resultBox{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.60);
+      border-radius: 14px;
+      padding: 12px;
+    }
 
-.modalBackdrop{
-  position: absolute;
-  inset: 0;
-  background: rgba(33,1,36,.45);
-  backdrop-filter: blur(3px);
-}
-
-/* O card precisa caber na tela e permitir scroll interno */
-.modalCard{
-  position: relative;
-  max-width: 720px;
-
-  /* ✅ chave do mobile */
-  max-height: calc(100dvh - 24px); /* usa dvh no mobile moderno */
-  height: auto;
-
-  margin: 0 auto;
-  top: 12px;                      /* evita “sumir” atrás da barra */
-  border: 1px solid var(--line);
-  background: rgba(250,242,230,.96);
-  border-radius: var(--r);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-
-  display: flex;                  /* ✅ para dividir head/body */
-  flex-direction: column;
-}
-
-
-.modalHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap: 12px;
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--line);
-}
-
-/* ✅ o scroll acontece aqui */
-.modalBody{
-  flex: 1 1 auto;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch; /* iOS */
-  padding: 14px 16px 16px;
-  display:grid;
-  gap: 14px;
-}
-    /* evita “bounce” estranho em alguns navegadores */
-.modalBody{ overscroll-behavior: contain; }
-
-.qBlock b{
-  display:block;
-  margin-bottom: 8px;
-}
-
-.optGrid{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-@media (max-width:520px){
-  .optGrid{ grid-template-columns: 1fr; }
-}
-
-.opt{
-  display:flex;
-  align-items:center;
-  gap: 8px;
-  padding: 10px 12px;
-  border-radius: 14px;
-  border:1px solid var(--line);
-  background: rgba(255,255,255,.55);
-  cursor:pointer;
-  font-size: 13px;
-}
-
-.resultBox{
-  border:1px solid var(--line);
-  background: rgba(255,255,255,.60);
-  border-radius: 14px;
-  padding: 12px;
-}
-
+    /* inicial: botão limpar seleção escondido */
+    #btnZerar{display:none;}
   </style>
+
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "uv9oeyq093");
-</script>
+  </script>
 </head>
 
 <body>
   <div class="wrap">
     <header class="top">
       <a class="brand" href="./index.html" aria-label="Voltar para a página inicial">
-        
         <img src="assets/images/logo.png" alt="Raízes Aromas" style="width:42px;height:42px;border-radius:14px;object-fit:cover;border:1px solid rgba(33,1,36,.18)">
         <div>
           <b>Raízes Aromas</b>
@@ -455,29 +382,27 @@
 
     <h1>Monte seu pedido</h1>
     <div>
-    <p>Escolha as quantidades por aroma e tamanho (30g e 110g). No final, clique em <b>fazer pedido no WhatsApp</b> e a mensagem vai pronta. 💛</p>
+      <p>Escolha as quantidades por aroma e tamanho (30g e 110g). No final, clique em <b>fazer pedido no WhatsApp</b> e a mensagem vai pronta. 💛</p>
     </div>
+
     <div class="grid">
-      <!-- LISTA DE PRODUTOS -->
       <section class="panel" aria-label="Produtos">
         <div class="panelHead">
           <div>
             <h2>Aromas</h2>
             <p>à pronta entrega ou encomenda</p>
           </div>
-<div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-  <button class="btnResumoMobile" type="button">
-  Ver resumo do pedido
-  </button>
-  <button class="btn" type="button" id="btnAjudaAroma">✨ Me ajuda a escolher</button>
-  <button class="btn" type="button" id="btnZerar">Limpar seleção</button>
-</div>
+
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <button class="btnResumoMobile" type="button">Ver resumo do pedido</button>
+            <button class="btn" type="button" id="btnAjudaAroma">✨ Me ajuda a escolher</button>
+            <button class="btn" type="button" id="btnZerar">Limpar seleção</button>
+          </div>
         </div>
 
         <div class="items" id="items"></div>
       </section>
 
-      <!-- RESUMO / CHECKOUT -->
       <aside class="panel" id="resumoPedido" aria-label="Resumo do pedido">
         <div class="panelHead">
           <div>
@@ -487,67 +412,61 @@
         </div>
 
         <div class="summary">
+          <div class="field">
+            <label for="local">Local de retirada/entrega</label>
+            <select id="local">
+              <option value="Atibaia">Atibaia</option>
+              <option value="Belo Horizonte">Belo Horizonte</option>
+              <option value="Frete">Frete</option>
+            </select>
+          </div>
 
-<div class="field">
-  <label for="local">Local de retirada/entrega</label>
-  <select id="local">
-    <option value="Atibaia">Atibaia</option>
-    <option value="Belo Horizonte">Belo Horizonte</option>
-    <option value="Frete">Frete</option>
-  </select>
-</div>
+          <div id="freteArea" class="field" style="display:none;">
+            <label><b>Calcular frete</b></label>
 
-<!-- Bloco do frete (fica escondido até selecionar "Frete") -->
-<div id="freteArea" class="field" style="display:none;">
-  <label><b>Calcular frete</b></label>
+            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+              <input id="cepInput" class="field" type="text" inputmode="numeric" placeholder="00000-000" maxlength="9" />
+              <button class="btn" id="btnCalcularFrete" type="button">Calcular</button>
+            </div>
 
-  <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-    <input id="cepInput" class="field" type="text" inputmode="numeric" placeholder="00000-000" maxlength="9" />
-    <button class="btn" id="btnCalcularFrete" type="button">Calcular</button>
-  </div>
+            <div id="freteStatus" style="margin-top:8px; font-size:14px;"></div>
 
-  <div id="freteStatus" style="margin-top:8px; font-size:14px;"></div>
+            <div id="freteResultados" style="display:none; margin-top:10px; padding:10px; border:1px solid #eee; border-radius:8px;">
+              <div style="margin-bottom:6px;"><b>Selecione uma opção (obrigatório):</b></div>
 
-  <div id="freteResultados" style="display:none; margin-top:10px; padding:10px; border:1px solid #eee; border-radius:8px;">
-  <div style="margin-bottom:6px;"><b>Selecione uma opção (obrigatório):</b></div>
+              <label style="display:flex; gap:8px; align-items:center; padding:8px; border:1px solid #f0f0f0; border-radius:8px; margin-bottom:8px;">
+                <input type="radio" name="freteOpcao" value="PAC">
+                <span id="pacLabel">PAC — ...</span>
+              </label>
 
-  <label style="display:flex; gap:8px; align-items:center; padding:8px; border:1px solid #f0f0f0; border-radius:8px; margin-bottom:8px;">
-    <input type="radio" name="freteOpcao" value="PAC">
-    <span id="pacLabel">PAC — ...</span>
-  </label>
+              <label style="display:flex; gap:8px; align-items:center; padding:8px; border:1px solid #f0f0f0; border-radius:8px;">
+                <input type="radio" name="freteOpcao" value="SEDEX">
+                <span id="sedexLabel">SEDEX — ...</span>
+              </label>
+            </div>
+          </div>
 
-  <label style="display:flex; gap:8px; align-items:center; padding:8px; border:1px solid #f0f0f0; border-radius:8px;">
-    <input type="radio" name="freteOpcao" value="SEDEX">
-    <span id="sedexLabel">SEDEX — ...</span>
-  </label>
-</div>
+          <div class="totals" id="totals">
+            <div><b>30g:</b> <span id="t30">0</span> un</div>
+            <div><b>110g:</b> <span id="t110">0</span> un</div>
+            <div class="hint">Preços (informativo): 30g R$15 • 110g R$60</div>
 
-</div>
-<div class="totals" id="totals">
-  <div><b>30g:</b> <span id="t30">0</span> un</div>
-  <div><b>110g:</b> <span id="t110">0</span> un</div>
-  <div class="hint">Preços (informativo): 30g R$15 • 110g R$60</div>
-
-  <div id="totaisValores" style="margin-top:6px; border-top:1px dashed rgba(33,1,36,.22); padding-top:8px;">
-    <div><b>Subtotal produtos:</b> <span id="subtotalProdutos">R$ 0,00</span></div>
-    <div id="linhaFrete"><b>Frete:</b> <span id="subtotalFrete">—</span></div>
-    <div style="margin-top:6px; font-size:14px;">
-      <b>Total estimado:</b> <span id="totalEstimado">R$ 0,00</span>
-    </div>
-  </div>
-</div>
-
+            <div id="totaisValores" style="margin-top:6px; border-top:1px dashed rgba(33,1,36,.22); padding-top:8px;">
+              <div><b>Subtotal produtos:</b> <span id="subtotalProdutos">R$ 0,00</span></div>
+              <div id="linhaFrete"><b>Frete:</b> <span id="subtotalFrete">—</span></div>
+              <div style="margin-top:6px; font-size:14px;">
+                <b>Total estimado:</b> <span id="totalEstimado">R$ 0,00</span>
+              </div>
+            </div>
+          </div>
 
           <div class="field">
             <label for="observacao">Observação (opcional)</label>
-            <textarea id="observacao" placeholder="Ex.: é presente, quero um aroma mais suave, entregar até sexta, etc. 
+            <textarea id="observacao" placeholder="Ex.: é presente, quero um aroma mais suave, entregar até sexta, etc.
 Caso frete seja incluído, favor inserir o endereço. ex. Rua das américas, 29 CEP:321012-203"></textarea>
           </div>
 
-
-          <button class="btn primary" type="button" id="btnWhatsapp">
-            Fazer pedido no WhatsApp
-          </button>
+          <button class="btn primary" type="button" id="btnWhatsapp">Fazer pedido no WhatsApp</button>
 
           <div class="footerRow">
             <span class="mutedLink">Feito por um jovem casal empreendendo para casar 💍</span>
@@ -557,907 +476,839 @@ Caso frete seja incluído, favor inserir o endereço. ex. Rua das américas, 29 
     </div>
   </div>
 
-<script>
-/**
- * =========================================================
- *  Raízes Aromas — compre.html (JS organizado)
- *  - Carrinho (quantidades por aroma / 30g e 110g)
- *  - Frete (API) + filtro de opções sem preço
- *  - Total estimado (Produtos + Frete somente quando "Frete")
- *  - WhatsApp: valida frete (CEP + PAC/SEDEX) quando selecionado
- *  - GA4: eventos básicos (opcional, só dispara se gtag existir)
- * =========================================================
- */
+  <script>
+    /**
+     * =========================================================
+     *  Raízes Aromas — compre.html (JS limpo)
+     *  - Carrinho (quantidades por aroma / 30g e 110g)
+     *  - Frete (API) + filtro de opções sem preço
+     *  - Total estimado (Produtos + Frete somente quando "Frete")
+     *  - WhatsApp: valida frete (CEP + PAC/SEDEX) quando selecionado
+     *  - Botão "Ver resumo" (somente mobile + itens > 0 + some quando resumo visível)
+     * =========================================================
+     */
 
-/* =========================
-   CONFIG
-========================= */
-const WHATSAPP_PHONE = "5511944800174"; // sem "+" e sem espaços
-const FRETE_API_URL = "https://aromasraizesapi.vercel.app/api/frete";
+    /* =========================
+       CONFIG
+    ========================= */
+    const WHATSAPP_PHONE = "5511944800174";
+    const FRETE_API_URL = "https://aromasraizesapi.vercel.app/api/frete";
+    const PRECO_30G = 15;
+    const PRECO_110G = 60;
 
-const PRECO_30G = 15;
-const PRECO_110G = 60;
+    const PRODUCTS = [
+      { id: "lavanda", name: "Lavanda", desc: "Conforto e calmaria. Ótima para relaxar." },
+      { id: "bamboo", name: "Bamboo", desc: "Fresco e leve. Sensação de ambiente limpo." },
+      { id: "morango_champagne", name: "Morango & Champagne", desc: "Doce e celebrativo. Presente com “uau”." },
+      { id: "baunilha", name: "Baunilha", desc: "Doce e aconchegante." },
+      { id: "flor_cerejeira", name: "Flor de Cerejeira", desc: "Delicada e elegante." },
+      { id: "ameixa", name: "Ameixa", desc: "Marcante e sofisticada." },
+    ];
 
-const PRODUCTS = [
-  { id: "lavanda", name: "Lavanda", desc: "Conforto e calmaria. Ótima para relaxar." },
-  { id: "bamboo", name: "Bamboo", desc: "Fresco e leve. Sensação de ambiente limpo." },
-  { id: "morango_champagne", name: "Morango & Champagne", desc: "Doce e celebrativo. Presente com “uau”." },
-  { id: "baunilha", name: "Baunilha", desc: "Doce e aconchegante." },
-  { id: "flor_cerejeira", name: "Flor de Cerejeira", desc: "Delicada e elegante." },
-  { id: "ameixa", name: "Ameixa", desc: "Marcante e sofisticada." },
-];
+    /* =========================
+       STATE
+    ========================= */
+    const state = Object.fromEntries(PRODUCTS.map(p => [p.id, { q30: 0, q110: 0 }]));
 
-/* =========================
-   STATE
-========================= */
-// Carrinho por aroma
-const state = Object.fromEntries(PRODUCTS.map(p => [p.id, { q30: 0, q110: 0 }]));
+    const freteState = {
+      cepMasked: "",
+      pac: null,
+      sedex: null,
+      escolhido: null
+    };
 
-// Frete
-const freteState = {
-  cepMasked: "",
-  pac: null,   // { price:number, delivery_time:number }
-  sedex: null, // { price:number, delivery_time:number }
-  escolhido: null // "PAC" | "SEDEX"
-};
+    let lastEntrega = null;
+    let resumoVisivel = false;
 
-let lastEntrega = null; // GA4: evita eventos duplicados no select
+    /* =========================
+       HELPERS
+    ========================= */
+    function onlyDigits(s){ return String(s || "").replace(/\D/g, ""); }
 
-/* =========================
-   HELPERS
-========================= */
-function onlyDigits(s){ return String(s || "").replace(/\D/g, ""); }
+    function clampInt(v){
+      const n = parseInt(v, 10);
+      return Number.isFinite(n) && n >= 0 ? n : 0;
+    }
 
-function clampInt(v){
-  const n = parseInt(v, 10);
-  return Number.isFinite(n) && n >= 0 ? n : 0;
-}
+    function formatBRL(value){
+      const n = Number(value);
+      if (Number.isNaN(n)) return String(value);
+      return n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    }
 
-function formatBRL(value){
-  const n = Number(value);
-  if (Number.isNaN(n)) return String(value);
-  return n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-}
+    function safeGtag(eventName, params){
+      if (window.gtag) window.gtag("event", eventName, params || {});
+    }
 
-function safeGtag(eventName, params){
-  if (window.gtag) window.gtag("event", eventName, params || {});
-}
+    function isMobile(){
+      return window.matchMedia("(max-width: 920px)").matches;
+    }
 
-/* =========================
-   DOM REFS
-========================= */
-const $items = document.getElementById("items");
-const $t30 = document.getElementById("t30");
-const $t110 = document.getElementById("t110");
+    function countTotalItens(){
+      return Object.values(state).reduce((sum, s) => sum + (s.q30 || 0) + (s.q110 || 0), 0);
+    }
 
-const $local = document.getElementById("local");
-const $freteArea = document.getElementById("freteArea");
-const $cepInput = document.getElementById("cepInput");
-const $btnCalcularFrete = document.getElementById("btnCalcularFrete");
-const $freteStatus = document.getElementById("freteStatus");
-const $freteResultados = document.getElementById("freteResultados");
+    /* =========================
+       DOM REFS
+    ========================= */
+    const $items = document.getElementById("items");
+    const $t30 = document.getElementById("t30");
+    const $t110 = document.getElementById("t110");
 
-const $pacLabel = document.getElementById("pacLabel");
-const $sedexLabel = document.getElementById("sedexLabel");
+    const $local = document.getElementById("local");
+    const $freteArea = document.getElementById("freteArea");
+    const $cepInput = document.getElementById("cepInput");
+    const $btnCalcularFrete = document.getElementById("btnCalcularFrete");
+    const $freteStatus = document.getElementById("freteStatus");
+    const $freteResultados = document.getElementById("freteResultados");
 
-const $btnWhatsapp = document.getElementById("btnWhatsapp");
-const $btnZerar = document.getElementById("btnZerar");
-const $observacao = document.getElementById("observacao");
+    const $pacLabel = document.getElementById("pacLabel");
+    const $sedexLabel = document.getElementById("sedexLabel");
 
-const $totaisValores = document.getElementById("totaisValores");
-const $linhaFrete = document.getElementById("linhaFrete");
-const $subtotalProdutos = document.getElementById("subtotalProdutos");
-const $subtotalFrete = document.getElementById("subtotalFrete");
-const $totalEstimado = document.getElementById("totalEstimado");
+    const $btnWhatsapp = document.getElementById("btnWhatsapp");
+    const $btnZerar = document.getElementById("btnZerar");
+    const $observacao = document.getElementById("observacao");
 
-/* =========================
-   CARRINHO UI
-========================= */
-function renderQtyBox(id, key, title, subtitle, value){
-  return `
-    <div class="qtyBox" aria-label="${title}">
-      <div class="label">
-        <b>${title}</b>
-        <span>${subtitle}</span>
-      </div>
-      <div class="stepper">
-        <button class="iconBtn" type="button" aria-label="Diminuir"
-          data-action="dec" data-id="${id}" data-key="${key}">−</button>
-        <input class="qty" inputmode="numeric" pattern="[0-9]*"
-          aria-label="Quantidade ${title}" value="${value}"
-          data-id="${id}" data-key="${key}">
-        <button class="iconBtn" type="button" aria-label="Aumentar"
-          data-action="inc" data-id="${id}" data-key="${key}">+</button>
-      </div>
-    </div>
-  `;
-}
+    const $totaisValores = document.getElementById("totaisValores");
+    const $linhaFrete = document.getElementById("linhaFrete");
+    const $subtotalProdutos = document.getElementById("subtotalProdutos");
+    const $subtotalFrete = document.getElementById("subtotalFrete");
+    const $totalEstimado = document.getElementById("totalEstimado");
 
-function step(id, key, action){
-  const cur = state[id][key];
-  state[id][key] = action === "inc" ? cur + 1 : Math.max(0, cur - 1);
+    const $btnResumoMobile = document.querySelector(".btnResumoMobile");
+    const $resumoPedido = document.getElementById("resumoPedido");
 
-  const inp = document.querySelector(`input.qty[data-id="${id}"][data-key="${key}"]`);
-  if (inp) inp.value = state[id][key];
+    /* =========================
+       BOTÃO RESUMO MOBILE
+    ========================= */
+    function refreshResumoBtn(hasItems){
+      if (!$btnResumoMobile) return;
 
-  updateTotals();
-}
+      // Desktop/tablet: nunca mostrar
+      if (!isMobile()){
+        $btnResumoMobile.style.display = "none";
+        return;
+      }
 
-function render(){
-  if (!$items) return;
+      // Mobile: sem itens, nunca mostrar
+      if (!hasItems){
+        $btnResumoMobile.style.display = "none";
+        return;
+      }
 
-  $items.innerHTML = PRODUCTS.map(p => {
-    const s = state[p.id];
-    return `
-      <article class="item" data-id="${p.id}">
-        <div class="itemTop">
+      // Mobile: se resumo está visível, esconde; senão mostra
+      $btnResumoMobile.style.display = resumoVisivel ? "none" : "flex";
+    }
+
+    function setupResumoObserver(){
+      if (!$btnResumoMobile || !$resumoPedido) return;
+
+      // clique -> scroll
+      $btnResumoMobile.addEventListener("click", () => {
+        if (!isMobile()) return;
+        $resumoPedido.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      // observer -> controla visibilidade
+      const observer = new IntersectionObserver(([entry]) => {
+        resumoVisivel = entry.isIntersecting;
+        refreshResumoBtn(countTotalItens() > 0);
+      }, { threshold: 0.2 });
+
+      observer.observe($resumoPedido);
+
+      // reavaliar em resize/orientation change
+      window.addEventListener("resize", () => refreshResumoBtn(countTotalItens() > 0));
+    }
+
+    /* =========================
+       CARRINHO UI
+    ========================= */
+    function renderQtyBox(id, key, title, subtitle, value){
+      return `
+        <div class="qtyBox" aria-label="${title}">
+          <div class="label">
+            <b>${title}</b>
+            <span>${subtitle}</span>
+          </div>
+          <div class="stepper">
+            <button class="iconBtn" type="button" aria-label="Diminuir"
+              data-action="dec" data-id="${id}" data-key="${key}">−</button>
+            <input class="qty" inputmode="numeric" pattern="[0-9]*"
+              aria-label="Quantidade ${title}" value="${value}"
+              data-id="${id}" data-key="${key}">
+            <button class="iconBtn" type="button" aria-label="Aumentar"
+              data-action="inc" data-id="${id}" data-key="${key}">+</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function step(id, key, action){
+      const cur = state[id][key];
+      state[id][key] = action === "inc" ? cur + 1 : Math.max(0, cur - 1);
+
+      const inp = document.querySelector(`input.qty[data-id="${id}"][data-key="${key}"]`);
+      if (inp) inp.value = state[id][key];
+
+      updateTotals();
+    }
+
+    function render(){
+      if (!$items) return;
+
+      $items.innerHTML = PRODUCTS.map(p => {
+        const s = state[p.id];
+        return `
+          <article class="item" data-id="${p.id}">
+            <div class="itemTop">
+              <div>
+                <b>${p.name}</b>
+                <div class="desc">${p.desc}</div>
+              </div>
+            </div>
+
+            <div class="qtyRow">
+              ${renderQtyBox(p.id, "q30", "30g", "Vela pequena", s.q30)}
+              ${renderQtyBox(p.id, "q110", "110g", "Vela grande", s.q110)}
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      // + / -
+      document.querySelectorAll("[data-action]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-id");
+          const key = btn.getAttribute("data-key");
+          const action = btn.getAttribute("data-action");
+          step(id, key, action);
+        });
+      });
+
+      // input manual
+      document.querySelectorAll("input.qty").forEach(inp => {
+        inp.addEventListener("input", () => {
+          const id = inp.getAttribute("data-id");
+          const key = inp.getAttribute("data-key");
+          state[id][key] = clampInt(inp.value);
+          updateTotals();
+        });
+      });
+
+      updateTotals();
+    }
+
+    function updateTotals(){
+      let total30 = 0, total110 = 0;
+
+      for (const s of Object.values(state)){
+        total30 += s.q30;
+        total110 += s.q110;
+      }
+
+      if ($t30) $t30.textContent = total30;
+      if ($t110) $t110.textContent = total110;
+
+      const hasItems = (total30 + total110) > 0;
+
+      // limpar seleção: só aparece com itens
+      if ($btnZerar) $btnZerar.style.display = hasItems ? "inline-flex" : "none";
+
+      // botão resumo (mobile only)
+      refreshResumoBtn(hasItems);
+
+      // valores
+      updateResumoValores();
+    }
+
+    /* =========================
+       TOTAL ESTIMADO
+    ========================= */
+    function calcSubtotalProdutos(){
+      let total30 = 0, total110 = 0;
+      for (const s of Object.values(state)) {
+        total30 += Number(s.q30 || 0);
+        total110 += Number(s.q110 || 0);
+      }
+      return (total30 * PRECO_30G) + (total110 * PRECO_110G);
+    }
+
+    function calcFreteSelecionado(){
+      if (!freteState.escolhido) return null;
+      const info = (freteState.escolhido === "PAC") ? freteState.pac : freteState.sedex;
+      if (!info || !Number.isFinite(Number(info.price))) return null;
+      return Number(info.price);
+    }
+
+    function updateResumoValores(){
+      const local = ($local?.value || "").trim();
+
+      if (!$subtotalProdutos || !$totalEstimado || !$totaisValores) return;
+
+      const subtotal = calcSubtotalProdutos();
+      $subtotalProdutos.textContent = formatBRL(subtotal);
+
+      if (local !== "Frete") {
+        if ($linhaFrete) $linhaFrete.style.display = "none";
+        if ($subtotalFrete) $subtotalFrete.textContent = "—";
+        $totalEstimado.textContent = formatBRL(subtotal);
+        return;
+      }
+
+      if ($linhaFrete) $linhaFrete.style.display = "block";
+
+      const frete = calcFreteSelecionado();
+      if (frete == null) {
+        if ($subtotalFrete) $subtotalFrete.textContent = "Selecione PAC ou SEDEX";
+        $totalEstimado.textContent = formatBRL(subtotal);
+        return;
+      }
+
+      if ($subtotalFrete) $subtotalFrete.textContent = formatBRL(frete);
+      $totalEstimado.textContent = formatBRL(subtotal + frete);
+    }
+
+    /* =========================
+       FRETE (UI + API)
+    ========================= */
+    function attachCepMask(){
+      if (!$cepInput) return;
+      $cepInput.addEventListener("input", () => {
+        let v = onlyDigits($cepInput.value).slice(0, 8);
+        if (v.length > 5) v = v.slice(0, 5) + "-" + v.slice(5);
+        $cepInput.value = v;
+      });
+    }
+
+    function resetFreteStateAndUI(){
+      freteState.cepMasked = "";
+      freteState.pac = null;
+      freteState.sedex = null;
+      freteState.escolhido = null;
+
+      if ($freteStatus) $freteStatus.textContent = "";
+      if ($freteResultados) $freteResultados.style.display = "none";
+
+      document.querySelectorAll('input[name="freteOpcao"]').forEach(r => (r.checked = false));
+
+      const pacRow = document.querySelector('input[name="freteOpcao"][value="PAC"]')?.closest("label");
+      const sedexRow = document.querySelector('input[name="freteOpcao"][value="SEDEX"]')?.closest("label");
+      if (pacRow) pacRow.style.display = "flex";
+      if (sedexRow) sedexRow.style.display = "flex";
+    }
+
+    function showFreteAreaIfNeeded(){
+      if (!$local || !$freteArea) return;
+
+      const localRaw = ($local.value || "").trim();
+      const local = localRaw.toLowerCase();
+      const isFrete = local === "frete";
+
+      if (localRaw !== lastEntrega) {
+        safeGtag("select_entrega", { method: localRaw });
+        lastEntrega = localRaw;
+      }
+
+      $freteArea.style.display = isFrete ? "block" : "none";
+
+      if (!isFrete) resetFreteStateAndUI();
+
+      updateResumoValores();
+    }
+
+    function getCartProductsForFreight(){
+      let q30 = 0, q110 = 0;
+      for (const s of Object.values(state)) {
+        q30 += Number(s.q30 || 0);
+        q110 += Number(s.q110 || 0);
+      }
+
+      const products = [];
+      if (q30 > 0) products.push({
+        id: "vela_30g",
+        width: 8, height: 5, length: 8,
+        weight: 0.06, insurance_value: 15,
+        quantity: q30
+      });
+      if (q110 > 0) products.push({
+        id: "vela_110g",
+        width: 10, height: 6, length: 10,
+        weight: 0.15, insurance_value: 60,
+        quantity: q110
+      });
+
+      return products;
+    }
+
+    function findPacSedex(options){
+      const pac = options.find(o => /pac/i.test(o.name));
+      const sedex = options.find(o => /sedex/i.test(o.name));
+      return { pac, sedex };
+    }
+
+    function bindFreteChoice(){
+      document.querySelectorAll('input[name="freteOpcao"]').forEach(radio => {
+        radio.addEventListener("change", () => {
+          freteState.escolhido = radio.value; // "PAC" | "SEDEX"
+          safeGtag("frete_opcao", { service: radio.value });
+          updateResumoValores();
+        });
+      });
+    }
+
+    async function calcularFrete(){
+      const cepMasked = ($cepInput?.value || "").trim();
+      const cep = onlyDigits(cepMasked);
+
+      if (!$freteStatus || !$freteResultados) return;
+
+      if (cep.length !== 8) {
+        $freteStatus.textContent = "Informe um CEP válido (00000-000).";
+        $freteResultados.style.display = "none";
+        return;
+      }
+
+      const products = getCartProductsForFreight();
+      if (!products.length) {
+        $freteStatus.textContent = "Adicione itens no carrinho antes de calcular o frete.";
+        $freteResultados.style.display = "none";
+        return;
+      }
+
+      $freteStatus.textContent = "Calculando frete...";
+      $freteResultados.style.display = "none";
+
+      try {
+        const resp = await fetch(FRETE_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ toPostalCode: cep, products })
+        });
+
+        const data = await resp.json();
+
+        if (!resp.ok) {
+          console.error("Erro frete:", data);
+          $freteStatus.textContent = "Não foi possível calcular o frete agora. Tente novamente.";
+          return;
+        }
+
+        const options = (data.options || [])
+          .map(o => ({
+            name: String(o.name || o.service || o.service_name || ""),
+            price: Number(o.price ?? o.custom_price),
+            delivery_time: Number(o.delivery_time ?? o.custom_delivery_time)
+          }))
+          .filter(o => Number.isFinite(o.price) && o.price > 0);
+
+        const { pac, sedex } = findPacSedex(options);
+
+        if (!pac && !sedex) {
+          resetFreteStateAndUI();
+          $freteStatus.textContent = "Nenhuma opção de frete disponível para este CEP.";
+          return;
+        }
+
+        freteState.cepMasked = cepMasked;
+        freteState.escolhido = null;
+
+        const pacRow = document.querySelector('input[name="freteOpcao"][value="PAC"]')?.closest("label");
+        const sedexRow = document.querySelector('input[name="freteOpcao"][value="SEDEX"]')?.closest("label");
+
+        if (pac) {
+          if ($pacLabel) $pacLabel.textContent = `PAC — ${formatBRL(pac.price)} • ${pac.delivery_time} dia(s)`;
+          if (pacRow) pacRow.style.display = "flex";
+          freteState.pac = { price: pac.price, delivery_time: pac.delivery_time };
+        } else {
+          if (pacRow) pacRow.style.display = "none";
+          freteState.pac = null;
+        }
+
+        if (sedex) {
+          if ($sedexLabel) $sedexLabel.textContent = `SEDEX — ${formatBRL(sedex.price)} • ${sedex.delivery_time} dia(s)`;
+          if (sedexRow) sedexRow.style.display = "flex";
+          freteState.sedex = { price: sedex.price, delivery_time: sedex.delivery_time };
+        } else {
+          if (sedexRow) sedexRow.style.display = "none";
+          freteState.sedex = null;
+        }
+
+        document.querySelectorAll('input[name="freteOpcao"]').forEach(r => (r.checked = false));
+
+        if (pac && !sedex) {
+          const r = document.querySelector('input[name="freteOpcao"][value="PAC"]');
+          if (r) r.checked = true;
+          freteState.escolhido = "PAC";
+        }
+        if (sedex && !pac) {
+          const r = document.querySelector('input[name="freteOpcao"][value="SEDEX"]');
+          if (r) r.checked = true;
+          freteState.escolhido = "SEDEX";
+        }
+
+        $freteResultados.style.display = "block";
+        $freteStatus.textContent =
+          (pac && sedex) ? "Frete calculado. Selecione PAC ou SEDEX (obrigatório)." : "Frete calculado.";
+
+        safeGtag("frete_calculado", { cep_prefix: cep.slice(0, 5) });
+
+        updateResumoValores();
+      } catch (e) {
+        console.error(e);
+        $freteStatus.textContent = "Erro ao calcular. Verifique sua conexão e tente novamente.";
+      }
+    }
+
+    /* =========================
+       WHATSAPP
+    ========================= */
+    function getEntregaTextForWhatsApp(){
+      const local = ($local?.value || "").trim();
+
+      if (local === "Atibaia") return "📍 Local de retirada/entrega: Retirada em Atibaia";
+      if (local === "Belo Horizonte") return "📍 Local de retirada/entrega: Retirada em Belo Horizonte";
+
+      if (local === "Frete") {
+        if (!freteState.cepMasked || !freteState.escolhido) return null;
+        const info = (freteState.escolhido === "PAC") ? freteState.pac : freteState.sedex;
+        if (!info) return null;
+
+        return [
+          "🚚 Local de retirada/entrega: Frete (Correios)",
+          `📍 CEP: ${freteState.cepMasked}`,
+          `📦 Serviço: ${freteState.escolhido}`,
+          `💸 Valor do frete: ${formatBRL(info.price)}`,
+          `⏱️ Prazo: ${info.delivery_time} dia(s)`
+        ].join("\n");
+      }
+
+      return `📍 Local de retirada/entrega: ${local}`;
+    }
+
+    function buildMessage(){
+      const local = ($local?.value || "").trim();
+      const obs = ($observacao?.value || "").trim();
+
+      const lines30 = [];
+      const lines110 = [];
+      let qtd30 = 0;
+      let qtd110 = 0;
+
+      for (const p of PRODUCTS){
+        const s = state[p.id];
+        if (s.q30 > 0) { lines30.push(`- ${p.name}: ${s.q30} un`); qtd30 += s.q30; }
+        if (s.q110 > 0) { lines110.push(`- ${p.name}: ${s.q110} un`); qtd110 += s.q110; }
+      }
+
+      const hasAny = lines30.length || lines110.length;
+      const header = `Olá! Quero fazer um pedido da Raízes Aromas 🌿🕯️`;
+
+      const entregaTxt = getEntregaTextForWhatsApp();
+      if (local === "Frete" && !entregaTxt) {
+        alert("Para Frete, informe o CEP, calcule e selecione PAC ou SEDEX.");
+        return null;
+      }
+
+      const subtotalProdutos = (qtd30 * PRECO_30G) + (qtd110 * PRECO_110G);
+
+      let frete = null;
+      if (local === "Frete" && freteState.escolhido) {
+        const info = freteState.escolhido === "PAC" ? freteState.pac : freteState.sedex;
+        if (info && Number.isFinite(Number(info.price))) frete = Number(info.price);
+      }
+
+      const totalPedido = frete != null ? (subtotalProdutos + frete) : subtotalProdutos;
+
+      const valoresBlock = [
+        "\n💰 Valores:",
+        `- Subtotal produtos: ${formatBRL(subtotalProdutos)}`,
+        ...(local === "Frete" ? [`- Frete: ${frete != null ? formatBRL(frete) : "Selecione PAC ou SEDEX"}`] : []),
+        `➡️ Total do pedido: ${formatBRL(totalPedido)}`
+      ].join("\n");
+
+      const itensBlock =
+        `\n📦 Itens:\n` +
+        (lines30.length ? `\n30g (${formatBRL(PRECO_30G)} cada):\n${lines30.join("\n")}\n` : `\n30g: (nenhum)\n`) +
+        (lines110.length ? `\n110g (${formatBRL(PRECO_110G)} cada):\n${lines110.join("\n")}\n` : `\n110g: (nenhum)\n`);
+
+      const story = `\n💛 Vi a história de vocês e quero apoiar o projeto do casal!`;
+      const obsBlock = obs ? `\n📝 Observação: ${obs}` : "";
+      const closing = `\n\nObrigad@! 😊`;
+
+      if (!hasAny){
+        return `${header}\n${entregaTxt}\n\nQuero ajuda para escolher um aroma e tamanho 🙂${valoresBlock}${story}${obsBlock}${closing}`;
+      }
+
+      return `${header}\n${entregaTxt}${itensBlock}${valoresBlock}${story}${obsBlock}${closing}`;
+    }
+
+    function goWhatsApp(){
+      safeGtag("whatsapp_click", { event_category: "engagement", event_label: "Fazer pedido" });
+      const msg = buildMessage();
+      if (!msg) return;
+
+      const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
+      window.open(url, "_blank", "noopener");
+    }
+
+    /* =========================
+       APPLY ADD FROM URL
+    ========================= */
+    function applyAddFromUrl(){
+      const params = new URLSearchParams(window.location.search);
+
+      const id = params.get("add");      // ex: lavanda
+      const size = params.get("size");   // "30"
+      const qty = Math.max(1, parseInt(params.get("qty") || "1", 10));
+
+      if (!id || size !== "30") return;
+      if (!state[id]) return;
+
+      state[id].q30 = qty;
+
+      const inp = document.querySelector(`input.qty[data-id="${id}"][data-key="q30"]`);
+      if (inp) inp.value = qty;
+
+      updateTotals();
+
+      params.delete("add"); params.delete("size"); params.delete("qty");
+      const cleanUrl = window.location.pathname + (params.toString() ? `?${params.toString()}` : "");
+      window.history.replaceState({}, "", cleanUrl);
+    }
+
+    /* =========================
+       MODAL AJUDA AROMA
+    ========================= */
+    const AROMAS = {
+      lavanda: { name:"Lavanda", desc:"Conforto e calmaria. Ótima para relaxar." },
+      bamboo: { name:"Bamboo", desc:"Fresco e leve. Sensação de ambiente limpo." },
+      morango_champagne: { name:"Morango & Champagne", desc:"Doce e celebrativo. Presente com “uau”." },
+      baunilha: { name:"Baunilha", desc:"Doce e aconchegante." },
+      flor_cerejeira: { name:"Flor de Cerejeira", desc:"Delicada e elegante." },
+      ameixa: { name:"Ameixa", desc:"Marcante e sofisticada." }
+    };
+
+    let aromaRecomendadoId = null;
+    let __scrollY = 0;
+
+    function lockScroll(){
+      __scrollY = window.scrollY || 0;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${__scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+    }
+
+    function unlockScroll(){
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      window.scrollTo(0, __scrollY);
+    }
+
+    function openModalAroma(){
+      const m = document.getElementById("modalAroma");
+      if (!m) return;
+      m.classList.add("is-open");
+      lockScroll();
+    }
+
+    function closeModalAroma(){
+      const m = document.getElementById("modalAroma");
+      if (!m) return;
+      m.classList.remove("is-open");
+      unlockScroll();
+
+      aromaRecomendadoId = null;
+      document.querySelectorAll('#modalAroma input[type="radio"]').forEach(r => r.checked = false);
+
+      const box = document.getElementById("resultadoAroma");
+      if (box) { box.style.display = "none"; box.innerHTML = ""; }
+
+      const btnAplicar = document.getElementById("btnAplicarAroma");
+      if (btnAplicar) btnAplicar.style.display = "none";
+    }
+
+    function getRadioValue(name){
+      return document.querySelector(`#modalAroma input[name="${name}"]:checked`)?.value || null;
+    }
+
+    function recomendarAroma({momento, estilo, uso}){
+      if (uso === "presente") {
+        if (estilo === "marcante") return "ameixa";
+        return "morango_champagne";
+      }
+      if (momento === "relaxar") {
+        if (estilo === "delicado") return "flor_cerejeira";
+        return "lavanda";
+      }
+      if (momento === "banho") {
+        if (estilo === "doce") return "baunilha";
+        return "bamboo";
+      }
+      if (momento === "receber") {
+        if (estilo === "marcante") return "ameixa";
+        if (estilo === "delicado") return "flor_cerejeira";
+        return "morango_champagne";
+      }
+      if (estilo === "doce") return "baunilha";
+      if (estilo === "marcante") return "ameixa";
+      if (estilo === "delicado") return "flor_cerejeira";
+      return "bamboo";
+    }
+
+    function showRecomendacao(){
+      const momento = getRadioValue("momento");
+      const estilo = getRadioValue("estilo");
+      const uso = getRadioValue("uso");
+
+      if (!momento || !estilo || !uso) {
+        alert("Responda as 3 perguntas para eu te indicar o melhor aroma 🙂");
+        return;
+      }
+
+      aromaRecomendadoId = recomendarAroma({momento, estilo, uso});
+      const a = AROMAS[aromaRecomendadoId];
+
+      const box = document.getElementById("resultadoAroma");
+      box.style.display = "block";
+      box.innerHTML = `
+        <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
           <div>
-            <b>${p.name}</b>
-            <div class="desc">${p.desc}</div>
+            <div style="font-weight:900; font-size:14px;">Indicação: ${a.name}</div>
+            <div style="font-size:13px; color: rgba(33,1,36,.78); margin-top:4px;">${a.desc}</div>
+          </div>
+          <span class="pill">✨</span>
+        </div>
+        <div style="margin-top:10px; font-size:12px; color: rgba(33,1,36,.74);">
+          Dica: se quiser, comece com <b>30g</b> para testar. Se já conhece o aroma, vá de <b>110g</b>.
+        </div>
+      `;
+
+      const btnAplicar = document.getElementById("btnAplicarAroma");
+      btnAplicar.style.display = "inline-flex";
+    }
+
+    function aplicarAromaNoCarrinho(){
+      if (!aromaRecomendadoId) return;
+
+      state[aromaRecomendadoId].q30 = (state[aromaRecomendadoId].q30 || 0) + 1;
+
+      const inp = document.querySelector(`input.qty[data-id="${aromaRecomendadoId}"][data-key="q30"]`);
+      if (inp) inp.value = String(state[aromaRecomendadoId].q30);
+
+      updateTotals();
+      closeModalAroma();
+    }
+
+    /* =========================
+       EVENTS / INIT
+    ========================= */
+    function bindEvents(){
+      $btnWhatsapp?.addEventListener("click", goWhatsApp);
+
+      $btnZerar?.addEventListener("click", () => {
+        for (const p of PRODUCTS){
+          state[p.id].q30 = 0;
+          state[p.id].q110 = 0;
+        }
+        document.querySelectorAll("input.qty").forEach(inp => (inp.value = 0));
+        updateTotals();
+      });
+
+      $local?.addEventListener("change", showFreteAreaIfNeeded);
+      $btnCalcularFrete?.addEventListener("click", calcularFrete);
+
+      bindFreteChoice();
+      attachCepMask();
+
+      showFreteAreaIfNeeded();
+      updateResumoValores();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      render();
+      bindEvents();
+      applyAddFromUrl();
+      setupResumoObserver();
+
+      // modal binds
+      document.getElementById("btnAjudaAroma")?.addEventListener("click", openModalAroma);
+      document.getElementById("btnCloseModal")?.addEventListener("click", closeModalAroma);
+      document.querySelector("#modalAroma .modalBackdrop")?.addEventListener("click", closeModalAroma);
+      document.getElementById("btnVerRecomendacao")?.addEventListener("click", showRecomendacao);
+      document.getElementById("btnAplicarAroma")?.addEventListener("click", aplicarAromaNoCarrinho);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key !== "Escape") return;
+        const m = document.getElementById("modalAroma");
+        if (m?.classList.contains("is-open")) closeModalAroma();
+      });
+    });
+  </script>
+
+  <!-- Modal Ajuda Aroma -->
+  <div class="modal" id="modalAroma" aria-hidden="true">
+    <div class="modalBackdrop"></div>
+
+    <div class="modalCard" role="dialog" aria-modal="true" aria-label="Ajuda para escolher um aroma">
+      <div class="modalHead">
+        <div>
+          <b>Me ajuda a escolher</b>
+          <div style="font-size:12px; color:rgba(33,1,36,.75); margin-top:2px;">
+            Responda 3 perguntas e eu te indico o melhor aroma 🙂
+          </div>
+        </div>
+        <button class="btn" type="button" id="btnCloseModal">Fechar</button>
+      </div>
+
+      <div class="modalBody">
+        <div class="qBlock">
+          <b>1) Para qual momento?</b>
+          <div class="optGrid">
+            <label class="opt"><input type="radio" name="momento" value="relaxar"> Relaxar</label>
+            <label class="opt"><input type="radio" name="momento" value="banho"> Banho</label>
+            <label class="opt"><input type="radio" name="momento" value="receber"> Receber visita</label>
+            <label class="opt"><input type="radio" name="momento" value="dia"> Dia a dia</label>
           </div>
         </div>
 
-        <div class="qtyRow">
-          ${renderQtyBox(p.id, "q30", "30g", "Vela pequena", s.q30)}
-          ${renderQtyBox(p.id, "q110", "110g", "Vela grande", s.q110)}
+        <div class="qBlock">
+          <b>2) Estilo de aroma?</b>
+          <div class="optGrid">
+            <label class="opt"><input type="radio" name="estilo" value="leve"> Leve / fresco</label>
+            <label class="opt"><input type="radio" name="estilo" value="delicado"> Delicado</label>
+            <label class="opt"><input type="radio" name="estilo" value="doce"> Doce</label>
+            <label class="opt"><input type="radio" name="estilo" value="marcante"> Marcante</label>
+          </div>
         </div>
-      </article>
-    `;
-  }).join("");
 
-  // Eventos: + e -
-  document.querySelectorAll("[data-action]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const id = btn.getAttribute("data-id");
-      const key = btn.getAttribute("data-key");
-      const action = btn.getAttribute("data-action");
-      step(id, key, action);
-    });
-  });
-
-  // Eventos: input manual
-  document.querySelectorAll("input.qty").forEach(inp => {
-    inp.addEventListener("input", () => {
-      const id = inp.getAttribute("data-id");
-      const key = inp.getAttribute("data-key");
-      state[id][key] = clampInt(inp.value);
-      updateTotals();
-    });
-  });
-
-  updateTotals();
-}
-
-function updateTotals(){
-  let total30 = 0, total110 = 0;
-
-  for (const s of Object.values(state)){
-    total30 += s.q30;
-    total110 += s.q110;
-  }
-
-  if ($t30) $t30.textContent = total30;
-  if ($t110) $t110.textContent = total110;
-
-  // ✅ calcula UMA VEZ e usa para tudo
-  const hasItems = (total30 + total110) > 0;
-
-  // Mostrar / esconder botão "Limpar seleção"
-  if ($btnZerar) {
-    $btnZerar.style.display = hasItems ? "inline-flex" : "none";
-  }
-
-  // Mobile-only: botão "Ver resumo"
-  updateResumoMobileBtnVisibility(hasItems);
-
-  updateResumoValores();
-
-  // toggleResumoButton();
-}
-
-/* =========================
-   TOTAL ESTIMADO
-========================= */
-function calcSubtotalProdutos(){
-  let total30 = 0, total110 = 0;
-  for (const s of Object.values(state)) {
-    total30 += Number(s.q30 || 0);
-    total110 += Number(s.q110 || 0);
-  }
-  return (total30 * PRECO_30G) + (total110 * PRECO_110G);
-}
-
-function calcFreteSelecionado(){
-  if (!freteState.escolhido) return null;
-  const info = (freteState.escolhido === "PAC") ? freteState.pac : freteState.sedex;
-  if (!info || !Number.isFinite(Number(info.price))) return null;
-  return Number(info.price);
-}
-
-function updateResumoValores(){
-  const local = ($local?.value || "").trim();
-
-  // não deixa quebrar caso os spans não existam (mas ideal é existir)
-  if (!$subtotalProdutos || !$totalEstimado || !$totaisValores) return;
-
-  const subtotal = calcSubtotalProdutos();
-  $subtotalProdutos.textContent = formatBRL(subtotal);
-
-  // Se não for Frete: esconde linha frete e total = subtotal
-  if (local !== "Frete") {
-    if ($linhaFrete) $linhaFrete.style.display = "none";
-    if ($subtotalFrete) $subtotalFrete.textContent = "—";
-    $totalEstimado.textContent = formatBRL(subtotal);
-    return;
-  }
-
-  // Se for Frete: mostra linha frete
-  if ($linhaFrete) $linhaFrete.style.display = "block";
-
-  const frete = calcFreteSelecionado();
-  if (frete == null) {
-    if ($subtotalFrete) $subtotalFrete.textContent = "Selecione PAC ou SEDEX";
-    $totalEstimado.textContent = formatBRL(subtotal);
-    return;
-  }
-
-  if ($subtotalFrete) $subtotalFrete.textContent = formatBRL(frete);
-  $totalEstimado.textContent = formatBRL(subtotal + frete);
-}
-
-/* =========================
-   FRETE (UI + API)
-========================= */
-function attachCepMask(){
-  if (!$cepInput) return;
-  $cepInput.addEventListener("input", () => {
-    let v = onlyDigits($cepInput.value).slice(0, 8);
-    if (v.length > 5) v = v.slice(0, 5) + "-" + v.slice(5);
-    $cepInput.value = v;
-  });
-}
-
-function resetFreteStateAndUI(){
-  freteState.cepMasked = "";
-  freteState.pac = null;
-  freteState.sedex = null;
-  freteState.escolhido = null;
-
-  if ($freteStatus) $freteStatus.textContent = "";
-  if ($freteResultados) $freteResultados.style.display = "none";
-
-  document.querySelectorAll('input[name="freteOpcao"]').forEach(r => (r.checked = false));
-
-  // reexibe as linhas caso você tenha ocultado antes
-  const pacRow = document.querySelector('input[name="freteOpcao"][value="PAC"]')?.closest("label");
-  const sedexRow = document.querySelector('input[name="freteOpcao"][value="SEDEX"]')?.closest("label");
-  if (pacRow) pacRow.style.display = "flex";
-  if (sedexRow) sedexRow.style.display = "flex";
-}
-
-function showFreteAreaIfNeeded(){
-  if (!$local || !$freteArea) return;
-
-  const localRaw = ($local.value || "").trim();
-  const local = localRaw.toLowerCase();
-  const isFrete = local === "frete";
-
-  // GA4: evento só se mudou
-  if (localRaw !== lastEntrega) {
-    safeGtag("select_entrega", { method: localRaw });
-    lastEntrega = localRaw;
-  }
-
-  $freteArea.style.display = isFrete ? "block" : "none";
-
-  if (!isFrete) {
-    resetFreteStateAndUI();
-  }
-
-  updateResumoValores();
-}
-
-function getCartProductsForFreight(){
-  let q30 = 0, q110 = 0;
-  for (const s of Object.values(state)) {
-    q30 += Number(s.q30 || 0);
-    q110 += Number(s.q110 || 0);
-  }
-
-  const products = [];
-  if (q30 > 0) products.push({
-    id: "vela_30g",
-    width: 8, height: 5, length: 8,
-    weight: 0.06, insurance_value: 15,
-    quantity: q30
-  });
-  if (q110 > 0) products.push({
-    id: "vela_110g",
-    width: 10, height: 6, length: 10,
-    weight: 0.15, insurance_value: 60,
-    quantity: q110
-  });
-
-  return products;
-}
-
-function findPacSedex(options){
-  const pac = options.find(o => /pac/i.test(o.name));
-  const sedex = options.find(o => /sedex/i.test(o.name));
-  return { pac, sedex };
-}
-
-function bindFreteChoice(){
-  document.querySelectorAll('input[name="freteOpcao"]').forEach(radio => {
-    radio.addEventListener("change", () => {
-      freteState.escolhido = radio.value; // "PAC" | "SEDEX"
-      safeGtag("frete_opcao", { service: radio.value });
-      updateResumoValores();
-    });
-  });
-}
-
-async function calcularFrete(){
-  const cepMasked = ($cepInput?.value || "").trim();
-  const cep = onlyDigits(cepMasked);
-
-  if (!$freteStatus || !$freteResultados) return;
-
-  if (cep.length !== 8) {
-    $freteStatus.textContent = "Informe um CEP válido (00000-000).";
-    $freteResultados.style.display = "none";
-    return;
-  }
-
-  const products = getCartProductsForFreight();
-  if (!products.length) {
-    $freteStatus.textContent = "Adicione itens no carrinho antes de calcular o frete.";
-    $freteResultados.style.display = "none";
-    return;
-  }
-
-  $freteStatus.textContent = "Calculando frete...";
-  $freteResultados.style.display = "none";
-
-  try {
-    const resp = await fetch(FRETE_API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ toPostalCode: cep, products })
-    });
-
-    const data = await resp.json();
-
-    if (!resp.ok) {
-      console.error("Erro frete:", data);
-      $freteStatus.textContent = "Não foi possível calcular o frete agora. Tente novamente.";
-      return;
-    }
-
-    // normaliza e filtra opções sem preço (ou preço 0 / NaN)
-    const options = (data.options || [])
-      .map(o => ({
-        name: String(o.name || o.service || o.service_name || ""),
-        price: Number(o.price ?? o.custom_price),
-        delivery_time: Number(o.delivery_time ?? o.custom_delivery_time)
-      }))
-      .filter(o => Number.isFinite(o.price) && o.price > 0);
-
-    const { pac, sedex } = findPacSedex(options);
-
-    // se não tem nenhuma opção válida, aborta
-    if (!pac && !sedex) {
-      resetFreteStateAndUI();
-      $freteStatus.textContent = "Nenhuma opção de frete disponível para este CEP.";
-      return;
-    }
-
-    // guarda CEP e reseta escolha
-    freteState.cepMasked = cepMasked;
-    freteState.escolhido = null;
-
-    // pega linhas para esconder/exibir
-    const pacRow = document.querySelector('input[name="freteOpcao"][value="PAC"]')?.closest("label");
-    const sedexRow = document.querySelector('input[name="freteOpcao"][value="SEDEX"]')?.closest("label");
-
-    // PAC
-    if (pac) {
-      if ($pacLabel) $pacLabel.textContent = `PAC — ${formatBRL(pac.price)} • ${pac.delivery_time} dia(s)`;
-      if (pacRow) pacRow.style.display = "flex";
-      freteState.pac = { price: pac.price, delivery_time: pac.delivery_time };
-    } else {
-      if (pacRow) pacRow.style.display = "none";
-      freteState.pac = null;
-    }
-
-    // SEDEX
-    if (sedex) {
-      if ($sedexLabel) $sedexLabel.textContent = `SEDEX — ${formatBRL(sedex.price)} • ${sedex.delivery_time} dia(s)`;
-      if (sedexRow) sedexRow.style.display = "flex";
-      freteState.sedex = { price: sedex.price, delivery_time: sedex.delivery_time };
-    } else {
-      if (sedexRow) sedexRow.style.display = "none";
-      freteState.sedex = null;
-    }
-
-    // limpa checks
-    document.querySelectorAll('input[name="freteOpcao"]').forEach(r => (r.checked = false));
-
-    // se só existe 1 opção válida, auto-seleciona
-    if (pac && !sedex) {
-      const r = document.querySelector('input[name="freteOpcao"][value="PAC"]');
-      if (r) r.checked = true;
-      freteState.escolhido = "PAC";
-    }
-    if (sedex && !pac) {
-      const r = document.querySelector('input[name="freteOpcao"][value="SEDEX"]');
-      if (r) r.checked = true;
-      freteState.escolhido = "SEDEX";
-    }
-
-    // UI final
-    $freteResultados.style.display = "block";
-    $freteStatus.textContent =
-      (pac && sedex) ? "Frete calculado. Selecione PAC ou SEDEX (obrigatório)." : "Frete calculado.";
-
-    safeGtag("frete_calculado", { cep_prefix: cep.slice(0, 5) });
-
-    updateResumoValores();
-
-  } catch (e) {
-    console.error(e);
-    $freteStatus.textContent = "Erro ao calcular. Verifique sua conexão e tente novamente.";
-  }
-}
-
-/* =========================
-   WHATSAPP (mensagem)
-========================= */
-function getEntregaTextForWhatsApp(){
-  const local = ($local?.value || "").trim();
-
-  if (local === "Atibaia") return "📍 Local de retirada/entrega: Retirada em Atibaia";
-  if (local === "Belo Horizonte") return "📍 Local de retirada/entrega: Retirada em Belo Horizonte";
-
-  // Frete
-  if (local === "Frete") {
-    if (!freteState.cepMasked || !freteState.escolhido) return null;
-    const info = (freteState.escolhido === "PAC") ? freteState.pac : freteState.sedex;
-    if (!info) return null;
-
-    return [
-      "🚚 Local de retirada/entrega: Frete (Correios)",
-      `📍 CEP: ${freteState.cepMasked}`,
-      `📦 Serviço: ${freteState.escolhido}`,
-      `💸 Valor do frete: ${formatBRL(info.price)}`,
-      `⏱️ Prazo: ${info.delivery_time} dia(s)`
-    ].join("\n");
-  }
-
-  return `📍 Local de retirada/entrega: ${local}`;
-}
-
-function buildMessage(){
-  const local = ($local?.value || "").trim();
-  const obs = ($observacao?.value || "").trim();
-
-  const lines30 = [];
-  const lines110 = [];
-
-  let qtd30 = 0;
-  let qtd110 = 0;
-
-  for (const p of PRODUCTS){
-    const s = state[p.id];
-    if (s.q30 > 0) {
-      lines30.push(`- ${p.name}: ${s.q30} un`);
-      qtd30 += s.q30;
-    }
-    if (s.q110 > 0) {
-      lines110.push(`- ${p.name}: ${s.q110} un`);
-      qtd110 += s.q110;
-    }
-  }
-
-  const hasAny = lines30.length || lines110.length;
-  const header = `Olá! Quero fazer um pedido da Raízes Aromas 🌿🕯️`;
-
-  // entrega (com validação de frete)
-  const entregaTxt = getEntregaTextForWhatsApp();
-  if (local === "Frete" && !entregaTxt) {
-    alert("Para Frete, informe o CEP, calcule e selecione PAC ou SEDEX.");
-    return null;
-  }
-
-  // ✅ valores
-  const subtotalProdutos = (qtd30 * PRECO_30G) + (qtd110 * PRECO_110G);
-
-  let frete = null;
-  if (local === "Frete" && freteState.escolhido) {
-    const info = freteState.escolhido === "PAC" ? freteState.pac : freteState.sedex;
-    if (info && Number.isFinite(Number(info.price))) frete = Number(info.price);
-  }
-
-  const totalPedido = frete != null ? (subtotalProdutos + frete) : subtotalProdutos;
-
-  const valoresBlock = [
-    "\n💰 Valores:",
-    `- Subtotal produtos: ${formatBRL(subtotalProdutos)}`,
-    ...(local === "Frete"
-      ? [`- Frete: ${frete != null ? formatBRL(frete) : "Selecione PAC ou SEDEX"}`]
-      : []),
-    `➡️ Total do pedido: ${formatBRL(totalPedido)}`
-  ].join("\n");
-
-  // ✅ itens com preços no título
-  const itensBlock =
-    `\n📦 Itens:\n` +
-    (lines30.length ? `\n30g (${formatBRL(PRECO_30G)} cada):\n${lines30.join("\n")}\n` : `\n30g: (nenhum)\n`) +
-    (lines110.length ? `\n110g (${formatBRL(PRECO_110G)} cada):\n${lines110.join("\n")}\n` : `\n110g: (nenhum)\n`);
-
-  const story = `\n💛 Vi a história de vocês e quero apoiar o projeto do casal!`;
-  const obsBlock = obs ? `\n📝 Observação: ${obs}` : "";
-  const closing = `\n\nObrigad@! 😊`;
-
-  if (!hasAny){
-    return `${header}\n${entregaTxt}\n\nQuero ajuda para escolher um aroma e tamanho 🙂${valoresBlock}${story}${obsBlock}${closing}`;
-  }
-
-  return `${header}\n${entregaTxt}${itensBlock}${valoresBlock}${story}${obsBlock}${closing}`;
-}
-
-function goWhatsApp(){
-  safeGtag("whatsapp_click", { event_category: "engagement", event_label: "Fazer pedido" });
-
-  const msg = buildMessage();
-  if (!msg) return;
-
-  const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
-  window.open(url, "_blank", "noopener");
-}
-
-
-/* =========================
-   EVENTS / INIT
-========================= */
-function bindEvents(){
-  $btnWhatsapp?.addEventListener("click", goWhatsApp);
-
-  $btnZerar?.addEventListener("click", () => {
-    for (const p of PRODUCTS){
-      state[p.id].q30 = 0;
-      state[p.id].q110 = 0;
-    }
-    document.querySelectorAll("input.qty").forEach(inp => (inp.value = 0));
-    updateTotals();
-  });
-
-  $local?.addEventListener("change", showFreteAreaIfNeeded);
-  $btnCalcularFrete?.addEventListener("click", calcularFrete);
-
-  // radios (bind 1x)
-  bindFreteChoice();
-
-  // CEP mask
-  attachCepMask();
-
-  // inicial
-  showFreteAreaIfNeeded();
-  updateResumoValores();
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  render();
-  bindEvents();
-  applyAddFromUrl();
-
-});
-  document.addEventListener("DOMContentLoaded", () => {
-  const btnResumo = document.querySelector(".btnResumoMobile");
-  const resumo = document.getElementById("resumoPedido");
-
-  if (!btnResumo || !resumo) return;
-
-  // Clique → scroll suave
-  btnResumo.addEventListener("click", () => {
-    resumo.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-
-  // Observer: esconde quando o resumo entra na tela
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        btnResumo.style.display = "none";
-      } else {
-        btnResumo.style.display = "block";
-      }
-    },
-    {
-      root: null,        // viewport
-      threshold: 0.2     // 20% visível já considera "chegou"
-    }
-  );
-
-  observer.observe(resumo);
-});
-
-
-  function applyAddFromUrl(){
-  const params = new URLSearchParams(window.location.search);
-
-  const id = params.get("add");      // ex: lavanda
-  const size = params.get("size");   // "30"
-  const qty = Math.max(1, parseInt(params.get("qty") || "1", 10));
-
-  if (!id || size !== "30") return;
-  if (!state[id]) return;
-
-  // 👉 define exatamente 1 unidade (como você pediu)
-  state[id].q30 = qty;
-
-  // atualiza input
-  const inp = document.querySelector(
-    `input.qty[data-id="${id}"][data-key="q30"]`
-  );
-  if (inp) inp.value = qty;
-
-  updateTotals();
-
-  // limpa URL (evita reaplicar ao recarregar)
-  params.delete("add");
-  params.delete("size");
-  params.delete("qty");
-  const cleanUrl =
-    window.location.pathname +
-    (params.toString() ? `?${params.toString()}` : "");
-  window.history.replaceState({}, "", cleanUrl);
-}
-
-  // ===== Modal Ajuda Aroma (compre.html) =====
-const AROMAS = {
-  lavanda: { name:"Lavanda", desc:"Conforto e calmaria. Ótima para relaxar." },
-  bamboo: { name:"Bamboo", desc:"Fresco e leve. Sensação de ambiente limpo." },
-  morango_champagne: { name:"Morango & Champagne", desc:"Doce e celebrativo. Presente com “uau”." },
-  baunilha: { name:"Baunilha", desc:"Doce e aconchegante." },
-  flor_cerejeira: { name:"Flor de Cerejeira", desc:"Delicada e elegante." },
-  ameixa: { name:"Ameixa", desc:"Marcante e sofisticada." }
-};
-
-let aromaRecomendadoId = null;
-
-let __scrollY = 0;
-
-function lockScroll(){
-  __scrollY = window.scrollY || 0;
-  document.body.style.position = "fixed";
-  document.body.style.top = `-${__scrollY}px`;
-  document.body.style.left = "0";
-  document.body.style.right = "0";
-  document.body.style.width = "100%";
-}
-
-function unlockScroll(){
-  document.body.style.position = "";
-  document.body.style.top = "";
-  document.body.style.left = "";
-  document.body.style.right = "";
-  document.body.style.width = "";
-  window.scrollTo(0, __scrollY);
-}
-
-function openModalAroma(){
-  const m = document.getElementById("modalAroma");
-  if (!m) return;
-  m.classList.add("is-open");
-  lockScroll();
-}
-
-function closeModalAroma(){
-  const m = document.getElementById("modalAroma");
-  if (!m) return;
-  m.classList.remove("is-open");
-  unlockScroll();
-
-  aromaRecomendadoId = null;
-  document.querySelectorAll('#modalAroma input[type="radio"]').forEach(r => r.checked = false);
-
-  const box = document.getElementById("resultadoAroma");
-  if (box) { box.style.display = "none"; box.innerHTML = ""; }
-
-  const btnAplicar = document.getElementById("btnAplicarAroma");
-  if (btnAplicar) btnAplicar.style.display = "none";
-}
-
-
-function getRadioValue(name){
-  return document.querySelector(`#modalAroma input[name="${name}"]:checked`)?.value || null;
-}
-
-function recomendarAroma({momento, estilo, uso}){
-  if (uso === "presente") {
-    if (estilo === "marcante") return "ameixa";
-    return "morango_champagne";
-  }
-
-  if (momento === "relaxar") {
-    if (estilo === "delicado") return "flor_cerejeira";
-    return "lavanda";
-  }
-
-  if (momento === "banho") {
-    if (estilo === "doce") return "baunilha";
-    return "bamboo";
-  }
-
-  if (momento === "receber") {
-    if (estilo === "marcante") return "ameixa";
-    if (estilo === "delicado") return "flor_cerejeira";
-    return "morango_champagne";
-  }
-
-  // dia a dia
-  if (estilo === "doce") return "baunilha";
-  if (estilo === "marcante") return "ameixa";
-  if (estilo === "delicado") return "flor_cerejeira";
-  return "bamboo";
-}
-
-function showRecomendacao(){
-  const momento = getRadioValue("momento");
-  const estilo = getRadioValue("estilo");
-  const uso = getRadioValue("uso");
-
-  if (!momento || !estilo || !uso) {
-    alert("Responda as 3 perguntas para eu te indicar o melhor aroma 🙂");
-    return;
-  }
-
-  aromaRecomendadoId = recomendarAroma({momento, estilo, uso});
-  const a = AROMAS[aromaRecomendadoId];
-
-  const box = document.getElementById("resultadoAroma");
-  box.style.display = "block";
-  box.innerHTML = `
-    <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
-      <div>
-        <div style="font-weight:900; font-size:14px;">Indicação: ${a.name}</div>
-        <div style="font-size:13px; color: rgba(33,1,36,.78); margin-top:4px;">${a.desc}</div>
-      </div>
-      <span class="pill">✨</span>
-    </div>
-    <div style="margin-top:10px; font-size:12px; color: rgba(33,1,36,.74);">
-      Dica: se quiser, comece com <b>30g</b> para testar. Se já conhece o aroma, vá de <b>110g</b>.
-    </div>
-  `;
-
-  const btnAplicar = document.getElementById("btnAplicarAroma");
-  btnAplicar.style.display = "inline-flex";
-}
-
-function aplicarAromaNoCarrinho(){
-  if (!aromaRecomendadoId) return;
-
-  // adiciona 1 unidade de 30g no carrinho atual (compre.html)
-  state[aromaRecomendadoId].q30 = (state[aromaRecomendadoId].q30 || 0) + 1;
-
-  // atualiza input visual
-  const inp = document.querySelector(`input.qty[data-id="${aromaRecomendadoId}"][data-key="q30"]`);
-  if (inp) inp.value = String(state[aromaRecomendadoId].q30);
-
-  updateTotals();
-
-  closeModalAroma();
-}
-document.querySelector(".btnResumoMobile")?.addEventListener("click", () => {
-  if (!isMobile()) return; // segurança extra
-
-  document
-    .getElementById("resumoPedido")
-    ?.scrollIntoView({ behavior: "smooth", block: "start" });
-});
-  function toggleResumoButton(){
-  const totalItens = Object.values(state)
-    .reduce((sum, s) => sum + s.q30 + s.q110, 0);
-
-  const btn = document.querySelector(".btnResumoMobile");
-  if (!btn) return;
-
-  btn.style.display = totalItens > 0 ? "flex" : "none";
-}
-  function isMobile(){
-  return window.matchMedia("(max-width: 920px)").matches;
-}
-
-function updateResumoMobileBtnVisibility(hasItems){
-  const btn = document.querySelector(".btnResumoMobile");
-  if (!btn) return;
-
-  // Desktop: nunca mostra
-  if (!isMobile()){
-    btn.style.display = "none";
-    return;
-  }
-
-  // Mobile: mostra só se tiver itens (se essa for a regra)
-  btn.style.display = hasItems ? "inline-flex" : "none";
-}
-
-// Binds (depois do DOM pronto)
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("btnAjudaAroma")?.addEventListener("click", openModalAroma);
-  document.getElementById("btnCloseModal")?.addEventListener("click", closeModalAroma);
-  document.querySelector("#modalAroma .modalBackdrop")?.addEventListener("click", closeModalAroma);
-  document.getElementById("btnVerRecomendacao")?.addEventListener("click", showRecomendacao);
-  document.getElementById("btnAplicarAroma")?.addEventListener("click", aplicarAromaNoCarrinho);
-
-document.addEventListener("keydown", (e) => {
-  if (e.key !== "Escape") return;
-  const m = document.getElementById("modalAroma");
-  if (m?.classList.contains("is-open")) closeModalAroma();
-});
-});
-
-</script>
-<!-- Modal Ajuda Aroma -->
-<div class="modal" id="modalAroma" aria-hidden="true">
-  <div class="modalBackdrop"></div>
-
-  <div class="modalCard" role="dialog" aria-modal="true" aria-label="Ajuda para escolher um aroma">
-    <div class="modalHead">
-      <div>
-        <b>Me ajuda a escolher</b>
-        <div style="font-size:12px; color:rgba(33,1,36,.75); margin-top:2px;">
-          Responda 3 perguntas e eu te indico o melhor aroma 🙂
+        <div class="qBlock">
+          <b>3) Vai usar para…</b>
+          <div class="optGrid">
+            <label class="opt"><input type="radio" name="uso" value="pessoal"> Eu mesmo(a)</label>
+            <label class="opt"><input type="radio" name="uso" value="presente"> Presente</label>
+          </div>
         </div>
-      </div>
-      <button class="btn" type="button" id="btnCloseModal">Fechar</button>
-    </div>
 
-    <div class="modalBody">
-      <div class="qBlock">
-        <b>1) Para qual momento?</b>
-        <div class="optGrid">
-          <label class="opt"><input type="radio" name="momento" value="relaxar"> Relaxar</label>
-          <label class="opt"><input type="radio" name="momento" value="banho"> Banho</label>
-          <label class="opt"><input type="radio" name="momento" value="receber"> Receber visita</label>
-          <label class="opt"><input type="radio" name="momento" value="dia"> Dia a dia</label>
+        <div class="footerRow" style="justify-content:flex-end;">
+          <button class="btn primary" type="button" id="btnVerRecomendacao">Ver sugestão</button>
         </div>
-      </div>
 
-      <div class="qBlock">
-        <b>2) Estilo de aroma?</b>
-        <div class="optGrid">
-          <label class="opt"><input type="radio" name="estilo" value="leve"> Leve / fresco</label>
-          <label class="opt"><input type="radio" name="estilo" value="delicado"> Delicado</label>
-          <label class="opt"><input type="radio" name="estilo" value="doce"> Doce</label>
-          <label class="opt"><input type="radio" name="estilo" value="marcante"> Marcante</label>
+        <div class="resultBox" id="resultadoAroma" style="display:none;"></div>
+
+        <div style="display:flex; justify-content:flex-end;">
+          <button class="btn primary" type="button" id="btnAplicarAroma" style="display:none;">
+            Adicionar 30g ao carrinho
+          </button>
         </div>
-      </div>
-
-      <div class="qBlock">
-        <b>3) Vai usar para…</b>
-        <div class="optGrid">
-          <label class="opt"><input type="radio" name="uso" value="pessoal"> Eu mesmo(a)</label>
-          <label class="opt"><input type="radio" name="uso" value="presente"> Presente</label>
-        </div>
-      </div>
-
-      <div class="footerRow" style="justify-content:flex-end;">
-        <button class="btn primary" type="button" id="btnVerRecomendacao">Ver sugestão</button>
-      </div>
-
-      <div class="resultBox" id="resultadoAroma" style="display:none;"></div>
-
-      <div style="display:flex; justify-content:flex-end;">
-        <button class="btn primary" type="button" id="btnAplicarAroma" style="display:none;">
-          Adicionar 30g ao carrinho
-        </button>
       </div>
     </div>
   </div>
-</div>
-<!-- /Modal Ajuda Aroma -->
-
-  
+  <!-- /Modal Ajuda Aroma -->
 </body>
 </html>
