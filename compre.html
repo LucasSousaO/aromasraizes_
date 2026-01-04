@@ -478,6 +478,7 @@ Caso frete seja incluído, favor inserir o endereço. ex. Rua das américas, 29 
 
           <div class="footerRow">
             <span class="mutedLink">Feito por um jovem casal empreendendor</span>
+            <span class="mutedLink">*Tempo total para entrega será combinado antes do pagamento de acordo com estoque ou tempo para produção.</span>
           </div>
         </div>
       </aside>
@@ -925,7 +926,7 @@ Caso frete seja incluído, favor inserir o endereço. ex. Rua das américas, 29 
         const sedexRow = document.querySelector('input[name="freteOpcao"][value="SEDEX"]')?.closest("label");
 
         if (pac) {
-          if ($pacLabel) $pacLabel.textContent = `PAC — ${formatBRL(pac.price)} • ${pac.delivery_time} dia(s)`;
+          if ($pacLabel) $pacLabel.textContent = `PAC — ${formatBRL(pac.price)} • ${pac.delivery_time} dia(s)*`;
           if (pacRow) pacRow.style.display = "flex";
           freteState.pac = { price: pac.price, delivery_time: pac.delivery_time };
         } else {
