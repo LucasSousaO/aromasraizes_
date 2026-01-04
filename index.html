@@ -340,151 +340,7 @@
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "uv9oeyq093");
-</script>
-  <script>// ================= Modal Ajuda Aroma =================
-const AROMAS = {
-  lavanda: { name:"Lavanda", desc:"Conforto e calmaria. Ótima para relaxar." },
-  bamboo: { name:"Bamboo", desc:"Fresco e leve. Sensação de ambiente limpo." },
-  morango_champagne: { name:"Morango & Champagne", desc:"Doce e celebrativo. Presente com “uau”." },
-  baunilha: { name:"Baunilha", desc:"Doce e aconchegante." },
-  flor_cerejeira: { name:"Flor de Cerejeira", desc:"Delicada e elegante." },
-  ameixa: { name:"Ameixa", desc:"Marcante e sofisticada." }
-};
-
-let aromaRecomendadoId = null;
-
-function openModalAroma(){
-  const m = document.getElementById("modalAroma");
-  m.setAttribute("aria-hidden","false");
-  document.body.style.overflow = "hidden";
-  // foco no primeiro botão
-  document.getElementById("btnCloseModal")?.focus();
-}
-
-function closeModalAroma(){
-  const m = document.getElementById("modalAroma");
-  m.setAttribute("aria-hidden","true");
-  document.body.style.overflow = "";
-  aromaRecomendadoId = null;
-  // limpa resultado
-  const box = document.getElementById("resultadoAroma");
-  box.style.display = "none";
-  box.innerHTML = "";
-  document.getElementById("btnAplicarAroma").style.display = "none";
-}
-
-function getRadioValue(name){
-  return document.querySelector(`input[name="${name}"]:checked`)?.value || null;
-}
-
-function recomendarAroma({momento, estilo, uso}){
-  // Regras simples e bem “humanas”
-  // 1) Presente tende a Morango & Champagne
-  if (uso === "presente") {
-    // se a pessoa quer algo marcante p/ presente, Ameixa também encaixa
-    if (estilo === "marcante") return "ameixa";
-    return "morango_champagne";
-  }
-
-  // 2) Relaxar -> Lavanda (principal), ou Flor de Cerejeira (delicado)
-  if (momento === "relaxar") {
-    if (estilo === "delicado") return "flor_cerejeira";
-    return "lavanda";
-  }
-
-  // 3) Banho / sensação de limpeza -> Bamboo
-  if (momento === "banho") {
-    if (estilo === "doce") return "baunilha";
-    return "bamboo";
-  }
-
-  // 4) Receber visita / clima especial -> Morango & Champagne ou Ameixa
-  if (momento === "receber") {
-    if (estilo === "marcante") return "ameixa";
-    if (estilo === "delicado") return "flor_cerejeira";
-    return "morango_champagne";
-  }
-
-  // 5) Dia a dia -> Bamboo (leve) / Baunilha (doce) / Ameixa (marcante) / Flor (delicado)
-  if (estilo === "doce") return "baunilha";
-  if (estilo === "marcante") return "ameixa";
-  if (estilo === "delicado") return "flor_cerejeira";
-  return "bamboo";
-}
-
-function showRecomendacao(){
-  const momento = getRadioValue("momento");
-  const estilo = getRadioValue("estilo");
-  const uso = getRadioValue("uso");
-
-  if (!momento || !estilo || !uso) {
-    alert("Responda as 3 perguntas para eu te indicar o melhor aroma 🙂");
-    return;
-  }
-
-  aromaRecomendadoId = recomendarAroma({momento, estilo, uso});
-  const a = AROMAS[aromaRecomendadoId];
-
-  const box = document.getElementById("resultadoAroma");
-  box.style.display = "block";
-  box.innerHTML = `
-    <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
-      <div>
-        <div style="font-weight:900; font-size:14px;">Indicação: ${a.name}</div>
-        <div style="font-size:13px; color: rgba(33,1,36,.78); margin-top:4px;">${a.desc}</div>
-      </div>
-      <span class="pill">✨</span>
-    </div>
-    <div style="margin-top:10px; font-size:12px; color: rgba(33,1,36,.74);">
-      Dica: se quiser, comece com <b>30g</b> para testar. Se já conhece o aroma, vá de <b>110g</b>.
-    </div>
-  `;
-
-  const btnAplicar = document.getElementById("btnAplicarAroma");
-  btnAplicar.style.display = "inline-flex";
-}
-
-// “Adicionar ao carrinho”: soma +1 no 30g do aroma recomendado
-function aplicarAromaNoCarrinho(){
-  if (!aromaRecomendadoId) return;
-
-  // seu state já usa ids iguais aos PRODUCTS (lavanda, bamboo, etc.)
-  if (!state[aromaRecomendadoId]) {
-    alert("Não encontrei esse aroma no carrinho.");
-    return;
-  }
-
-  state[aromaRecomendadoId].q30 += 1;
-
-  // atualiza input na tela
-  const inp = document.querySelector(`input.qty[data-id="${aromaRecomendadoId}"][data-key="q30"]`);
-  if (inp) inp.value = state[aromaRecomendadoId].q30;
-
-  updateTotals();
-
-  // (opcional) GA4 evento
-  if (window.gtag) {
-    gtag('event', 'aroma_recomendado_aplicado', {
-      aroma: aromaRecomendadoId
-    });
-  }
-
-  closeModalAroma();
-}
-
-// Bind
-document.getElementById("btnAjudaAroma")?.addEventListener("click", openModalAroma);
-document.getElementById("btnCloseModal")?.addEventListener("click", closeModalAroma);
-document.querySelector("#modalAroma .modalBackdrop")?.addEventListener("click", closeModalAroma);
-document.getElementById("btnVerRecomendacao")?.addEventListener("click", showRecomendacao);
-document.getElementById("btnAplicarAroma")?.addEventListener("click", aplicarAromaNoCarrinho);
-
-// ESC fecha
-document.addEventListener("keydown", (e) => {
-  const m = document.getElementById("modalAroma");
-  if (e.key === "Escape" && m?.getAttribute("aria-hidden") === "false") closeModalAroma();
-});
- </script>
+</script> 
 </head>
 
 <body>
@@ -759,6 +615,139 @@ document.addEventListener("keydown", (e) => {
   </div>
 </div>
 <!-- ===== /Modal Ajuda Aroma ===== -->
+    <script>
+(() => {
+  const AROMAS = {
+    lavanda: { name:"Lavanda", desc:"Conforto e calmaria. Ótima para relaxar." },
+    bamboo: { name:"Bamboo", desc:"Fresco e leve. Sensação de ambiente limpo." },
+    morango_champagne: { name:"Morango & Champagne", desc:"Doce e celebrativo. Presente com “uau”." },
+    baunilha: { name:"Baunilha", desc:"Doce e aconchegante." },
+    flor_cerejeira: { name:"Flor de Cerejeira", desc:"Delicada e elegante." },
+    ameixa: { name:"Ameixa", desc:"Marcante e sofisticada." }
+  };
+
+  let aromaRecomendadoId = null;
+
+  function qs(sel, root=document){ return root.querySelector(sel); }
+
+  function openModalAroma(){
+    const m = document.getElementById("modalAroma");
+    if (!m) return console.warn("modalAroma não encontrado no DOM");
+    m.setAttribute("aria-hidden","false");
+    document.body.style.overflow = "hidden";
+    qs("#btnCloseModal")?.focus();
+  }
+
+  function closeModalAroma(){
+    const m = document.getElementById("modalAroma");
+    if (!m) return;
+    m.setAttribute("aria-hidden","true");
+    document.body.style.overflow = "";
+    aromaRecomendadoId = null;
+
+    // limpa radios
+    ["momento","estilo","uso"].forEach(n => {
+      document.querySelectorAll(`input[name="${n}"]`).forEach(i => i.checked = false);
+    });
+
+    // limpa resultado
+    const box = document.getElementById("resultadoAroma");
+    if (box){
+      box.style.display = "none";
+      box.innerHTML = "";
+    }
+    const btnAplicar = document.getElementById("btnAplicarAroma");
+    if (btnAplicar) btnAplicar.style.display = "none";
+  }
+
+  function getRadioValue(name){
+    return document.querySelector(`input[name="${name}"]:checked`)?.value || null;
+  }
+
+  function recomendarAroma({momento, estilo, uso}){
+    // presente
+    if (uso === "presente") {
+      if (estilo === "marcante") return "ameixa";
+      return "morango_champagne";
+    }
+
+    if (momento === "relaxar") {
+      if (estilo === "delicado") return "flor_cerejeira";
+      return "lavanda";
+    }
+
+    if (momento === "banho") {
+      if (estilo === "doce") return "baunilha";
+      return "bamboo";
+    }
+
+    if (momento === "receber") {
+      if (estilo === "marcante") return "ameixa";
+      if (estilo === "delicado") return "flor_cerejeira";
+      return "morango_champagne";
+    }
+
+    // diaadia
+    if (estilo === "doce") return "baunilha";
+    if (estilo === "marcante") return "ameixa";
+    if (estilo === "delicado") return "flor_cerejeira";
+    return "bamboo";
+  }
+
+  function showRecomendacao(){
+    const momento = getRadioValue("momento");
+    const estilo = getRadioValue("estilo");
+    const uso = getRadioValue("uso");
+
+    if (!momento || !estilo || !uso) {
+      alert("Responda as 3 perguntas para eu te indicar o melhor aroma 🙂");
+      return;
+    }
+
+    aromaRecomendadoId = recomendarAroma({momento, estilo, uso});
+    const a = AROMAS[aromaRecomendadoId];
+
+    const box = document.getElementById("resultadoAroma");
+    box.style.display = "block";
+    box.innerHTML = `
+      <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
+        <div>
+          <div style="font-weight:900; font-size:14px;">Indicação: ${a.name}</div>
+          <div style="font-size:13px; color: rgba(33,1,36,.78); margin-top:4px;">${a.desc}</div>
+        </div>
+        <span class="pill">✨</span>
+      </div>
+      <div style="margin-top:10px; font-size:12px; color: rgba(33,1,36,.74);">
+        Dica: se quiser, comece com <b>30g</b> para testar. Se já conhece o aroma, vá de <b>110g</b>.
+      </div>
+    `;
+
+    const btnAplicar = document.getElementById("btnAplicarAroma");
+    btnAplicar.style.display = "inline-flex";
+  }
+
+  // Se você não tem carrinho nessa página, substitua aqui por WhatsApp/Instagram depois.
+  function aplicarAromaNoCarrinho(){
+    alert("Recomendação aplicada! (Aqui você pode integrar ao carrinho/WhatsApp)");
+    closeModalAroma();
+  }
+
+  // ✅ Bind só depois do DOM pronto
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("btnAjudaAroma")?.addEventListener("click", openModalAroma);
+    document.getElementById("btnCloseModal")?.addEventListener("click", closeModalAroma);
+    document.querySelector("#modalAroma .modalBackdrop")?.addEventListener("click", closeModalAroma);
+    document.getElementById("btnVerRecomendacao")?.addEventListener("click", showRecomendacao);
+    document.getElementById("btnAplicarAroma")?.addEventListener("click", aplicarAromaNoCarrinho);
+
+    document.addEventListener("keydown", (e) => {
+      const m = document.getElementById("modalAroma");
+      if (e.key === "Escape" && m?.getAttribute("aria-hidden") === "false") closeModalAroma();
+    });
+  });
+})();
+</script>
+
 </body>
 <style>
   /* ====== Layout base ====== */
