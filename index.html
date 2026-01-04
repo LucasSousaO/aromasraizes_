@@ -732,6 +732,8 @@ document.addEventListener("keydown", (e) => {
     box-shadow: 0 10px 24px rgba(0,0,0,.10);
     background: #f6f0e8;
     touch-action: pan-y; /* ajuda no swipe */
+    --nav-space: 56px; /* largura da “faixa” das setas */
+
   }
 
   .story-carousel__track {
@@ -748,6 +750,8 @@ document.addEventListener("keydown", (e) => {
   gap: 16px;
   padding: 18px;
   min-height: auto;          /* <-- remove o “vazio” */
+  padding-left: var(--nav-space);
+  padding-right: var(--nav-space);
 }
 
 /* MÍDIA (imagem) */
@@ -819,9 +823,11 @@ document.addEventListener("keydown", (e) => {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: 999px;
+    opacity: .95;
+    z-index: 5;
     border: 1px solid rgba(0,0,0,.10);
     background: rgba(255,255,255,.85);
     backdrop-filter: blur(6px);
@@ -867,8 +873,8 @@ document.addEventListener("keydown", (e) => {
     grid-template-columns: 1.1fr 0.9fr;
     align-items: center;
     gap: 24px;
-    padding: 28px;
-  }
+    padding-left: 28px;
+    padding-right: 28px;  }
 
   .story-card__media {
     aspect-ratio: 4 / 3;     /* mapa/Foto fica melhor assim no desktop */
@@ -881,9 +887,13 @@ document.addEventListener("keydown", (e) => {
 
   .story-card__content p {
     font-size: 18px;
+  }  
+  .story-carousel__btn--prev { left: -22px; }
+  .story-carousel__btn--next { right: -22px; }
+  .story-carousel__viewport {
+   --nav-space: 0px; /* no desktop não precisa reservar espaço interno */
+    overflow: visible; /* permite botões fora */
   }
-  .story-carousel__btn--prev { left: 16px; }
-  .story-carousel__btn--next { right: 16px; }
 }
 
 
