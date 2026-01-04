@@ -539,7 +539,7 @@
           <h3>Feito à mão</h3>
           <p>Por meio do trabalho manual, com afeto e cuidado, nossas velas aromáticas são produzidas, uma por uma.</p>
             <div class="story-card__cta">
-            <a class="btn btn--ghost" href="#produtos">Conhecer aromas</a>
+            <a class="btn btn--ghost" id="escolha2">Me ajude a escolher</a>
             <a class="btn" href="/compre.html" rel="noopener noreferrer">
               Garanta a sua
             </a>
@@ -741,6 +741,7 @@
   // ✅ Bind só depois do DOM pronto
   document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btnAjudaAroma")?.addEventListener("click", openModalAroma);
+    document.getElementById("escolha2")?.addEventListener("click", openModalAroma);
     document.getElementById("btnCloseModal")?.addEventListener("click", closeModalAroma);
     document.querySelector("#modalAroma .modalBackdrop")?.addEventListener("click", closeModalAroma);
     document.getElementById("btnVerRecomendacao")?.addEventListener("click", showRecomendacao);
