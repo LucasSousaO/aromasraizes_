@@ -269,29 +269,60 @@
     }
 
     /* Modal */
-.modal{ position:fixed; inset:0; display:none; z-index:999; }
+/* ===== Modal (Ajuda Aroma) - FIX iOS ===== */
+.modal{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 9999;
+  padding: 12px;                 /* importante no mobile */
+}
+    .modal.is-open{ display: block; }
+
 .modal[aria-hidden="false"]{ display:block; }
 .modalBackdrop{
   position:absolute; inset:0;
   background: rgba(33,1,36,.35);
   backdrop-filter: blur(4px);
 }
+/* O card precisa caber na tela e permitir scroll interno */
 .modalCard{
-  position:relative;
-  width:min(720px, calc(100% - 24px));
-  margin: 60px auto;
-  border-radius: 18px;
-  border:1px solid var(--line);
+  position: relative;
+  max-width: 720px;
+
+  /* ✅ chave do mobile */
+  max-height: calc(100dvh - 24px); /* usa dvh no mobile moderno */
+  height: auto;
+
+  margin: 0 auto;
+  top: 12px;                      /* evita “sumir” atrás da barra */
+  border: 1px solid var(--line);
   background: rgba(250,242,230,.96);
+  border-radius: var(--r);
   box-shadow: var(--shadow);
-  overflow:hidden;
+  overflow: hidden;
+
+  display: flex;                  /* ✅ para dividir head/body */
+  flex-direction: column;
 }
 .modalHead{
   display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
   padding:14px 16px;
   border-bottom:1px solid var(--line);
 }
-.modalBody{ padding:14px 16px; display:grid; gap:12px; }
+/* ✅ o scroll acontece aqui */
+.modalBody{
+  flex: 1 1 auto;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; /* iOS */
+  padding: 14px 16px 16px;
+  display:grid;
+  gap: 14px;
+}
+
+/* evita “bounce” estranho em alguns navegadores */
+.modalBody{ overscroll-behavior: contain; }
+
 .qBlock{ display:grid; gap:8px; padding:10px; border:1px solid rgba(33,1,36,.12); border-radius:16px; background: rgba(255,255,255,.35); }
 .optGrid{ display:grid; grid-template-columns: 1fr 1fr; gap:8px; }
 @media (max-width: 520px){ .optGrid{ grid-template-columns:1fr; } }
@@ -631,35 +662,49 @@ ou correios em todo Brasil 📦</p>
 
   function qs(sel, root=document){ return root.querySelector(sel); }
 
-  function openModalAroma(){
-    const m = document.getElementById("modalAroma");
-    if (!m) return console.warn("modalAroma não encontrado no DOM");
-    m.setAttribute("aria-hidden","false");
-    document.body.style.overflow = "hidden";
-    qs("#btnCloseModal")?.focus();
-  }
+  let __scrollY = 0;
 
-  function closeModalAroma(){
-    const m = document.getElementById("modalAroma");
-    if (!m) return;
-    m.setAttribute("aria-hidden","true");
-    document.body.style.overflow = "";
-    aromaRecomendadoId = null;
+function lockScroll(){
+  __scrollY = window.scrollY || 0;
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${__scrollY}px`;
+  document.body.style.left = "0";
+  document.body.style.right = "0";
+  document.body.style.width = "100%";
+}
 
-    // limpa radios
-    ["momento","estilo","uso"].forEach(n => {
-      document.querySelectorAll(`input[name="${n}"]`).forEach(i => i.checked = false);
-    });
+function unlockScroll(){
+  document.body.style.position = "";
+  document.body.style.top = "";
+  document.body.style.left = "";
+  document.body.style.right = "";
+  document.body.style.width = "";
+  window.scrollTo(0, __scrollY);
+}
 
-    // limpa resultado
-    const box = document.getElementById("resultadoAroma");
-    if (box){
-      box.style.display = "none";
-      box.innerHTML = "";
-    }
-    const btnAplicar = document.getElementById("btnAplicarAroma");
-    if (btnAplicar) btnAplicar.style.display = "none";
-  }
+function openModalAroma(){
+  const m = document.getElementById("modalAroma");
+  if (!m) return;
+  m.classList.add("is-open");
+  lockScroll();
+}
+
+function closeModalAroma(){
+  const m = document.getElementById("modalAroma");
+  if (!m) return;
+  m.classList.remove("is-open");
+  unlockScroll();
+
+  aromaRecomendadoId = null;
+  document.querySelectorAll('#modalAroma input[type="radio"]').forEach(r => r.checked = false);
+
+  const box = document.getElementById("resultadoAroma");
+  if (box) { box.style.display = "none"; box.innerHTML = ""; }
+
+  const btnAplicar = document.getElementById("btnAplicarAroma");
+  if (btnAplicar) btnAplicar.style.display = "none";
+}
+
 
   function getRadioValue(name){
     return document.querySelector(`input[name="${name}"]:checked`)?.value || null;
@@ -830,6 +875,8 @@ ou correios em todo Brasil 📦</p>
 .story-card__content {
   padding: 0;                /* já tem padding no card */
 }
+  .modalCard, .modalBody { touch-action: pan-y; }
+
 
 .story-card__content h3 {
   margin: 0 0 10px;
