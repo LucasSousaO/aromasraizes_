@@ -305,6 +305,7 @@
             <h2>Aromas</h2>
             <p>Fixos + possibilidades extras</p>
           </div>
+          <button class="btn" type="button" id="btnAjudaAroma">Nova sugestão de aroma</button>
           <button class="btn" type="button" id="btnZerar">Zerar tudo</button>
         </div>
 
@@ -374,7 +375,7 @@
 
           <div class="field">
             <label for="observacao">Observação (opcional)</label>
-            <textarea id="observacao" placeholder="Ex.: é presente, quero um aroma mais suave, entregar até sexta, etc. Caso frete seja incluído, favor inserir o endereço. ex. Rua das américas, 29 CEP:321012-203"></textarea>
+            <textarea id="observacao" placeholder="Ex.: é presente, quero um aroma mais suave, entregar até sexta, etc. <br>\nCaso frete seja incluído, favor inserir o endereço. ex. Rua das américas, 29 CEP:321012-203"></textarea>
           </div>
 
 
@@ -1004,7 +1005,197 @@ document.addEventListener("DOMContentLoaded", () => {
   window.history.replaceState({}, "", cleanUrl);
 }
 
+  // ===== Modal Ajuda Aroma (compre.html) =====
+const AROMAS = {
+  lavanda: { name:"Lavanda", desc:"Conforto e calmaria. Ótima para relaxar." },
+  bamboo: { name:"Bamboo", desc:"Fresco e leve. Sensação de ambiente limpo." },
+  morango_champagne: { name:"Morango & Champagne", desc:"Doce e celebrativo. Presente com “uau”." },
+  baunilha: { name:"Baunilha", desc:"Doce e aconchegante." },
+  flor_cerejeira: { name:"Flor de Cerejeira", desc:"Delicada e elegante." },
+  ameixa: { name:"Ameixa", desc:"Marcante e sofisticada." }
+};
+
+let aromaRecomendadoId = null;
+
+function openModalAroma(){
+  const m = document.getElementById("modalAroma");
+  if (!m) return;
+  m.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+  document.getElementById("btnCloseModal")?.focus();
+}
+
+function closeModalAroma(){
+  const m = document.getElementById("modalAroma");
+  if (!m) return;
+  m.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+  aromaRecomendadoId = null;
+
+  // limpa seleção e resultado (opcional)
+  document.querySelectorAll('#modalAroma input[type="radio"]').forEach(r => r.checked = false);
+
+  const box = document.getElementById("resultadoAroma");
+  if (box) { box.style.display = "none"; box.innerHTML = ""; }
+
+  const btnAplicar = document.getElementById("btnAplicarAroma");
+  if (btnAplicar) btnAplicar.style.display = "none";
+}
+
+function getRadioValue(name){
+  return document.querySelector(`#modalAroma input[name="${name}"]:checked`)?.value || null;
+}
+
+function recomendarAroma({momento, estilo, uso}){
+  if (uso === "presente") {
+    if (estilo === "marcante") return "ameixa";
+    return "morango_champagne";
+  }
+
+  if (momento === "relaxar") {
+    if (estilo === "delicado") return "flor_cerejeira";
+    return "lavanda";
+  }
+
+  if (momento === "banho") {
+    if (estilo === "doce") return "baunilha";
+    return "bamboo";
+  }
+
+  if (momento === "receber") {
+    if (estilo === "marcante") return "ameixa";
+    if (estilo === "delicado") return "flor_cerejeira";
+    return "morango_champagne";
+  }
+
+  // dia a dia
+  if (estilo === "doce") return "baunilha";
+  if (estilo === "marcante") return "ameixa";
+  if (estilo === "delicado") return "flor_cerejeira";
+  return "bamboo";
+}
+
+function showRecomendacao(){
+  const momento = getRadioValue("momento");
+  const estilo = getRadioValue("estilo");
+  const uso = getRadioValue("uso");
+
+  if (!momento || !estilo || !uso) {
+    alert("Responda as 3 perguntas para eu te indicar o melhor aroma 🙂");
+    return;
+  }
+
+  aromaRecomendadoId = recomendarAroma({momento, estilo, uso});
+  const a = AROMAS[aromaRecomendadoId];
+
+  const box = document.getElementById("resultadoAroma");
+  box.style.display = "block";
+  box.innerHTML = `
+    <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
+      <div>
+        <div style="font-weight:900; font-size:14px;">Indicação: ${a.name}</div>
+        <div style="font-size:13px; color: rgba(33,1,36,.78); margin-top:4px;">${a.desc}</div>
+      </div>
+      <span class="pill">✨</span>
+    </div>
+    <div style="margin-top:10px; font-size:12px; color: rgba(33,1,36,.74);">
+      Dica: se quiser, comece com <b>30g</b> para testar. Se já conhece o aroma, vá de <b>110g</b>.
+    </div>
+  `;
+
+  const btnAplicar = document.getElementById("btnAplicarAroma");
+  btnAplicar.style.display = "inline-flex";
+}
+
+function aplicarAromaNoCarrinho(){
+  if (!aromaRecomendadoId) return;
+
+  // adiciona 1 unidade de 30g no carrinho atual (compre.html)
+  state[aromaRecomendadoId].q30 = (state[aromaRecomendadoId].q30 || 0) + 1;
+
+  // atualiza input visual
+  const inp = document.querySelector(`input.qty[data-id="${aromaRecomendadoId}"][data-key="q30"]`);
+  if (inp) inp.value = String(state[aromaRecomendadoId].q30);
+
+  updateTotals();
+
+  closeModalAroma();
+}
+
+// Binds (depois do DOM pronto)
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("btnAjudaAroma")?.addEventListener("click", openModalAroma);
+  document.getElementById("btnCloseModal")?.addEventListener("click", closeModalAroma);
+  document.querySelector("#modalAroma .modalBackdrop")?.addEventListener("click", closeModalAroma);
+  document.getElementById("btnVerRecomendacao")?.addEventListener("click", showRecomendacao);
+  document.getElementById("btnAplicarAroma")?.addEventListener("click", aplicarAromaNoCarrinho);
+
+  document.addEventListener("keydown", (e) => {
+    const m = document.getElementById("modalAroma");
+    if (e.key === "Escape" && m?.getAttribute("aria-hidden") === "false") closeModalAroma();
+  });
+});
+
 </script>
+<!-- Modal Ajuda Aroma -->
+<div class="modal" id="modalAroma" aria-hidden="true">
+  <div class="modalBackdrop"></div>
+
+  <div class="modalCard" role="dialog" aria-modal="true" aria-label="Ajuda para escolher um aroma">
+    <div class="modalHead">
+      <div>
+        <b>Me ajuda a escolher</b>
+        <div style="font-size:12px; color:rgba(33,1,36,.75); margin-top:2px;">
+          Responda 3 perguntas e eu te indico o melhor aroma 🙂
+        </div>
+      </div>
+      <button class="btn" type="button" id="btnCloseModal">Fechar</button>
+    </div>
+
+    <div class="modalBody">
+      <div class="qBlock">
+        <b>1) Para qual momento?</b>
+        <div class="optGrid">
+          <label class="opt"><input type="radio" name="momento" value="relaxar"> Relaxar</label>
+          <label class="opt"><input type="radio" name="momento" value="banho"> Banho</label>
+          <label class="opt"><input type="radio" name="momento" value="receber"> Receber visita</label>
+          <label class="opt"><input type="radio" name="momento" value="dia"> Dia a dia</label>
+        </div>
+      </div>
+
+      <div class="qBlock">
+        <b>2) Estilo de aroma?</b>
+        <div class="optGrid">
+          <label class="opt"><input type="radio" name="estilo" value="leve"> Leve / fresco</label>
+          <label class="opt"><input type="radio" name="estilo" value="delicado"> Delicado</label>
+          <label class="opt"><input type="radio" name="estilo" value="doce"> Doce</label>
+          <label class="opt"><input type="radio" name="estilo" value="marcante"> Marcante</label>
+        </div>
+      </div>
+
+      <div class="qBlock">
+        <b>3) Vai usar para…</b>
+        <div class="optGrid">
+          <label class="opt"><input type="radio" name="uso" value="pessoal"> Eu mesmo(a)</label>
+          <label class="opt"><input type="radio" name="uso" value="presente"> Presente</label>
+        </div>
+      </div>
+
+      <div class="footerRow" style="justify-content:flex-end;">
+        <button class="btn primary" type="button" id="btnVerRecomendacao">Ver sugestão</button>
+      </div>
+
+      <div class="resultBox" id="resultadoAroma" style="display:none;"></div>
+
+      <div style="display:flex; justify-content:flex-end;">
+        <button class="btn primary" type="button" id="btnAplicarAroma" style="display:none;">
+          Adicionar 30g ao carrinho
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Modal Ajuda Aroma -->
 
   
 </body>
