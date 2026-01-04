@@ -1131,6 +1131,35 @@ document.addEventListener("DOMContentLoaded", () => {
   applyAddFromUrl();
 
 });
+  document.addEventListener("DOMContentLoaded", () => {
+  const btnResumo = document.querySelector(".btnResumoMobile");
+  const resumo = document.getElementById("resumoPedido");
+
+  if (!btnResumo || !resumo) return;
+
+  // Clique → scroll suave
+  btnResumo.addEventListener("click", () => {
+    resumo.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  // Observer: esconde quando o resumo entra na tela
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        btnResumo.style.display = "none";
+      } else {
+        btnResumo.style.display = "block";
+      }
+    },
+    {
+      root: null,        // viewport
+      threshold: 0.2     // 20% visível já considera "chegou"
+    }
+  );
+
+  observer.observe(resumo);
+});
+
 
   function applyAddFromUrl(){
   const params = new URLSearchParams(window.location.search);
