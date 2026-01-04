@@ -265,6 +265,84 @@
       font-size:12px;
       color: rgba(33,1,36,.80);
     }
+    /* ===== Modal (Ajuda Aroma) ===== */
+.modal{
+  position: fixed;
+  inset: 0;
+  display: none; /* fechado por padrão */
+  z-index: 999;
+}
+
+.modal.is-open{
+  display: block;
+}
+
+.modalBackdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(33,1,36,.45);
+  backdrop-filter: blur(3px);
+}
+
+.modalCard{
+  position: relative;
+  max-width: 720px;
+  margin: 8vh auto;
+  border: 1px solid var(--line);
+  background: rgba(250,242,230,.96);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.modalHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.modalBody{
+  padding: 14px 16px 16px;
+  display:grid;
+  gap: 14px;
+}
+
+.qBlock b{
+  display:block;
+  margin-bottom: 8px;
+}
+
+.optGrid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+@media (max-width:520px){
+  .optGrid{ grid-template-columns: 1fr; }
+}
+
+.opt{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.55);
+  cursor:pointer;
+  font-size: 13px;
+}
+
+.resultBox{
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.60);
+  border-radius: 14px;
+  padding: 12px;
+}
+
   </style>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -293,10 +371,9 @@
     </header>
 
     <h1>Monte seu pedido</h1>
-    <p class="sub">
-      Escolha as quantidades por aroma e tamanho (30g e 110g). No final, clique em <b>fazer pedido no WhatsApp</b> e a mensagem vai pronta. 💛
-    </p>
-
+    <div>
+    <p class="sub">Escolha as quantidades por aroma e tamanho (30g e 110g). No final, clique em <b>fazer pedido no WhatsApp</b> e a mensagem vai pronta. 💛</p>
+    </div>
     <div class="grid">
       <!-- LISTA DE PRODUTOS -->
       <section class="panel" aria-label="Produtos">
@@ -305,8 +382,10 @@
             <h2>Aromas</h2>
             <p>Fixos + possibilidades extras</p>
           </div>
-          <button class="btn" type="button" id="btnAjudaAroma">Nova sugestão de aroma</button>
-          <button class="btn" type="button" id="btnZerar">Zerar tudo</button>
+<div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+  <button class="btn" type="button" id="btnAjudaAroma">Nova sugestão de aroma</button>
+  <button class="btn" type="button" id="btnZerar">Zerar tudo</button>
+</div>
         </div>
 
         <div class="items" id="items"></div>
@@ -375,7 +454,8 @@
 
           <div class="field">
             <label for="observacao">Observação (opcional)</label>
-            <textarea id="observacao" placeholder="Ex.: é presente, quero um aroma mais suave, entregar até sexta, etc. <br>\nCaso frete seja incluído, favor inserir o endereço. ex. Rua das américas, 29 CEP:321012-203"></textarea>
+            <textarea id="observacao" placeholder="Ex.: é presente, quero um aroma mais suave, entregar até sexta, etc. 
+              Caso frete seja incluído, favor inserir o endereço. ex. Rua das américas, 29 CEP:321012-203"></textarea>
           </div>
 
 
@@ -1020,7 +1100,7 @@ let aromaRecomendadoId = null;
 function openModalAroma(){
   const m = document.getElementById("modalAroma");
   if (!m) return;
-  m.setAttribute("aria-hidden","false");
+  m.classList.add("is-open");
   document.body.style.overflow = "hidden";
   document.getElementById("btnCloseModal")?.focus();
 }
@@ -1028,11 +1108,11 @@ function openModalAroma(){
 function closeModalAroma(){
   const m = document.getElementById("modalAroma");
   if (!m) return;
-  m.setAttribute("aria-hidden","true");
+  m.classList.remove("is-open");
   document.body.style.overflow = "";
+
   aromaRecomendadoId = null;
 
-  // limpa seleção e resultado (opcional)
   document.querySelectorAll('#modalAroma input[type="radio"]').forEach(r => r.checked = false);
 
   const box = document.getElementById("resultadoAroma");
@@ -1130,10 +1210,11 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btnVerRecomendacao")?.addEventListener("click", showRecomendacao);
   document.getElementById("btnAplicarAroma")?.addEventListener("click", aplicarAromaNoCarrinho);
 
-  document.addEventListener("keydown", (e) => {
-    const m = document.getElementById("modalAroma");
-    if (e.key === "Escape" && m?.getAttribute("aria-hidden") === "false") closeModalAroma();
-  });
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  const m = document.getElementById("modalAroma");
+  if (m?.classList.contains("is-open")) closeModalAroma();
+});
 });
 
 </script>
