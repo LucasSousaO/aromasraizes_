@@ -733,7 +733,6 @@ document.addEventListener("keydown", (e) => {
     background: #f6f0e8;
     touch-action: pan-y; /* ajuda no swipe */
     --nav-space: 56px; /* largura da “faixa” das setas */
-
   }
 
   .story-carousel__track {
@@ -890,9 +889,9 @@ document.addEventListener("keydown", (e) => {
   }  
   .story-carousel__btn--prev { left: -22px; }
   .story-carousel__btn--next { right: -22px; }
-  .story-carousel__viewport {
-   --nav-space: 0px; /* no desktop não precisa reservar espaço interno */
-    overflow: visible; /* permite botões fora */
+  .story-carousel__viewport{
+    overflow-x: clip;   /* ou hidden */
+    overflow-y: visible;
   }
 }
 
