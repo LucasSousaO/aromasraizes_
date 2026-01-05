@@ -24,16 +24,47 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-<!-- Google tag (gtag.js) -->
+
+  <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMVN86NGX7"></script>
-<script>
+
+  <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-PMVN86NGX7');
 </script>
-
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"LocalBusiness",
+    "name":"Raízes Aromas",
+    "description":"Velas veganas aromatizadas. Presentes especiais e encomendas.",
+    "areaServed":["Atibaia - SP","Belo Horizonte - MG"],
+    "sameAs":["https://www.instagram.com/raizesaromas_/"],
+    "url":"https://aromasraizes.com.br/",
+    "contactPoint":{
+      "@type":"ContactPoint",
+      "contactType":"sales",
+      "telephone":"+55-11-94480-0174"
+    }
+  }
+  </script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uv9oeyq093");
+</script> 
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T8M4KRX9');</script>
+<!-- End Google Tag Manager -->
+  
   <style>
     :root{
       --bg:#F2E3CE;
@@ -345,40 +376,7 @@
   padding:12px 16px;
   border-top:1px solid var(--line);
 }
-
   </style>
-
-  <!-- SEO local básico (informativo, sem prometer o que não tem) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"LocalBusiness",
-    "name":"Raízes Aromas",
-    "description":"Velas veganas aromatizadas. Presentes especiais e encomendas.",
-    "areaServed":["Atibaia - SP","Belo Horizonte - MG"],
-    "sameAs":["https://www.instagram.com/raizesaromas_/"],
-    "url":"https://aromasraizes.com.br/",
-    "contactPoint":{
-      "@type":"ContactPoint",
-      "contactType":"sales",
-      "telephone":"+55-11-94480-0174"
-    }
-  }
-  </script>
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "uv9oeyq093");
-</script> 
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-T8M4KRX9');</script>
-<!-- End Google Tag Manager -->
 </head>
 
 <body>
@@ -386,6 +384,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T8M4KRX9"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+  
   <div class="wrap">
     <!-- Top -->
     <header class="top card">
@@ -593,12 +592,8 @@ ou correios em todo Brasil 📦</p>
     </div>
 
     <!-- Controles -->
-    <button class="story-carousel__btn story-carousel__btn--prev" type="button" aria-label="Slide anterior" data-prev>
-      ‹
-    </button>
-    <button class="story-carousel__btn story-carousel__btn--next" type="button" aria-label="Próximo slide" data-next>
-      ›
-    </button>
+    <button class="story-carousel__btn story-carousel__btn--prev" type="button" aria-label="Slide anterior" data-prev>‹</button>
+    <button class="story-carousel__btn story-carousel__btn--next" type="button" aria-label="Próximo slide" data-next>›</button>
   </div>
 
   <!-- Dots -->
@@ -607,7 +602,6 @@ ou correios em todo Brasil 📦</p>
 <!-- ===== Modal Ajuda Aroma ===== -->
 <div class="modal" id="modalAroma" aria-hidden="true" aria-label="Ajuda para escolher aroma" role="dialog" aria-modal="true">
   <div class="modalBackdrop"></div>
-
   <div class="modalCard" role="document">
     <div class="modalHead">
       <div>
@@ -671,11 +665,9 @@ ou correios em todo Brasil 📦</p>
   };
 
   let aromaRecomendadoId = null;
-
   function qs(sel, root=document){ return root.querySelector(sel); }
 
   let __scrollY = 0;
-
 function lockScroll(){
   __scrollY = window.scrollY || 0;
   document.body.style.position = "fixed";
@@ -716,7 +708,6 @@ function closeModalAroma(){
   const btnAplicar = document.getElementById("btnAplicarAroma");
   if (btnAplicar) btnAplicar.style.display = "none";
 }
-
 
   function getRadioValue(name){
     return document.querySelector(`input[name="${name}"]:checked`)?.value || null;
@@ -784,7 +775,6 @@ function closeModalAroma(){
     btnAplicar.style.display = "inline-flex";
   }
 
-  // Se você não tem carrinho nessa página, substitua aqui por WhatsApp/Instagram depois.
   function aplicarAromaNoCarrinho(){
   if (!aromaRecomendadoId) return;
 
