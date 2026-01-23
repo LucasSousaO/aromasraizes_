@@ -3,21 +3,21 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://aromasraizes.com.br/</loc>
+    <loc>https://raizesaromas.com.br/</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://aromasraizes.com.br/index.html</loc>
+    <loc>https://raizesaromas.com.br/index.html</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://aromasraizes.com.br/compre.html</loc>
+    <loc>https://raizesaromas.com.br/compre.html</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -25,7 +25,7 @@
 
   <!-- Se existir -->
   <url>
-    <loc>https://aromasraizes.com.br/monte.html</loc>
+    <loc>https://raizesaromas.com.br/monte.html</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
