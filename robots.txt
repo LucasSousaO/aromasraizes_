@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Evita indexar parâmetros e arquivos internos
+Disallow: /*?*
+Disallow: /assets/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://aromasraizes.com.br/sitemap.xml
