@@ -201,24 +201,46 @@
     }
 
     /* Modal (base única) */
-    .modal{ position:fixed; inset:0; display:none; z-index:9999; padding:12px; }
-    .modal.is-open{ display:block; }
-    .modalBackdrop{ position:absolute; inset:0; background: rgba(33,1,36,.35); backdrop-filter: blur(4px); }
+    .modal{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 9999;
+  padding: 12px;
 
-    .modalCard{
-      position:relative;
-      max-width:720px;
-      max-height: calc(100dvh - 24px);
-      margin: 0 auto;
-      /*top: 12px;*/
-      border: 1px solid var(--line);
-      background: rgba(250,242,230,.96);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-    }
+  /* ✅ centralização */
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.is-open{
+  display: flex; /* ✅ flex pra centralizar */
+}
+
+.modalBackdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(33,1,36,.45);
+  backdrop-filter: blur(3px);
+}
+
+.modalCard{
+  position: relative;
+  max-width: 720px;
+  width: min(720px, calc(100vw - 24px)); /* ✅ garante caber no mobile */
+
+  max-height: calc(100dvh - 24px);
+  margin: 0;
+  border: 1px solid var(--line);
+  background: rgba(250,242,230,.96);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
     .modalHead{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:14px 16px; border-bottom:1px solid var(--line);}
     .modalBody{
       flex:1 1 auto;
