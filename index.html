@@ -117,7 +117,42 @@
 
     /* Hero */
     .hero{display:grid; grid-template-columns: 1.1fr .9fr; gap:14px; margin-top:14px;}
-    .hero .left{padding:18px;}
+    /* ===== HERO (desktop): melhor distribuição no left card ===== */
+.hero .left{
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;  /* distribui conteúdo na vertical */
+  gap: 14px;                       /* respiro entre blocos */
+}
+
+/* Mantém o texto confortável para leitura */
+.hero .left .lead{
+  max-width: 58ch;
+  margin: 0;                       /* evita espaços “estranhos” */
+}
+
+/* CTA com respiro consistente */
+.hero .left .ctaRow{
+  margin-top: 6px;
+  gap: 12px;
+}
+
+/* Mini sempre no “rodapé” do card */
+.hero .left .mini{
+  margin-top: auto;                /* empurra para baixo */
+  padding-top: 10px;
+  border-top: 1px solid rgba(49,55,21,.12);
+  width: 100%;
+}
+
+/* Opcional: deixa o card acompanhar a altura do bloco da imagem no desktop */
+@media (min-width: 900px){
+  .hero{ align-items: stretch; }
+  .hero .left{ min-height: 420px; }
+}
+
     .hero .right{overflow:hidden;}
 
     .pill{
@@ -334,28 +369,33 @@
 
     <main id="topo" class="hero">
       <section class="left card">
-        <span class="pill">🎁 Presente especial • 🌿 Veganas • ✨ Aromas marcantes</span>
+  <div class="heroContent">
+    <span class="pill">🎁 Presente especial • 🌿 Veganas • ✨ Aromas marcantes</span>
 
-        <h1>Velas que viram <span style="color:var(--accent)">momento</span>.</h1>
+  <h1 id="hero-title">Velas que viram <span>momento</span>.</h1>
 
-        <p class="lead">
-          A Raízes Aromas cria velas veganas aromatizadas para presentear ou transformar seu cantinho em um lugar mais
-          acolhedor. O pedido acontece rapidinho por Instagram ou WhatsApp.
-        </p>
+    <p class="lead">
+      A Raízes Aromas cria velas veganas aromatizadas para presentear ou transformar seu cantinho
+      em um lugar mais acolhedor.
+    </p>
 
-        <div class="ctaRow">
-          <a class="btn" href="https://www.instagram.com/raizesaromas_/" target="_blank" rel="noopener">Ver vitrine no Instagram</a>
-          <a class="btn primary" href="./compre.html" rel="noopener">Quero comprar para presente</a>
-        </div>
+    <div class="ctaRow">
+      <a class="btn" href="https://www.instagram.com/raizesaromas_/" target="_blank" rel="noopener">
+        Ver vitrine no Instagram
+      </a>
+      <a class="btn primary" href="./compre.html" rel="noopener">
+        Quero comprar para presente
+      </a>
+    </div>
+  </div>
 
-        <div class="mini">
-          Entregas em <b>Atibaia</b> e <b>Belo Horizonte</b> • Tamanhos: <b>30g</b> e <b>110g</b>
-          <br/>
-          Entregas para <b>todo o Brasil</b> com inclusão de frete dos correios
-          <br/>
-          <span style="opacity:.9;">*Os prazos podem variar de acordo com a disponibilidade em estoque.</span>
-        </div>
-      </section>
+  <div class="mini">
+    Entregas em <b>Atibaia</b> e <b>Belo Horizonte</b> • Tamanhos: <b>30g</b> e <b>110g</b><br/>
+    Entregas para <b>todo o Brasil</b> com inclusão de frete dos correios<br/>
+    <span style="opacity:.9;">*Os prazos podem variar de acordo com a disponibilidade em estoque.</span>
+  </div>
+</section>
+
 
       <aside class="right card">
 <div
