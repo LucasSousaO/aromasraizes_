@@ -126,6 +126,12 @@
   justify-content: space-between;  /* distribui conteúdo na vertical */
   gap: 14px;                       /* respiro entre blocos */
 }
+.nota{
+      font-size: 10px;
+    max-width: 56ch;      /* controla a largura do texto (ch = largura de caracteres) */
+  line-height: 1.65;
+  color: rgba(49,55,21,.92);
+}
 
 /* Mantém o texto confortável para leitura */
 .hero .left .lead{
@@ -755,7 +761,7 @@ A cura acontece com calma, para que o aroma se desenvolva por completo e chegue 
     />
   </div>
         <div class="resultBox" id="quickAromaDesc" style="font-size:13px; color:rgba(33,1,36,.78);"></div>
-<p>* As cores representadas nas velas são meramente ilustrativas, todos os aromas terão a mesma tonalidade.</p>
+<p class = "nota">* As cores representadas nas velas são meramente ilustrativas, todos os aromas terão a mesma tonalidade.</p>
         <div style="display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
           <button class="btn" type="button" data-close="modalAromaQuick">Voltar</button>
           <button class="btn primary" type="button" id="btnQuickAdd30">Adicionar 30g ao pedido</button>
