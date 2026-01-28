@@ -241,6 +241,21 @@
   flex-direction: column;
 }
 
+.media--clickable{
+  cursor: pointer;
+}
+
+.media--clickable:hover img{
+  filter: brightness(0.96);
+}
+
+.media--clickable:active img{
+  transform: scale(0.995);
+}
+
+.heroCaptionBtn{
+  pointer-events: none; /* clique passa para o container */
+}
     .modalHead{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:14px 16px; border-bottom:1px solid var(--line);}
     .modalBody{
       flex:1 1 auto;
@@ -343,12 +358,18 @@
       </section>
 
       <aside class="right card">
-        <div class="media" aria-label="Foto do produto">
-          <img src="assets/images/velas.jpg" alt="Vela artesanal Raízes Aromas" loading="eager" />
-          <button class="heroCaptionBtn" type="button" data-open="modalComoProduzimos">
-            Feitas com carinho para encantar ❤️
-          </button>
-        </div>
+<div
+  class="media media--clickable"
+  role="button"
+  tabindex="0"
+  aria-label="Abrir informações sobre como produzimos"
+  data-open="modalComoProduzimos"
+>
+  <img
+    src="assets/images/velas.jpg"
+    alt="Vela artesanal Raízes Aromas"
+    loading="eager"  />
+<button class="heroCaptionBtn" type="button" tabindex="-1">Feitas com carinho para encantar ❤️</button></div>
       </aside>
     </main>
 
