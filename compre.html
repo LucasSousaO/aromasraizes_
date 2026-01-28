@@ -274,15 +274,38 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .footerRow{display:flex; gap:10px; flex-wrap:wrap;}
     .mutedLink{font-size:12px; color: rgba(33,1,36,.75);}
 
-    .pill{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:7px 10px;
-      border-radius: 999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.35);
-      font-size:12px;
-      color: rgba(33,1,36,.80);
-    }
+.topMeta{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap: wrap;      /* ✅ permite quebrar no mobile */
+}
+
+.pill{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.35);
+
+  font-size:12px;
+  line-height:1.2;
+  color: rgba(33,1,36,.80);
+
+  max-width: 100%;
+  min-width: 0;         /* ✅ evita “forçar” overflow em flex */
+}
+
+/* opcional: no mobile deixa os dois em “linhas separadas” e alinhados */
+@media (max-width: 520px){
+  .topMeta{ align-items: stretch; }
+  .pill{ width: 100%; justify-content: center; text-align:center; }
+  #backtoInstagram{ width: 100%; justify-content: center; }
+}
+
 
     /* ✅ Botão flutuante mobile (uma regra só) */
     .btnResumoMobile{
@@ -406,10 +429,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <span>Velas veganas aromatizadas</span>
         </div>
       </a>
-      <div style="display:flex; gap:10px; align-items:center;">
-        <span class="pill">📍 Atibaia/SP BH/MG Frete/Todo Brasil</span>
-        <a class="btn" id="backtoInstagram" href="https://www.instagram.com/raizesaromas_/" target="_blank" rel="noopener">Ver Instagram</a>
-      </div>
+<div class="topMeta">
+  <span class="pill">📍 Atibaia/SP • BH/MG • Frete para todo Brasil</span>
+  <a class="btn" id="backtoInstagram" href="https://www.instagram.com/raizesaromas_/" target="_blank" rel="noopener">Ver Instagram</a>
+</div>
     </header>
 
     <h1>Monte seu pedido</h1>
