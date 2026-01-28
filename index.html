@@ -216,7 +216,7 @@
     .aromaCard:focus-visible{ outline:3px solid rgba(0,0,0,.25); outline-offset:2px; }
 
     .prices{display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px;}
-    .priceBox{padding:12px; border-radius:16px; border:1px solid rgba(49,55,21,.18); background: rgba(255,255,255,.45);}
+    .priceBox{font-size:14px;padding:12px; border-radius:16px; border:1px solid rgba(49,55,21,.18); background: rgba(255,255,255,.45);}
     .priceBox b{ color: var(--deep); }
     .priceBox ul{ margin:8px 0 0; padding-left:18px; }
     .priceBox li{ margin:4px 0; font-size:13px; color: rgba(49,55,21,.9); }
@@ -458,7 +458,8 @@
           data-aroma-id="lavanda"
           data-aroma-title="Lavanda"
           data-aroma-desc="Conforto e calmaria. Ótima para relaxar."
-          data-aroma-use="Ideal para relaxar, desacelerar e criar clima de descanso.">
+          data-aroma-use="Ideal para relaxar, desacelerar e criar clima de descanso."
+          data-aroma-image="/assets/images/lavanda.webp">
           <b>Lavanda</b>
           <p>Conforto e calmaria. Ótima para relaxar.</p>
         </div>
@@ -467,7 +468,8 @@
           data-aroma-id="bamboo"
           data-aroma-title="Bamboo"
           data-aroma-desc="Fresco e leve. Sensação de ambiente limpo."
-          data-aroma-use="Ideal para sala e home office: sensação de ambiente limpo e leve.">
+          data-aroma-use="Ideal para sala e home office: sensação de ambiente limpo e leve."
+          data-aroma-image="/assets/images/bamboo.webp">
           <b>Bamboo</b>
           <p>Fresco e leve. Sensação de ambiente limpo.</p>
         </div>
@@ -476,7 +478,8 @@
           data-aroma-id="morango_champagne"
           data-aroma-title="Morango &amp; Champagne"
           data-aroma-desc="Doce e celebrativo. Presente com “uau”."
-          data-aroma-use="Ideal para ambientes sociais e presentes: doce, marcante e celebrativo.">
+          data-aroma-use="Ideal para ambientes sociais e presentes: doce, marcante e celebrativo."
+          data-aroma-image="/assets/images/morango.webp">
           <b>Morango &amp; Champagne</b>
           <p>Doce e celebrativo. Presente com “uau”.</p>
         </div>
@@ -496,7 +499,8 @@
           data-aroma-id="baunilha"
           data-aroma-title="Baunilha"
           data-aroma-desc="Doce e aconchegante."
-          data-aroma-use="Ideal para aconchego: perfeito para noites frias e autocuidado.">
+          data-aroma-use="Ideal para aconchego: perfeito para noites frias e autocuidado."
+          data-aroma-image="/assets/images/baunilha.webp">
           <b>Baunilha</b><p>Doce e aconchegante.</p>
         </div>
 
@@ -504,7 +508,8 @@
           data-aroma-id="flor_cerejeira"
           data-aroma-title="Flor de Cerejeira"
           data-aroma-desc="Delicada e elegante."
-          data-aroma-use="Ideal para um clima delicado e elegante: quarto, leitura e relax.">
+          data-aroma-use="Ideal para um clima delicado e elegante: quarto, leitura e relax."
+          data-aroma-image="/assets/images/flor-de-cerejeira.webp">
           <b>Flor de Cerejeira</b><p>Delicada e elegante.</p>
         </div>
 
@@ -512,7 +517,8 @@
           data-aroma-id="ameixa"
           data-aroma-title="Ameixa"
           data-aroma-desc="Marcante e sofisticada."
-          data-aroma-use="Ideal para impressionar: sofisticado, ótimo para visita e presente.">
+          data-aroma-use="Ideal para impressionar: sofisticado, ótimo para visita e presente."
+          data-aroma-image="/assets/images/ameixa.webp">
           <b>Ameixa</b><p>Marcante e sofisticada.</p>
         </div>
       </div>
@@ -739,8 +745,6 @@ A cura acontece com calma, para que o aroma se desenvolva por completo e chegue 
   </div>
   <button class="btn" type="button" data-close="modalAromaQuick">Fechar</button>
 </div>
-
-
       <div class="modalBody">
           <!-- IMAGEM DO AROMA -->
   <div class="modalImage">
@@ -924,7 +928,7 @@ A cura acontece com calma, para que o aroma se desenvolva por completo e chegue 
 
   // 👉 imagem do aroma
   if ($i) {
-    $i.src = image || "/assets/images/default.jpg";
+    $i.src = image || "/assets/images/default.webp";
     $i.alt = title ? `Vela aromática ${title}` : "Vela aromática";
   }
 
@@ -940,7 +944,8 @@ A cura acontece com calma, para que o aroma se desenvolva por completo e chegue 
         id: card.getAttribute("data-aroma-id"),
         title: card.getAttribute("data-aroma-title"),
         desc: card.getAttribute("data-aroma-desc"),
-        useHint: card.getAttribute("data-aroma-use")
+        useHint: card.getAttribute("data-aroma-use"),
+        image: card.getAttribute("data-aroma-image")
       });
     });
 
