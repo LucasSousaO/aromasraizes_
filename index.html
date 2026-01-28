@@ -7,33 +7,33 @@
 
   <title>Raízes Aromas | Velas veganas aromatizadas</title>
   <meta name="description" content="Velas veganas aromatizadas (Lavanda, Bamboo, Morango & Champagne). Presentes especiais e encomendas. Entregas em Atibaia e Belo Horizonte. Peça pelo WhatsApp ou Instagram." />
+  <meta name="robots" content="index,follow" />
 
-  <!-- Canonical (troque quando publicar no domínio final) -->
-  <link rel="canonical" href="https://aromasraizes.com.br" />
-
-  <!-- Favicon (troque pela URL final) -->
+  <!-- Canonical -->
+  <link rel="canonical" href="https://raizesaromas.com.br/" />
   <link rel="icon" href="assets/images/logo.png" />
 
-  <!-- Open Graph / WhatsApp Preview -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Raízes Aromas | Velas veganas aromatizadas" />
   <meta property="og:description" content="Presentes especiais e encomendas. Entregas em Atibaia e Belo Horizonte. Peça pelo WhatsApp ou Instagram." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://aromasraizes.com.br" />
-  <meta property="og:image" content="assets/images/logo.png" />
+  <meta property="og:url" content="https://raizesaromas.com.br/" />
+  <meta property="og:image" content="https://raizesaromas.com.br/assets/images/logo.png" />
   <meta property="og:locale" content="pt_BR" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PMVN86NGX7"></script>
-
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMVN86NGX7"></script>
   <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PMVN86NGX7');
-</script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PMVN86NGX7');
+  </script>
+
+  <!-- Schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -42,7 +42,7 @@
     "description":"Velas veganas aromatizadas. Presentes especiais e encomendas.",
     "areaServed":["Atibaia - SP","Belo Horizonte - MG"],
     "sameAs":["https://www.instagram.com/raizesaromas_/"],
-    "url":"https://aromasraizes.com.br/",
+    "url":"https://raizesaromas.com.br/",
     "contactPoint":{
       "@type":"ContactPoint",
       "contactType":"sales",
@@ -50,21 +50,25 @@
     }
   }
   </script>
+
+  <!-- Clarity -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "uv9oeyq093");
-</script> 
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-T8M4KRX9');</script>
-<!-- End Google Tag Manager -->
-  
+  </script>
+
+  <!-- GTM -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T8M4KRX9');
+  </script>
+
   <style>
     :root{
       --bg:#F2E3CE;
@@ -88,209 +92,106 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       line-height: 1.45;
     }
     a{ color: inherit; }
-    .wrap{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 22px 16px 56px;
-    }
-    .card{
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-    }
+    .wrap{max-width: var(--max); margin: 0 auto; padding: 22px 16px 56px;}
+    .card{background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow);}
 
     /* Header */
-    .top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding: 14px 16px;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(10px);
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      text-decoration:none;
-    }
-    .logo{
-      width:42px;
-      height:42px;
-      border-radius: 14px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(209,96,20,.55), transparent 58%),
-        radial-gradient(circle at 70% 35%, rgba(33,1,36,.35), transparent 58%),
-        #ffffff;
-      border: 1px solid rgba(49,55,21,.18);
-    }
-    .brand b{ font-size: 14px; letter-spacing:.2px; }
-    .brand span{ display:block; font-size: 12px; color: rgba(49,55,21,.78); }
+    .top{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; position:sticky; top:0; z-index:20; backdrop-filter: blur(10px);}
+    .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+    .logo{width:42px; height:42px; border-radius:14px; border:1px solid rgba(49,55,21,.18); object-fit:cover; background:#fff;}
+    .brand b{ font-size:14px; letter-spacing:.2px; }
+    .brand span{ display:block; font-size:12px; color: rgba(49,55,21,.78); }
 
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding: 12px 14px;
-      border-radius: 14px;
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px; border-radius:14px;
       border: 1px solid rgba(49,55,21,.22);
       background: rgba(255,255,255,.55);
-      text-decoration:none;
-      font-weight: 800;
-      font-size: 13px;
+      text-decoration:none; font-weight:800; font-size:13px;
       transition: transform .15s ease, filter .15s ease;
-      white-space:nowrap;
+      white-space:nowrap; cursor:pointer;
     }
     .btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
-    .btn.primary{
-      background: var(--accent);
-      color: #fff;
-      border-color: rgba(0,0,0,.08);
-    }
-    .btn.secondary{
-      background: var(--deep);
-      color:#fff;
-      border-color: rgba(0,0,0,.10);
-    }
+    .btn.primary{ background: var(--accent); color:#fff; border-color: rgba(0,0,0,.08); }
+    .btn.secondary{ background: var(--deep); color:#fff; border-color: rgba(0,0,0,.10); }
 
     /* Hero */
-    .hero{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:14px;
-      margin-top: 14px;
-    }
-    .hero .left{ padding: 18px; }
-    .hero .right{ overflow:hidden; }
+    .hero{display:grid; grid-template-columns: 1.1fr .9fr; gap:14px; margin-top:14px;}
+    .hero .left{padding:18px;}
+    .hero .right{overflow:hidden;}
 
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(49,55,21,.22);
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 10px; border-radius:999px;
+      border:1px solid rgba(49,55,21,.22);
       background: rgba(255,255,255,.45);
-      font-size: 12px;
-      font-weight: 700;
-      color: rgba(49,55,21,.88);
+      font-size:12px; font-weight:700; color: rgba(49,55,21,.88);
     }
-    h1{
-      margin: 10px 0 8px;
-      font-size: clamp(26px, 4vw, 40px);
-      line-height: 1.08;
-      letter-spacing: -.6px;
-      color: var(--deep);
-    }
-    .lead{
-      margin: 0 0 14px;
-      font-size: 15px;
-      color: rgba(49,55,21,.92);
-      max-width: 58ch;
-    }
-    .ctaRow{
-      display:flex;
-      gap:10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-    .mini{
-      margin-top: 10px;
-      font-size: 12px;
-      color: rgba(49,55,21,.78);
-    }
+    h1{margin:10px 0 8px; font-size: clamp(26px, 4vw, 40px); line-height: 1.08; letter-spacing: -.6px; color: var(--deep);}
+    .lead{margin:0 0 14px; font-size:15px; color: rgba(49,55,21,.92); max-width:58ch;}
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+    .mini{margin-top:10px; font-size:12px; color: rgba(49,55,21,.78);}
 
-    .media{
-      height: 100%;
-      min-height: 240px;
-      background: rgba(33,1,36,.06);
-      position:relative;
-    }
-    .media img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display:block;
-      filter: contrast(1.05) saturate(1.02);
-    }
-    .mediaOverlay{
+    .media{height:100%; min-height:240px; background: rgba(33,1,36,.06); position:relative;}
+    .media img{width:100%; height:100%; object-fit:cover; display:block; filter: contrast(1.05) saturate(1.02);}
+
+    /* Botão clicável no overlay da imagem (resolve o “clicou e não aconteceu nada”) */
+    .heroCaptionBtn{
       position:absolute;
-      inset:0;
-      display:flex;
-      align-items:flex-end;
-      padding: 12px;
-      background: linear-gradient(to top, rgba(33,1,36,.55), transparent 55%);
+      left:12px; right:12px; bottom:12px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(33,1,36,.62);
       color:#fff;
       font-weight: 800;
-      font-size: 12px;
-      letter-spacing: .2px;
+      letter-spacing:.2px;
+      cursor:pointer;
+      text-align:left;
     }
+    .heroCaptionBtn:hover{ filter: brightness(1.05); }
 
     /* Sections */
-    .section{
-      margin-top: 14px;
-      padding: 16px;
-    }
-    .section h2{
-      margin: 0 0 10px;
-      font-size: 16px;
-      color: var(--deep);
-      letter-spacing: -.2px;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    .item{
-      padding: 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(49,55,21,.18);
-      background: rgba(255,255,255,.40);
-    }
-    .item b{ display:block; margin-bottom: 4px; }
-    .item p{ margin:0; font-size: 13px; color: rgba(49,55,21,.85); }
+    .section{margin-top:14px; padding:16px;}
+    .section h2{margin:0 0 10px; font-size:16px; color: var(--deep); letter-spacing:-.2px;}
+    .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px;}
+    .item{padding:12px; border-radius:16px; border:1px solid rgba(49,55,21,.18); background: rgba(255,255,255,.40);}
+    .item b{display:block; margin-bottom:4px;}
+    .item p{margin:0; font-size:13px; color: rgba(49,55,21,.85);}
 
-    .prices{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .priceBox{
-      padding: 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(49,55,21,.18);
-      background: rgba(255,255,255,.45);
-    }
+    .aromaCard{ cursor:pointer; }
+    .aromaCard:focus-visible{ outline:3px solid rgba(0,0,0,.25); outline-offset:2px; }
+
+    .prices{display:grid; grid-template-columns: 1fr 1fr; gap:10px;}
+    .priceBox{padding:12px; border-radius:16px; border:1px solid rgba(49,55,21,.18); background: rgba(255,255,255,.45);}
     .priceBox b{ color: var(--deep); }
-    .priceBox ul{ margin: 8px 0 0; padding-left: 18px; }
-    .priceBox li{ margin: 4px 0; font-size: 13px; color: rgba(49,55,21,.9); }
+    .priceBox ul{ margin:8px 0 0; padding-left:18px; }
+    .priceBox li{ margin:4px 0; font-size:13px; color: rgba(49,55,21,.9); }
 
-    .story{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 8px;
-      font-size: 13px;
-      color: rgba(49,55,21,.9);
-    }
-    .story p{ margin:0; }
+    footer{margin-top:16px; padding:14px 16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between; color: rgba(49,55,21,.78); font-size:12px;}
 
-    footer{
-      margin-top: 16px;
-      padding: 14px 16px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-      color: rgba(49,55,21,.78);
-      font-size: 12px;
+    /* Tooltip estoque */
+    .stockHint{display:inline-flex; align-items:center; gap:8px; position:relative;}
+    .hintIcon{
+      width:22px; height:22px; border-radius:999px;
+      border:1px solid rgba(33,1,36,.25);
+      background: rgba(255,255,255,.55);
+      font-weight:900; cursor:pointer;
     }
+    .tooltip{
+      position:absolute; left:0; top: calc(100% + 8px);
+      width: min(280px, 85vw);
+      background: rgba(33,1,36,.92); color:#fff;
+      padding:10px 12px; border-radius:12px;
+      font-size:12px; line-height:1.35;
+      display:none; z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .stockHint.is-open .tooltip{ display:block; }
+#quickAromaUse { display:inline; }
+@media (max-width: 520px){
+  #quickAromaUse { display:inline; }
+}
 
     /* Mobile */
     @media (max-width: 900px){
@@ -299,113 +200,101 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .prices{ grid-template-columns: 1fr; }
     }
 
-    /* Modal */
-/* ===== Modal (Ajuda Aroma) - FIX iOS ===== */
-.modal{
-  position: fixed;
-  inset: 0;
-  display: none;
-  z-index: 9999;
-  padding: 12px;                 /* importante no mobile */
-}
-    .modal.is-open{ display: block; }
+    /* Modal (base única) */
+    .modal{ position:fixed; inset:0; display:none; z-index:9999; padding:12px; }
+    .modal.is-open{ display:block; }
+    .modalBackdrop{ position:absolute; inset:0; background: rgba(33,1,36,.35); backdrop-filter: blur(4px); }
 
-.modal[aria-hidden="false"]{ display:block; }
-.modalBackdrop{
-  position:absolute; inset:0;
-  background: rgba(33,1,36,.35);
-  backdrop-filter: blur(4px);
-}
-/* O card precisa caber na tela e permitir scroll interno */
-.modalCard{
-  position: relative;
-  max-width: 720px;
+    .modalCard{
+      position:relative;
+      max-width:720px;
+      max-height: calc(100dvh - 24px);
+      margin: 0 auto;
+      top: 12px;
+      border: 1px solid var(--line);
+      background: rgba(250,242,230,.96);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .modalHead{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:14px 16px; border-bottom:1px solid var(--line);}
+    .modalBody{
+      flex:1 1 auto;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      padding:14px 16px 16px;
+      display:grid;
+      gap:14px;
+      overscroll-behavior: contain;
+    }
 
-  /* ✅ chave do mobile */
-  max-height: calc(100dvh - 24px); /* usa dvh no mobile moderno */
-  height: auto;
+    .qBlock{ display:grid; gap:8px; padding:10px; border:1px solid rgba(33,1,36,.12); border-radius:16px; background: rgba(255,255,255,.35); }
+    .optGrid{ display:grid; grid-template-columns: 1fr 1fr; gap:8px; }
+    @media (max-width: 520px){ .optGrid{ grid-template-columns:1fr; } }
+    .opt{
+      display:flex; gap:10px; align-items:center;
+      padding:10px; border-radius:14px;
+      border:1px solid rgba(33,1,36,.12);
+      background: rgba(255,255,255,.45);
+      cursor:pointer;
+      font-size:13px;
+    }
+    .resultBox{ border:1px solid rgba(33,1,36,.18); background: rgba(255,255,255,.55); border-radius:16px; padding:12px; }
+    .modalFoot{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; padding:12px 16px; border-top:1px solid var(--line); }
 
-  margin: 0 auto;
-  top: 12px;                      /* evita “sumir” atrás da barra */
-  border: 1px solid var(--line);
-  background: rgba(250,242,230,.96);
-  border-radius: var(--r);
-  box-shadow: var(--shadow);
-  overflow: hidden;
+    /* Carrossel — seu CSS atual (mantido) */
+    .story-carousel { max-width: 980px; margin: 0 auto; padding: 24px 16px 8px; }
+    .story-carousel__header h2 { margin: 0 0 6px; font-size: clamp(28px, 3vw, 42px); line-height: 1.05; letter-spacing: -0.02em; }
+    .story-carousel__header p { margin: 0 0 18px; opacity: 0.9; }
+    .story-carousel__viewport { position: relative; overflow: hidden; border-radius: 18px; box-shadow: 0 10px 24px rgba(0,0,0,.10); background: #f6f0e8; touch-action: pan-y; --nav-space: 56px; }
+    .story-carousel__track { display: flex; transition: transform 320ms ease; will-change: transform; }
+    .story-card { flex: 0 0 100%; display: grid; grid-template-columns: 1fr; gap: 16px; padding: 18px; min-height: auto; padding-left: var(--nav-space); padding-right: var(--nav-space); }
+    .story-card__media { width: 100%; border-radius: 16px; overflow: hidden; background: #e9dfd2; aspect-ratio: 1 / 1; max-height: 320px; margin: 0 auto; }
+    .story-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .story-card__content { padding: 0; }
+    .story-card__content h3 { margin: 0 0 10px; font-size: 26px; line-height: 1.1; }
+    .story-card__content p { margin: 0 0 10px; font-size: 16px; line-height: 1.6; }
+    .story-card__cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .story-carousel__btn { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 999px; opacity: .95; z-index: 5; border: 1px solid rgba(0,0,0,.10); background: rgba(255,255,255,.85); backdrop-filter: blur(6px); cursor: pointer; display: grid; place-items: center; font-size: 28px; line-height: 1; user-select: none; }
+    .story-carousel__btn--prev { left: 12px; }
+    .story-carousel__btn--next { right: 12px; }
+    .story-carousel__dots { display: flex; justify-content: center; gap: 8px; padding: 12px 0 0; }
+    .story-dot { width: 10px; height: 10px; border-radius: 999px; border: 1px solid rgba(0,0,0,.25); background: transparent; cursor: pointer; }
+    .story-dot[aria-selected="true"] { background: rgba(0,0,0,.55); }
 
-  display: flex;                  /* ✅ para dividir head/body */
-  flex-direction: column;
-}
-.modalHead{
-  display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
-  padding:14px 16px;
-  border-bottom:1px solid var(--line);
-}
-/* ✅ o scroll acontece aqui */
-.modalBody{
-  flex: 1 1 auto;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch; /* iOS */
-  padding: 14px 16px 16px;
-  display:grid;
-  gap: 14px;
-}
-
-/* evita “bounce” estranho em alguns navegadores */
-.modalBody{ overscroll-behavior: contain; }
-
-.qBlock{ display:grid; gap:8px; padding:10px; border:1px solid rgba(33,1,36,.12); border-radius:16px; background: rgba(255,255,255,.35); }
-.optGrid{ display:grid; grid-template-columns: 1fr 1fr; gap:8px; }
-@media (max-width: 520px){ .optGrid{ grid-template-columns:1fr; } }
-.opt{
-  display:flex; gap:10px; align-items:center;
-  padding:10px; border-radius:14px;
-  border:1px solid rgba(33,1,36,.12);
-  background: rgba(255,255,255,.45);
-  cursor:pointer;
-  font-size:13px;
-}
-.resultBox{
-  border:1px solid rgba(33,1,36,.18);
-  background: rgba(255,255,255,.55);
-  border-radius: 16px;
-  padding:12px;
-}
-.modalFoot{
-  display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
-  padding:12px 16px;
-  border-top:1px solid var(--line);
-}
+    @media (min-width: 860px) {
+      .story-card { grid-template-columns: 1.1fr 0.9fr; align-items: center; gap: 24px; padding-left: 28px; padding-right: 40px; }
+      .story-card__media { aspect-ratio: 4 / 3; max-height: 440px; }
+      .story-card__content h3 { font-size: 34px; }
+      .story-card__content p { font-size: 18px; }
+      .story-carousel__btn--prev { left: -2px; }
+      .story-carousel__btn--next { right: -2px; }
+      .story-carousel__viewport{ overflow-x: clip; overflow-y: visible; }
+    }
   </style>
 </head>
 
 <body>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T8M4KRX9"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-  
+  <!-- GTM (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T8M4KRX9"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
   <div class="wrap">
-    <!-- Top -->
     <header class="top card">
       <a class="brand" href="#topo" aria-label="Raízes Aromas">
-          <img 
-      src="assets/images/logo.png"
-      alt="Raízes Aromas - Velas veganas aromatizadas"
-      class="logo"
-    />
+        <img src="assets/images/logo.png" alt="Raízes Aromas - Velas veganas aromatizadas" class="logo" />
         <div>
           <b>Raízes Aromas</b>
           <span>Velas veganas aromatizadas</span>
         </div>
       </a>
-
       <div class="ctaRow">
         <a class="btn primary" href="./compre.html" rel="noopener">Compre</a>
       </div>
     </header>
 
-    <!-- Hero -->
     <main id="topo" class="hero">
       <section class="left card">
         <span class="pill">🎁 Presente especial • 🌿 Veganas • ✨ Aromas marcantes</span>
@@ -426,17 +315,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           Entregas em <b>Atibaia</b> e <b>Belo Horizonte</b> • Tamanhos: <b>30g</b> e <b>110g</b>
           <br/>
           Entregas para <b>todo o Brasil</b> com inclusão de frete dos correios
-          
-          *Os prazos podem variar de acordo com a disponibilidade em estoque.
+          <br/>
+          <span style="opacity:.9;">*Os prazos podem variar de acordo com a disponibilidade em estoque.</span>
         </div>
       </section>
 
       <aside class="right card">
         <div class="media" aria-label="Foto do produto">
-          <!-- Troque por uma imagem sua hospedada (recomendado).
-               Ex.: https://aromasraizes.com.br/raizes/hero.png -->
           <img src="assets/images/velas.jpg" alt="Vela artesanal Raízes Aromas" loading="eager" />
-          <div class="mediaOverlay">Feitas com carinho para encantar ❤️</div>
+          <button class="heroCaptionBtn" type="button" data-open="modalComoProduzimos">
+            Feitas com carinho para encantar ❤️
+          </button>
         </div>
       </aside>
     </main>
@@ -444,16 +333,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Aromas -->
     <section class="section card" aria-label="Aromas">
       <h2>Aromas à pronta entrega</h2>
+
+      <!-- (1) Pronta entrega -->
       <div class="grid">
-        <div class="item">
+        <div class="item aromaCard" tabindex="0"
+          data-aroma-id="lavanda"
+          data-aroma-title="Lavanda"
+          data-aroma-desc="Conforto e calmaria. Ótima para relaxar."
+          data-aroma-use="Ideal para relaxar, desacelerar e criar clima de descanso.">
           <b>Lavanda</b>
           <p>Conforto e calmaria. Ótima para relaxar.</p>
         </div>
-        <div class="item">
+
+        <div class="item aromaCard" tabindex="0"
+          data-aroma-id="bamboo"
+          data-aroma-title="Bamboo"
+          data-aroma-desc="Fresco e leve. Sensação de ambiente limpo."
+          data-aroma-use="Ideal para sala e home office: sensação de ambiente limpo e leve.">
           <b>Bamboo</b>
           <p>Fresco e leve. Sensação de ambiente limpo.</p>
         </div>
-        <div class="item">
+
+        <div class="item aromaCard" tabindex="0"
+          data-aroma-id="morango_champagne"
+          data-aroma-title="Morango &amp; Champagne"
+          data-aroma-desc="Doce e celebrativo. Presente com “uau”."
+          data-aroma-use="Ideal para ambientes sociais e presentes: doce, marcante e celebrativo.">
           <b>Morango &amp; Champagne</b>
           <p>Doce e celebrativo. Presente com “uau”.</p>
         </div>
@@ -461,17 +366,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div style="height:10px"></div>
 
-      <h2>sujeito a disponibilidade</h2>
-      <div class="grid">
-        <div class="item"><b>Baunilha</b><p>Doce e aconchegante.</p></div>
-        <div class="item"><b>Flor de Cerejeira</b><p>Delicada e elegante.</p></div>
-        <div class="item"><b>Ameixa</b><p>Marcante e sofisticada.</p></div>
+      <!-- (2) Sujeito a disponibilidade + tooltip -->
+      <span class="stockHint">
+        sujeito à disponibilidade
+        <button class="hintIcon" type="button" aria-label="Mais informações" data-tooltip>?</button>
+        <span class="tooltip" role="tooltip">Produção artesanal, pode variar conforme estoque.</span>
+      </span>
+
+      <div class="grid" style="margin-top:10px;">
+        <div class="item aromaCard" tabindex="0"
+          data-aroma-id="baunilha"
+          data-aroma-title="Baunilha"
+          data-aroma-desc="Doce e aconchegante."
+          data-aroma-use="Ideal para aconchego: perfeito para noites frias e autocuidado.">
+          <b>Baunilha</b><p>Doce e aconchegante.</p>
+        </div>
+
+        <div class="item aromaCard" tabindex="0"
+          data-aroma-id="flor_cerejeira"
+          data-aroma-title="Flor de Cerejeira"
+          data-aroma-desc="Delicada e elegante."
+          data-aroma-use="Ideal para um clima delicado e elegante: quarto, leitura e relax.">
+          <b>Flor de Cerejeira</b><p>Delicada e elegante.</p>
+        </div>
+
+        <div class="item aromaCard" tabindex="0"
+          data-aroma-id="ameixa"
+          data-aroma-title="Ameixa"
+          data-aroma-desc="Marcante e sofisticada."
+          data-aroma-use="Ideal para impressionar: sofisticado, ótimo para visita e presente.">
+          <b>Ameixa</b><p>Marcante e sofisticada.</p>
+        </div>
       </div>
 
       <div class="ctaRow" style="margin-top:12px">
-      <button class="btn" type="button" id="btnAjudaAroma">Me ajuda a escolher um aroma</button>
-
-   <a class="btn primary" href="./compre.html" rel="noopener">Montar pedido</a>
+        <button class="btn" type="button" id="btnAjudaAroma" data-open="modalAroma">Me ajuda a escolher um aroma</button>
+        <a class="btn primary" href="./compre.html" rel="noopener">Montar pedido</a>
       </div>
     </section>
 
@@ -510,7 +440,7 @@ ou correios em todo Brasil 📦</p>
         </div>
         <div class="item">
           <b>Como pedir</b>
-          <p>Monte seu pedido, prossiga para o whatsapp para finalizar seu pedido. Pronto. Receberá a chave pix para finalizar seu pedido.</p>
+          <p>Monte seu pedido e finalize pelo WhatsApp. Você recebe a chave Pix para concluir.</p>
         </div>
       </div>
 
@@ -519,594 +449,468 @@ ou correios em todo Brasil 📦</p>
       </div>
     </section>
 
-  <!-- ====== CARROSSEL: Nossa História ====== -->
-<section class="story-carousel" aria-label="Carrossel: Conheça nossa história">
-  <div class="story-carousel__header">
-    <h2>Conheça nossa história</h2>
-    <p>Por trás da Raízes Aromas, existe uma história (de amor).</p>
+    <!-- ====== CARROSSEL: Nossa História (mantido) ====== -->
+    <section class="story-carousel" aria-label="Carrossel: Conheça nossa história">
+      <div class="story-carousel__header">
+        <h2>Conheça nossa história</h2>
+        <p>Por trás da Raízes Aromas, existe uma história (de amor).</p>
+      </div>
+
+      <div class="story-carousel__viewport" data-carousel>
+        <div class="story-carousel__track" data-track>
+          <!-- Card 1 -->
+          <article class="story-card" role="group" aria-roledescription="slide" aria-label="1 de 6">
+            <div class="story-card__media">
+              <img src="assets/images/velas-carrossel.png" alt="Vela acesa em ambiente aconchegante" loading="lazy">
+            </div>
+            <div class="story-card__content">
+              <h3>Por trás da marca</h3>
+              <p>Por trás da Raízes Aromas, existe uma história (de amor).</p>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="story-card" role="group" aria-roledescription="slide" aria-label="2 de 6">
+            <div class="story-card__media">
+              <img src="assets/images/bhsp.png" alt="Mapa entre SP e BH" loading="lazy">
+            </div>
+            <div class="story-card__content">
+              <h3>Como tudo começou</h3>
+              <p>Um casal diferente: mesmo com os <strong>500 km</strong> de distância, <strong>desde 2023</strong> mantemos nosso relacionamento forte!</p><br>
+              <p>Para isso, lidamos com viagens custosas entre Campinas e BH que nos impedem de juntar dinheiro para nossos objetivos em casal. Com o desejo de fazer renda extra para reduzir a distância entre nós, nasce o <strong>Raízes Aromas</strong>.</p>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="story-card" role="group" aria-roledescription="slide" aria-label="3 de 6">
+            <div class="story-card__media">
+              <img src="assets/images/paulo.png" alt="Pessoa tranquila em luz natural" loading="lazy">
+            </div>
+            <div class="story-card__content">
+              <h3>Paulo</h3>
+              <p>Mineiro com orgulho. Lê Conceição Evaristo e escuta Milton Nascimento. Tranquilo demais, vive pela calmaria. Também é professor de Pilates e esportes.</p>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="story-card" role="group" aria-roledescription="slide" aria-label="4 de 6">
+            <div class="story-card__media">
+              <img src="assets/images/rafa.png" alt="Pessoa com energia em ambiente urbano" loading="lazy">
+            </div>
+            <div class="story-card__content">
+              <h3>Rafa</h3>
+              <p>Menina do interior que ama cidade grande. Energia que não acaba. Graduanda em Geografia pela Unicamp. Se pudesse, teria 3 profissões.</p>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="story-card" role="group" aria-roledescription="slide" aria-label="5 de 6">
+            <div class="story-card__media">
+              <img src="assets/images/garanta a sua.png" alt="Mãos segurando uma vela artesanal" loading="lazy">
+            </div>
+            <div class="story-card__content">
+              <h3>Feito à mão</h3>
+              <p>Por meio do trabalho manual, com afeto e cuidado, nossas velas aromáticas são produzidas, uma por uma.</p>
+              <div class="story-card__cta">
+                <button class="btn btn--ghost" type="button" data-open="modalAroma">Me ajude a escolher</button>
+                <a class="btn" href="./compre.html" rel="noopener noreferrer">Garanta a sua</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <button class="story-carousel__btn story-carousel__btn--prev" type="button" aria-label="Slide anterior" data-prev>‹</button>
+        <button class="story-carousel__btn story-carousel__btn--next" type="button" aria-label="Próximo slide" data-next>›</button>
+      </div>
+
+      <div class="story-carousel__dots" role="tablist" aria-label="Navegação do carrossel" data-dots></div>
+    </section>
+
+    <footer class="card">
+      <span>Raízes Aromas • feito com carinho 💛</span>
+      <span>Atibaia/SP • Belo Horizonte/MG</span>
+    </footer>
   </div>
 
-  <div class="story-carousel__viewport" data-carousel>
-    <div class="story-carousel__track" data-track>
-      <!-- Card 1 -->
-      <article class="story-card" role="group" aria-roledescription="slide" aria-label="1 de 6">
-        <div class="story-card__media">
-          <img src="assets/images/velas-carrossel.png" alt="Vela acesa em ambiente aconchegante" loading="lazy">
-        </div>
-        <div class="story-card__content">
-          <h3>Por trás da marca</h3>
-          <p>Por trás da Raízes Aromas, existe uma história (de amor).</p>
-        </div>
-      </article>
+  <!-- ===== Modal Ajuda Aroma (mantido) ===== -->
+  <div class="modal" id="modalAroma" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Ajuda para escolher aroma">
+    <div class="modalBackdrop" data-close="modalAroma"></div>
 
-      <!-- Card 2 -->
-      <article class="story-card" role="group" aria-roledescription="slide" aria-label="3 de 6">
-        <div class="story-card__media">
-          <img src="assets/images/bhsp.png" alt="Mapa entre SP e BH" loading="lazy">
-        </div>
-        <div class="story-card__content">
-          <h3>Como tudo começou</h3>
-          <p>Um casal diferente: mesmo com os <strong>500 km</strong> de distância, <strong>desde 2023</strong> mantemos nosso relacionamento forte!</p><br>
-          <p>Para isso, lidamos com viagens custosas entre Campinas e BH que nos impedem de juntar dinheiro para nossos objetivos em casal. Com o desejo de fazer renda extra para reduzir a distância entre nós, nasce o <strong>Raízes Aromas</strong>.</p>
-        </div>
-      </article>
-
-      <!-- Card 3 -->
-      <article class="story-card" role="group" aria-roledescription="slide" aria-label="5 de 6">
-        <div class="story-card__media">
-          <img src="assets/images/paulo.png" alt="Pessoa tranquila em luz natural" loading="lazy">
-        </div>
-        <div class="story-card__content">
-          <h3>Paulo</h3>
-          <p>Mineiro com orgulho. Lê Conceição Evaristo e escuta Milton Nascimento. Tranquilo demais, vive pela calmaria. Também é professor de Pilates e esportes.</p>
-        </div>
-      </article>
-
-      <!-- Card 4 -->
-      <article class="story-card" role="group" aria-roledescription="slide" aria-label="6 de 6">
-        <div class="story-card__media">
-          <img src="assets/images/rafa.png" alt="Pessoa com energia em ambiente urbano" loading="lazy">
-        </div>
-        <div class="story-card__content">
-          <h3>Rafa</h3>
-          <p>Menina do interior que ama cidade grande. Energia que não acaba. Graduanda em Geografia pela Unicamp. Se pudesse, teria 3 profissões.</p>
-
-        </div>
-      </article>
-            <!-- Card 6 -->
-      <article class="story-card" role="group" aria-roledescription="slide" aria-label="4 de 6">
-        <div class="story-card__media">
-          <img src="assets/images/garanta a sua.png" alt="Mãos segurando uma vela artesanal" loading="lazy">
-        </div>
-        <div class="story-card__content">
-          <h3>Feito à mão</h3>
-          <p>Por meio do trabalho manual, com afeto e cuidado, nossas velas aromáticas são produzidas, uma por uma.</p>
-            <div class="story-card__cta">
-            <a class="btn btn--ghost" id="escolha2">Me ajude a escolher</a>
-            <a class="btn" href="/compre.html" rel="noopener noreferrer">
-              Garanta a sua
-            </a>
+    <div class="modalCard" role="document">
+      <div class="modalHead">
+        <div>
+          <div style="font-weight:900; font-size:14px;">Me ajuda a escolher um aroma</div>
+          <div style="font-size:12px; color: rgba(33,1,36,.72); margin-top:3px;">
+            Responda rapidinho e eu te indico o melhor.
           </div>
         </div>
-      </article>
-    </div>
+        <button class="btn" type="button" data-close="modalAroma" aria-label="Fechar">Fechar</button>
+      </div>
 
-    <!-- Controles -->
-    <button class="story-carousel__btn story-carousel__btn--prev" type="button" aria-label="Slide anterior" data-prev>‹</button>
-    <button class="story-carousel__btn story-carousel__btn--next" type="button" aria-label="Próximo slide" data-next>›</button>
-  </div>
-
-  <!-- Dots -->
-  <div class="story-carousel__dots" role="tablist" aria-label="Navegação do carrossel" data-dots></div>
-</section>
-<!-- ===== Modal Ajuda Aroma ===== -->
-<div class="modal" id="modalAroma" aria-hidden="true" aria-label="Ajuda para escolher aroma" role="dialog" aria-modal="true">
-  <div class="modalBackdrop"></div>
-  <div class="modalCard" role="document">
-    <div class="modalHead">
-      <div>
-        <div style="font-weight:900; font-size:14px;">Me ajuda a escolher um aroma</div>
-        <div style="font-size:12px; color: rgba(33,1,36,.72); margin-top:3px;">
-          Responda rapidinho e eu te indico o melhor.
+      <div class="modalBody">
+        <div class="qBlock">
+          <div style="font-weight:800;">1) Para qual momento?</div>
+          <div class="optGrid">
+            <label class="opt"><input type="radio" name="momento" value="relaxar"> Relaxar / dormir</label>
+            <label class="opt"><input type="radio" name="momento" value="banho"> Banho / autocuidado</label>
+            <label class="opt"><input type="radio" name="momento" value="receber"> Receber visita</label>
+            <label class="opt"><input type="radio" name="momento" value="diaadia"> Dia a dia</label>
+          </div>
         </div>
-      </div>
 
-      <button class="btn" type="button" id="btnCloseModal" aria-label="Fechar">Fechar</button>
-    </div>
-
-    <div class="modalBody">
-      <div class="qBlock">
-        <div style="font-weight:800;">1) Para qual momento?</div>
-        <div class="optGrid">
-          <label class="opt"><input type="radio" name="momento" value="relaxar"> Relaxar / dormir</label>
-          <label class="opt"><input type="radio" name="momento" value="banho"> Banho / autocuidado</label>
-          <label class="opt"><input type="radio" name="momento" value="receber"> Receber visita</label>
-          <label class="opt"><input type="radio" name="momento" value="diaadia"> Dia a dia</label>
+        <div class="qBlock">
+          <div style="font-weight:800;">2) Você prefere qual estilo?</div>
+          <div class="optGrid">
+            <label class="opt"><input type="radio" name="estilo" value="leve"> Leve / fresco</label>
+            <label class="opt"><input type="radio" name="estilo" value="doce"> Doce / aconchegante</label>
+            <label class="opt"><input type="radio" name="estilo" value="delicado"> Delicado / floral</label>
+            <label class="opt"><input type="radio" name="estilo" value="marcante"> Marcante / sofisticado</label>
+          </div>
         </div>
-      </div>
 
-      <div class="qBlock">
-        <div style="font-weight:800;">2) Você prefere qual estilo?</div>
-        <div class="optGrid">
-          <label class="opt"><input type="radio" name="estilo" value="leve"> Leve / fresco</label>
-          <label class="opt"><input type="radio" name="estilo" value="doce"> Doce / aconchegante</label>
-          <label class="opt"><input type="radio" name="estilo" value="delicado"> Delicado / floral</label>
-          <label class="opt"><input type="radio" name="estilo" value="marcante"> Marcante / sofisticado</label>
+        <div class="qBlock">
+          <div style="font-weight:800;">3) É para você ou para presente?</div>
+          <div class="optGrid">
+            <label class="opt"><input type="radio" name="uso" value="pra_mim"> Pra mim</label>
+            <label class="opt"><input type="radio" name="uso" value="presente"> Presente</label>
+          </div>
         </div>
-      </div>
 
-      <div class="qBlock">
-        <div style="font-weight:800;">3) É para você ou para presente?</div>
-        <div class="optGrid">
-          <label class="opt"><input type="radio" name="uso" value="pra_mim"> Pra mim</label>
-          <label class="opt"><input type="radio" name="uso" value="presente"> Presente</label>
+        <div class="modalFoot">
+          <button class="btn" type="button" id="btnVerRecomendacao">Ver recomendação</button>
+          <button class="btn primary" type="button" id="btnAplicarAroma" style="display:none;">Adicionar 30g ao pedido</button>
         </div>
-      </div>
 
-      <div class="modalFoot">
-        <button class="btn" type="button" id="btnVerRecomendacao">Ver recomendação</button>
-        <button class="btn primary" type="button" id="btnAplicarAroma" style="display:none;">Adicionar 30g ao carrinho</button>
+        <div class="resultBox" id="resultadoAroma" style="display:none;"></div>
       </div>
-
-      <div class="resultBox" id="resultadoAroma" style="display:none;"></div>
     </div>
   </div>
-</div>
-<!-- ===== /Modal Ajuda Aroma ===== -->
-    <script>
-(() => {
-  const AROMAS = {
-    lavanda: { name:"Lavanda", desc:"Conforto e calmaria. Ótima para relaxar." },
-    bamboo: { name:"Bamboo", desc:"Fresco e leve. Sensação de ambiente limpo." },
-    morango_champagne: { name:"Morango & Champagne", desc:"Doce e celebrativo. Presente com “uau”." },
-    baunilha: { name:"Baunilha", desc:"Doce e aconchegante." },
-    flor_cerejeira: { name:"Flor de Cerejeira", desc:"Delicada e elegante." },
-    ameixa: { name:"Ameixa", desc:"Marcante e sofisticada." }
-  };
+  <!-- ===== /Modal Ajuda Aroma ===== -->
 
-  let aromaRecomendadoId = null;
-  function qs(sel, root=document){ return root.querySelector(sel); }
+  <!-- Modal: Como produzimos -->
+  <div class="modal" id="modalComoProduzimos" aria-hidden="true">
+    <div class="modalBackdrop" data-close="modalComoProduzimos"></div>
 
-  let __scrollY = 0;
-function lockScroll(){
-  __scrollY = window.scrollY || 0;
-  document.body.style.position = "fixed";
-  document.body.style.top = `-${__scrollY}px`;
-  document.body.style.left = "0";
-  document.body.style.right = "0";
-  document.body.style.width = "100%";
-}
-
-function unlockScroll(){
-  document.body.style.position = "";
-  document.body.style.top = "";
-  document.body.style.left = "";
-  document.body.style.right = "";
-  document.body.style.width = "";
-  window.scrollTo(0, __scrollY);
-}
-
-function openModalAroma(){
-  const m = document.getElementById("modalAroma");
-  if (!m) return;
-  m.classList.add("is-open");
-  lockScroll();
-}
-
-function closeModalAroma(){
-  const m = document.getElementById("modalAroma");
-  if (!m) return;
-  m.classList.remove("is-open");
-  unlockScroll();
-
-  aromaRecomendadoId = null;
-  document.querySelectorAll('#modalAroma input[type="radio"]').forEach(r => r.checked = false);
-
-  const box = document.getElementById("resultadoAroma");
-  if (box) { box.style.display = "none"; box.innerHTML = ""; }
-
-  const btnAplicar = document.getElementById("btnAplicarAroma");
-  if (btnAplicar) btnAplicar.style.display = "none";
-}
-
-  function getRadioValue(name){
-    return document.querySelector(`input[name="${name}"]:checked`)?.value || null;
-  }
-
-  function recomendarAroma({momento, estilo, uso}){
-    // presente
-    if (uso === "presente") {
-      if (estilo === "marcante") return "ameixa";
-      return "morango_champagne";
-    }
-
-    if (momento === "relaxar") {
-      if (estilo === "delicado") return "flor_cerejeira";
-      return "lavanda";
-    }
-
-    if (momento === "banho") {
-      if (estilo === "doce") return "baunilha";
-      return "bamboo";
-    }
-
-    if (momento === "receber") {
-      if (estilo === "marcante") return "ameixa";
-      if (estilo === "delicado") return "flor_cerejeira";
-      return "morango_champagne";
-    }
-
-    // diaadia
-    if (estilo === "doce") return "baunilha";
-    if (estilo === "marcante") return "ameixa";
-    if (estilo === "delicado") return "flor_cerejeira";
-    return "bamboo";
-  }
-
-  function showRecomendacao(){
-    const momento = getRadioValue("momento");
-    const estilo = getRadioValue("estilo");
-    const uso = getRadioValue("uso");
-
-    if (!momento || !estilo || !uso) {
-      alert("Responda as 3 perguntas para eu te indicar o melhor aroma 🙂");
-      return;
-    }
-
-    aromaRecomendadoId = recomendarAroma({momento, estilo, uso});
-    const a = AROMAS[aromaRecomendadoId];
-
-    const box = document.getElementById("resultadoAroma");
-    box.style.display = "block";
-    box.innerHTML = `
-      <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
+    <div class="modalCard" role="dialog" aria-modal="true" aria-label="Como produzimos">
+      <div class="modalHead">
         <div>
-          <div style="font-weight:900; font-size:14px;">Indicação: ${a.name}</div>
-          <div style="font-size:13px; color: rgba(33,1,36,.78); margin-top:4px;">${a.desc}</div>
+          <b>Como produzimos</b>
+          <div style="font-size:12px; color:rgba(33,1,36,.75); margin-top:2px;">
+            Produção artesanal, feita em pequenos lotes 💛
+          </div>
         </div>
-        <span class="pill">✨</span>
+        <button class="btn" type="button" data-close="modalComoProduzimos">Fechar</button>
       </div>
-      <div style="margin-top:10px; font-size:12px; color: rgba(33,1,36,.74);">
-        Dica: se quiser, comece com <b>30g</b> para testar. Se já conhece o aroma, vá de <b>110g</b>.
+
+      <div class="modalBody">
+        <div class="resultBox">
+          <b style="display:block; margin-bottom:6px;">O cuidado em cada etapa</b>
+          <div style="font-size:13px; color:rgba(33,1,36,.78); line-height:1.45;">
+            • Derretemos a cera vegetal e misturamos a essência na temperatura ideal<br/>
+            • Preparamos o pavio e o pote, garantindo que fique centralizado<br/>
+            • A cura acontece com calma para fixar melhor o aroma<br/>
+            • Cada lote é pequeno — isso ajuda a manter qualidade e frescor
+          </div>
+        </div>
       </div>
-    `;
+    </div>
+  </div>
+  <!-- /Modal: Como produzimos -->
 
-    const btnAplicar = document.getElementById("btnAplicarAroma");
-    btnAplicar.style.display = "inline-flex";
-  }
+  <!-- Modal: Aroma rápido -->
+  <div class="modal" id="modalAromaQuick" aria-hidden="true">
+    <div class="modalBackdrop" data-close="modalAromaQuick"></div>
 
-  function aplicarAromaNoCarrinho(){
-  if (!aromaRecomendadoId) return;
+    <div class="modalCard" role="dialog" aria-modal="true" aria-label="Detalhes do aroma">
+<div class="modalHead">
+  <div>
+    <b id="quickAromaTitle">Aroma</b>
+    <div style="font-size:12px; color:rgba(33,1,36,.75); margin-top:6px;">
+      <span style="font-weight:900;">Indicação de uso:</span>
+      <span id="quickAromaUse" style="font-weight:700;"></span>
+    </div>
+  </div>
+  <button class="btn" type="button" data-close="modalAromaQuick">Fechar</button>
+</div>
 
-  const url = new URL("./compre.html", window.location.href);
-  url.searchParams.set("add", aromaRecomendadoId); // ex: lavanda
-  url.searchParams.set("size", "30");
-  url.searchParams.set("qty", "1");
 
-  window.location.href = url.toString();
-  }
+      <div class="modalBody">
+        <div class="resultBox" id="quickAromaDesc" style="font-size:13px; color:rgba(33,1,36,.78);"></div>
 
-  // ✅ Bind só depois do DOM pronto
-  document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("btnAjudaAroma")?.addEventListener("click", openModalAroma);
-    document.getElementById("escolha2")?.addEventListener("click", openModalAroma);
-    document.getElementById("btnCloseModal")?.addEventListener("click", closeModalAroma);
-    document.querySelector("#modalAroma .modalBackdrop")?.addEventListener("click", closeModalAroma);
-    document.getElementById("btnVerRecomendacao")?.addEventListener("click", showRecomendacao);
-    document.getElementById("btnAplicarAroma")?.addEventListener("click", aplicarAromaNoCarrinho);
+        <div style="display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
+          <button class="btn" type="button" data-close="modalAromaQuick">Voltar</button>
+          <button class="btn primary" type="button" id="btnQuickAdd30">Adicionar 30g ao pedido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Modal: Aroma rápido -->
+
+  <script>
+    /* ========= Carrossel (seu JS mantido) ========= */
+    (function () {
+      const root = document.querySelector("[data-carousel]");
+      if (!root) return;
+
+      const track = root.querySelector("[data-track]");
+      const slides = Array.from(track.children);
+      const btnPrev = root.querySelector("[data-prev]");
+      const btnNext = root.querySelector("[data-next]");
+      const dotsWrap = root.parentElement.querySelector("[data-dots]");
+
+      let index = 0;
+      let startX = 0;
+      let currentX = 0;
+      let dragging = false;
+
+      const dots = slides.map((_, i) => {
+        const b = document.createElement("button");
+        b.className = "story-dot";
+        b.type = "button";
+        b.setAttribute("role", "tab");
+        b.setAttribute("aria-label", `Ir para o slide ${i + 1}`);
+        b.addEventListener("click", () => goTo(i));
+        dotsWrap.appendChild(b);
+        return b;
+      });
+
+      function update() {
+        track.style.transform = `translateX(${-index * 100}%)`;
+        dots.forEach((d, i) => d.setAttribute("aria-selected", String(i === index)));
+        btnPrev.disabled = index === 0;
+        btnNext.disabled = index === slides.length - 1;
+        slides.forEach((s, i) => s.setAttribute("aria-label", `${i + 1} de ${slides.length}`));
+      }
+
+      function goTo(i) { index = Math.max(0, Math.min(i, slides.length - 1)); update(); }
+      function next() { goTo(index + 1); }
+      function prev() { goTo(index - 1); }
+
+      btnNext.addEventListener("click", next);
+      btnPrev.addEventListener("click", prev);
+
+      root.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") next();
+        if (e.key === "ArrowLeft") prev();
+      });
+      root.tabIndex = 0;
+
+      function onStart(clientX) { dragging = true; startX = clientX; currentX = clientX; track.style.transition = "none"; }
+      function onMove(clientX) {
+        if (!dragging) return;
+        currentX = clientX;
+        const dx = currentX - startX;
+        const percent = (dx / root.clientWidth) * 100;
+        track.style.transform = `translateX(${(-index * 100) + percent}%)`;
+      }
+      function onEnd() {
+        if (!dragging) return;
+        dragging = false;
+        const dx = currentX - startX;
+        const threshold = root.clientWidth * 0.18;
+        track.style.transition = "transform 320ms ease";
+        if (dx < -threshold) next();
+        else if (dx > threshold) prev();
+        else update();
+      }
+
+      root.addEventListener("touchstart", (e) => onStart(e.touches[0].clientX), { passive: true });
+      root.addEventListener("touchmove", (e) => onMove(e.touches[0].clientX), { passive: true });
+      root.addEventListener("touchend", onEnd);
+
+      root.addEventListener("mousedown", (e) => onStart(e.clientX));
+      window.addEventListener("mousemove", (e) => onMove(e.clientX));
+      window.addEventListener("mouseup", onEnd);
+
+      window.addEventListener("resize", update);
+      update();
+    })();
+
+    /* ========= Modais (helpers únicos) ========= */
+    let __scrollY = 0;
+
+    function lockScroll(){
+      __scrollY = window.scrollY || 0;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${__scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+    }
+
+    function unlockScroll(){
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      window.scrollTo(0, __scrollY);
+    }
+
+    function openModal(id){
+      const m = document.getElementById(id);
+      if (!m) return;
+      m.classList.add("is-open");
+      m.setAttribute("aria-hidden", "false");
+      lockScroll();
+    }
+
+    function closeModal(id){
+      const m = document.getElementById(id);
+      if (!m) return;
+      m.classList.remove("is-open");
+      m.setAttribute("aria-hidden", "true");
+      unlockScroll();
+    }
+
+    document.addEventListener("click", (e) => {
+      const openId = e.target?.closest("[data-open]")?.getAttribute("data-open");
+      if (openId) openModal(openId);
+
+      const closeId = e.target?.closest("[data-close]")?.getAttribute("data-close");
+      if (closeId) closeModal(closeId);
+    });
 
     document.addEventListener("keydown", (e) => {
-      const m = document.getElementById("modalAroma");
-      if (e.key === "Escape" && m?.getAttribute("aria-hidden") === "false") closeModalAroma();
-    });
-  });
-})();
-</script>
-
-</body>
-<style>
-  /* ====== Layout base ====== */
-  .story-carousel {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 24px 16px 8px;
-  }
-
-  .story-carousel__header h2 {
-    margin: 0 0 6px;
-    font-size: clamp(28px, 3vw, 42px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-  }
-
-  .story-carousel__header p {
-    margin: 0 0 18px;
-    opacity: 0.9;
-  }
-
-  .story-carousel__viewport {
-    position: relative;
-    overflow: hidden;
-    border-radius: 18px;
-    box-shadow: 0 10px 24px rgba(0,0,0,.10);
-    background: #f6f0e8;
-    touch-action: pan-y; /* ajuda no swipe */
-    --nav-space: 56px; /* largura da “faixa” das setas */
-  }
-
-  .story-carousel__track {
-    display: flex;
-    transition: transform 320ms ease;
-    will-change: transform;
-  }
-
-  /* Cada card ocupa 100% da viewport */
-.story-card {
-  flex: 0 0 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  padding: 18px;
-  min-height: auto;          /* <-- remove o “vazio” */
-  padding-left: var(--nav-space);
-  padding-right: var(--nav-space);
-}
-
-/* MÍDIA (imagem) */
-.story-card__media {
-  width: 100%;
-  border-radius: 16px;
-  overflow: hidden;
-  background: #e9dfd2;
-
-  /* tamanho bom no mobile sem “poster gigante” */
-  aspect-ratio: 1 / 1;       /* quadrado no mobile (mais instagramável) */
-  max-height: 320px;         /* controla a altura */
-  margin: 0 auto;
-}
-
-/* imagem ocupa o quadro de forma agradável */
-.story-card__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;         /* preenche e fica bonito */
-  display: block;
-}
-
-/* Conteúdo */
-.story-card__content {
-  padding: 0;                /* já tem padding no card */
-}
-  .modalCard, .modalBody { touch-action: pan-y; }
-
-
-.story-card__content h3 {
-  margin: 0 0 10px;
-  font-size: 26px;
-  line-height: 1.1;
-}
-
-.story-card__content p {
-  margin: 0 0 10px;
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-  .story-card__cta {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 16px;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 14px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    border: 1px solid rgba(0,0,0,.08);
-    background: #2a1a12;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .btn--ghost {
-    background: transparent;
-    color: #2a1a12;
-    border-color: rgba(42,26,18,.25);
-  }
-
-  /* ====== Botões Prev/Next ====== */
-  .story-carousel__btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 999px;
-    opacity: .95;
-    z-index: 5;
-    border: 1px solid rgba(0,0,0,.10);
-    background: rgba(255,255,255,.85);
-    backdrop-filter: blur(6px);
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    font-size: 28px;
-    line-height: 1;
-    user-select: none;
-  }
-
-  .story-carousel__btn--prev { left: 12px; }
-  .story-carousel__btn--next { right: 12px; }
-
-  .story-carousel__btn:focus-visible {
-    outline: 3px solid rgba(0,0,0,.35);
-    outline-offset: 2px;
-  }
-
-  /* ====== Dots ====== */
-  .story-carousel__dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px 0 0;
-  }
-
-  .story-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 999px;
-    border: 1px solid rgba(0,0,0,.25);
-    background: transparent;
-    cursor: pointer;
-  }
-
-  .story-dot[aria-selected="true"] {
-    background: rgba(0,0,0,.55);
-  }
-/* Desktop: imagem maior e texto com melhor leitura */
-@media (min-width: 860px) {
-  .story-card {
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: center;
-    gap: 24px;
-    padding-left: 28px;
-    padding-right: 40px;  }
-
-  .story-card__media {
-    aspect-ratio: 4 / 3;     /* mapa/Foto fica melhor assim no desktop */
-    max-height: 440px;       /* imagem finalmente fica “grande” */
-  }
-
-  .story-card__content h3 {
-    font-size: 34px;
-  }
-
-  .story-card__content p {
-    font-size: 18px;
-  }  
-  .story-carousel__btn--prev { left: -2px; }
-  .story-carousel__btn--next { right: -2px; }
-  .story-carousel__viewport{
-    overflow-x: clip;   /* ou hidden */
-    overflow-y: visible;
-  }
-}
-
-
-</style>
-
-<script>
-  (function () {
-    const root = document.querySelector("[data-carousel]");
-    if (!root) return;
-
-    const track = root.querySelector("[data-track]");
-    const slides = Array.from(track.children);
-    const btnPrev = root.querySelector("[data-prev]");
-    const btnNext = root.querySelector("[data-next]");
-    const dotsWrap = root.parentElement.querySelector("[data-dots]");
-
-    let index = 0;
-    let startX = 0;
-    let currentX = 0;
-    let dragging = false;
-
-    // Cria dots
-    const dots = slides.map((_, i) => {
-      const b = document.createElement("button");
-      b.className = "story-dot";
-      b.type = "button";
-      b.setAttribute("role", "tab");
-      b.setAttribute("aria-label", `Ir para o slide ${i + 1}`);
-      b.addEventListener("click", () => goTo(i));
-      dotsWrap.appendChild(b);
-      return b;
-    });
-
-    function update() {
-      track.style.transform = `translateX(${-index * 100}%)`;
-
-      // aria-selected nos dots
-      dots.forEach((d, i) => d.setAttribute("aria-selected", String(i === index)));
-
-      // Desabilita botões nas pontas
-      btnPrev.disabled = index === 0;
-      btnNext.disabled = index === slides.length - 1;
-
-      // Atualiza labels do slide (1 de N)
-      slides.forEach((s, i) => {
-        s.setAttribute("aria-label", `${i + 1} de ${slides.length}`);
+      if (e.key !== "Escape") return;
+      document.querySelectorAll(".modal.is-open").forEach(m => {
+        m.classList.remove("is-open");
+        m.setAttribute("aria-hidden", "true");
       });
-    }
-
-    function goTo(i) {
-      index = Math.max(0, Math.min(i, slides.length - 1));
-      update();
-    }
-
-    function next() { goTo(index + 1); }
-    function prev() { goTo(index - 1); }
-
-    btnNext.addEventListener("click", next);
-    btnPrev.addEventListener("click", prev);
-
-    // Teclado (setas)
-    root.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") next();
-      if (e.key === "ArrowLeft") prev();
+      unlockScroll();
     });
-    root.tabIndex = 0; // permite foco para teclado
 
-    // Swipe (touch + mouse)
-    function onStart(clientX) {
-      dragging = true;
-      startX = clientX;
-      currentX = clientX;
-      track.style.transition = "none";
+    /* ========= Tooltip “sujeito à disponibilidade” ========= */
+    document.addEventListener("click", (e) => {
+      const holder = e.target.closest(".stockHint");
+      const clickedIcon = e.target.closest("[data-tooltip]");
+
+      if (holder && clickedIcon) {
+        holder.classList.toggle("is-open");
+        return;
+      }
+      document.querySelectorAll(".stockHint.is-open").forEach(el => el.classList.remove("is-open"));
+    });
+
+    /* ========= Modal Aroma rápido ========= */
+    let quickAromaId = null;
+
+    function openQuickAromaModal({ id, title, desc, useHint }){
+      quickAromaId = id;
+      const $t = document.getElementById("quickAromaTitle");
+      const $u = document.getElementById("quickAromaUse");
+      const $d = document.getElementById("quickAromaDesc");
+
+      if ($t) $t.textContent = title || "Aroma";
+if ($u) $u.textContent = useHint || "Um aroma versátil para o dia a dia.";
+      if ($d) $d.textContent = desc || "";
+
+      openModal("modalAromaQuick");
     }
 
-    function onMove(clientX) {
-      if (!dragging) return;
-      currentX = clientX;
-      const dx = currentX - startX;
+    document.addEventListener("click", (e) => {
+      const card = e.target.closest(".aromaCard");
+      if (!card) return;
 
-      // move track de forma “elástica”
-      const percent = (dx / root.clientWidth) * 100;
-      track.style.transform = `translateX(${(-index * 100) + percent}%)`;
-    }
+      openQuickAromaModal({
+        id: card.getAttribute("data-aroma-id"),
+        title: card.getAttribute("data-aroma-title"),
+        desc: card.getAttribute("data-aroma-desc"),
+        useHint: card.getAttribute("data-aroma-use")
+      });
+    });
 
-    function onEnd() {
-      if (!dragging) return;
-      dragging = false;
+    document.getElementById("btnQuickAdd30")?.addEventListener("click", () => {
+      if (!quickAromaId) return;
+      window.location.href = `./compre.html?add=${encodeURIComponent(quickAromaId)}&size=30&qty=1`;
+    });
 
-      const dx = currentX - startX;
-      const threshold = root.clientWidth * 0.18; // 18% da largura
-      track.style.transition = "transform 320ms ease";
+    /* ========= Modal Ajuda Aroma (recomendação) ========= */
+    (function(){
+      const AROMAS = {
+        lavanda: { name:"Lavanda", desc:"Conforto e calmaria. Ótima para relaxar." },
+        bamboo: { name:"Bamboo", desc:"Fresco e leve. Sensação de ambiente limpo." },
+        morango_champagne: { name:"Morango & Champagne", desc:"Doce e celebrativo. Presente com “uau”." },
+        baunilha: { name:"Baunilha", desc:"Doce e aconchegante." },
+        flor_cerejeira: { name:"Flor de Cerejeira", desc:"Delicada e elegante." },
+        ameixa: { name:"Ameixa", desc:"Marcante e sofisticada." }
+      };
 
-      if (dx < -threshold) next();
-      else if (dx > threshold) prev();
-      else update();
-    }
+      let aromaRecomendadoId = null;
 
-    // Touch
-    root.addEventListener("touchstart", (e) => onStart(e.touches[0].clientX), { passive: true });
-    root.addEventListener("touchmove", (e) => onMove(e.touches[0].clientX), { passive: true });
-    root.addEventListener("touchend", onEnd);
+      function getRadioValue(name){
+        return document.querySelector(`#modalAroma input[name="${name}"]:checked`)?.value || null;
+      }
 
-    // Mouse (arrastar)
-    root.addEventListener("mousedown", (e) => onStart(e.clientX));
-    window.addEventListener("mousemove", (e) => onMove(e.clientX));
-    window.addEventListener("mouseup", onEnd);
+      function recomendarAroma({momento, estilo, uso}){
+        if (uso === "presente") return (estilo === "marcante") ? "ameixa" : "morango_champagne";
+        if (momento === "relaxar") return (estilo === "delicado") ? "flor_cerejeira" : "lavanda";
+        if (momento === "banho") return (estilo === "doce") ? "baunilha" : "bamboo";
+        if (momento === "receber") {
+          if (estilo === "marcante") return "ameixa";
+          if (estilo === "delicado") return "flor_cerejeira";
+          return "morango_champagne";
+        }
+        if (estilo === "doce") return "baunilha";
+        if (estilo === "marcante") return "ameixa";
+        if (estilo === "delicado") return "flor_cerejeira";
+        return "bamboo";
+      }
 
-    // Recalcula ao redimensionar
-    window.addEventListener("resize", update);
+      function showRecomendacao(){
+        const momento = getRadioValue("momento");
+        const estilo = getRadioValue("estilo");
+        const uso = getRadioValue("uso");
 
-    update();
-  })();
-</script>
-<!-- ====== /CARROSSEL ====== -->
+        if (!momento || !estilo || !uso) {
+          alert("Responda as 3 perguntas para eu te indicar o melhor aroma 🙂");
+          return;
+        }
+
+        aromaRecomendadoId = recomendarAroma({momento, estilo, uso});
+        const a = AROMAS[aromaRecomendadoId];
+
+        const box = document.getElementById("resultadoAroma");
+        box.style.display = "block";
+        box.innerHTML = `
+          <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
+            <div>
+              <div style="font-weight:900; font-size:14px;">Indicação: ${a.name}</div>
+              <div style="font-size:13px; color: rgba(33,1,36,.78); margin-top:4px;">${a.desc}</div>
+            </div>
+            <span class="pill">✨</span>
+          </div>
+          <div style="margin-top:10px; font-size:12px; color: rgba(33,1,36,.74);">
+            Dica: se quiser, comece com <b>30g</b> para testar. Se já conhece o aroma, vá de <b>110g</b>.
+          </div>
+        `;
+
+        const btnAplicar = document.getElementById("btnAplicarAroma");
+        btnAplicar.style.display = "inline-flex";
+      }
+
+      function aplicarAromaNoPedido(){
+        if (!aromaRecomendadoId) return;
+        window.location.href = `./compre.html?add=${encodeURIComponent(aromaRecomendadoId)}&size=30&qty=1`;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("btnVerRecomendacao")?.addEventListener("click", showRecomendacao);
+        document.getElementById("btnAplicarAroma")?.addEventListener("click", aplicarAromaNoPedido);
+
+        // reset ao fechar
+        document.addEventListener("click", (e) => {
+          const close = e.target.closest('[data-close="modalAroma"]');
+          if (!close) return;
+          aromaRecomendadoId = null;
+          document.querySelectorAll('#modalAroma input[type="radio"]').forEach(r => r.checked = false);
+          const box = document.getElementById("resultadoAroma");
+          if (box){ box.style.display = "none"; box.innerHTML = ""; }
+          const btnAplicar = document.getElementById("btnAplicarAroma");
+          if (btnAplicar) btnAplicar.style.display = "none";
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
