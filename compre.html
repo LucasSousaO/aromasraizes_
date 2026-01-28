@@ -1018,63 +1018,117 @@ Caso frete seja incluído, favor inserir o endereço. ex. Rua das américas, 29 
 
       return `📍 Local de retirada/entrega: ${local}`;
     }
+const EMOJI = {
+  leaf: "\u{1F33F}",          // 🌿
+  candle: "\u{1F56F}\u{FE0F}",// 🕯️
+  pin: "\u{1F4CD}",           // 📍
+  box: "\u{1F4E6}",           // 📦
+  money: "\u{1F4B0}",         // 💰
+  heart: "\u{1F49B}",         // 💛
+  note: "\u{1F4DD}",          // 📝
+  smile: "\u{1F60A}"          // 😊
+};
 
     function buildMessage(){
-      const local = ($local?.value || "").trim();
-      const obs = ($observacao?.value || "").trim();
+  const local = ($local?.value || "").trim();
+  const obs   = ($observacao?.value || "").trim();
 
-      const lines30 = [];
-      const lines110 = [];
-      let qtd30 = 0;
-      let qtd110 = 0;
+  const lines30  = [];
+  const lines110 = [];
+  let qtd30  = 0;
+  let qtd110 = 0;
 
-      for (const p of PRODUCTS){
-        const s = state[p.id];
-        if (s.q30 > 0) { lines30.push(`- ${p.name}: ${s.q30} un`); qtd30 += s.q30; }
-        if (s.q110 > 0) { lines110.push(`- ${p.name}: ${s.q110} un`); qtd110 += s.q110; }
-      }
-
-      const hasAny = lines30.length || lines110.length;
-      const header = `Olá! Quero fazer um pedido da Raízes Aromas 🌿🕯️`;
-
-      const entregaTxt = getEntregaTextForWhatsApp();
-      if (local === "Frete" && !entregaTxt) {
-        alert("Para Frete, informe o CEP, calcule e selecione PAC ou SEDEX.");
-        return null;
-      }
-
-      const subtotalProdutos = (qtd30 * PRECO_30G) + (qtd110 * PRECO_110G);
-
-      let frete = null;
-      if (local === "Frete" && freteState.escolhido) {
-        const info = freteState.escolhido === "PAC" ? freteState.pac : freteState.sedex;
-        if (info && Number.isFinite(Number(info.price))) frete = Number(info.price);
-      }
-
-      const totalPedido = frete != null ? (subtotalProdutos + frete) : subtotalProdutos;
-
-      const valoresBlock = [
-        "\n💰 Valores:",
-        `- Subtotal produtos: ${formatBRL(subtotalProdutos)}`,
-        ...(local === "Frete" ? [`- Frete: ${frete != null ? formatBRL(frete) : "Selecione PAC ou SEDEX"}`] : []),
-        `➡️ Total do pedido: ${formatBRL(totalPedido)}`
-      ].join("\n");
-
-      const itensBlock =
-        `\n📦 Itens:\n` +
-        (lines30.length ? `\n30g (${formatBRL(PRECO_30G)} cada):\n${lines30.join("\n")}\n` : `\n30g: (nenhum)\n`) +
-        (lines110.length ? `\n110g (${formatBRL(PRECO_110G)} cada):\n${lines110.join("\n")}\n` : `\n110g: (nenhum)\n`);
-
-      const story = `\n💛 Vi a história de vocês e quero apoiar o projeto do casal!`;
-      const obsBlock = obs ? `\n📝 Observação: ${obs}` : "";
-      const closing = `\n\nObrigad@! 😊`;
-
-      if (!hasAny){
-        return `${header}\n${entregaTxt}\n\nQuero ajuda para escolher um aroma e tamanho 🙂${valoresBlock}${story}${obsBlock}${closing}`;
-      }
-
-      return `${header}\n${entregaTxt}${itensBlock}${valoresBlock}${story}${obsBlock}${closing}`;
+  for (const p of PRODUCTS){
+    const s = state[p.id];
+    if (s.q30 > 0){
+      lines30.push(`- ${p.name}: ${s.q30} un`);
+      qtd30 += s.q30;
     }
+    if (s.q110 > 0){
+      lines110.push(`- ${p.name}: ${s.q110} un`);
+      qtd110 += s.q110;
+    }
+  }
+
+  const hasAny = lines30.length || lines110.length;
+
+  const header =
+    `Olá! Quero fazer um pedido da Raízes Aromas ` +
+    `${EMOJI.leaf}${EMOJI.candle}`;
+
+  const entregaTxt = getEntregaTextForWhatsApp();
+  if (local === "Frete" && !entregaTxt){
+    alert("Para Frete, informe o CEP, calcule e selecione PAC ou SEDEX.");
+    return null;
+  }
+
+  const subtotalProdutos =
+    (qtd30  * PRECO_30G) +
+    (qtd110 * PRECO_110G);
+
+  let frete = null;
+  if (local === "Frete" && freteState.escolhido){
+    const info =
+      freteState.escolhido === "PAC"
+        ? freteState.pac
+        : freteState.sedex;
+
+    if (info && Number.isFinite(Number(info.price))){
+      frete = Number(info.price);
+    }
+  }
+
+  const totalPedido =
+    frete != null ? (subtotalProdutos + frete) : subtotalProdutos;
+
+  const valoresBlock = [
+    `\n${EMOJI.money} Valores:`,
+    `- Subtotal produtos: ${formatBRL(subtotalProdutos)}`,
+    ...(local === "Frete"
+      ? [`- Frete: ${frete != null ? formatBRL(frete) : "Selecione PAC ou SEDEX"}`]
+      : []),
+    `➡️ Total do pedido: ${formatBRL(totalPedido)}`
+  ].join("\n");
+
+  const itensBlock =
+    `\n${EMOJI.box} Itens:\n` +
+    (lines30.length
+      ? `\n30g (${formatBRL(PRECO_30G)} cada):\n${lines30.join("\n")}\n`
+      : `\n30g: (nenhum)\n`) +
+    (lines110.length
+      ? `\n110g (${formatBRL(PRECO_110G)} cada):\n${lines110.join("\n")}\n`
+      : `\n110g: (nenhum)\n`);
+
+  const story =
+    `\n${EMOJI.heart} Vi a história de vocês e quero apoiar o projeto do casal!`;
+
+  const obsBlock =
+    obs ? `\n${EMOJI.note} Observação: ${obs}` : "";
+
+  const closing =
+    `\n\nObrigad@! ${EMOJI.smile}`;
+
+  if (!hasAny){
+    return (
+      `${header}\n${entregaTxt}\n\n` +
+      `Quero ajuda para escolher um aroma e tamanho 🙂` +
+      `${valoresBlock}` +
+      `${story}` +
+      `${obsBlock}` +
+      `${closing}`
+    );
+  }
+
+  return (
+    `${header}\n${entregaTxt}` +
+    `${itensBlock}` +
+    `${valoresBlock}` +
+    `${story}` +
+    `${obsBlock}` +
+    `${closing}`
+  );
+}
+
 
     function goWhatsApp(){
       safeGtag("whatsapp_click", { event_category: "engagement", event_label: "Fazer pedido" });
